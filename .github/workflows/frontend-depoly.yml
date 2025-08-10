@@ -3,8 +3,6 @@ name: Frontend Deploy (Vite + React → Nginx on EC2)
 on:
   push:
     branches: [ main ]
-    paths:
-      - "frontend/**"
 
 env:
   FRONTEND_DIR: frontend
