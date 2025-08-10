@@ -20,8 +20,8 @@ jobs:
         run: |
           pwd && ls -la
           ls -la frontend || true
-          test -f package-lock.json && echo "root lock found"
-          test -f frontend/package-lock.json && echo "frontend lock found"
+          test -f package-lock.json && echo "root lock found" || true
+          test -f frontend/package-lock.json && echo "frontend lock found" || true
 
       # ✅ lock이 있으면 캐시 사용
       - name: Setup Node (with cache)
