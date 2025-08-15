@@ -70,7 +70,7 @@ jobs:
             RELEASE_ID=$(date +%Y%m%d%H%M%S)
             sudo mkdir -p /var/www/bus/releases/${RELEASE_ID}
             sudo cp -r /home/${{ secrets.EC2_USER }}/upload/frontend/* /var/www/bus/releases/${RELEASE_ID}/
-            sudo ln -sfn /var/www/bus/releases/${RELEASE_ID} /var/www/bus/current
+            sudo ln -sfnT /var/www/bus/releases/${RELEASE_ID} /var/www/bus/current
             sudo chown -R www-data:www-data /var/www/bus
             # 오래된 릴리즈 5개만 남기기
             ls -1dt /var/www/bus/releases/* | tail -n +6 | xargs -r sudo rm -rf
