@@ -15,34 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 디버그: lock 위치 확인
-      - name: Show lockfiles
-        run: |
-          pwd && ls -la
-          ls -la frontend || true
-          test -f package-lock.json && echo "root lock found" || true
-          test -f frontend/package-lock.json && echo "frontend lock found" || true
-
-      # ✅ lock이 있으면 캐시 사용
-      - name: Setup Node (with cache)
-        if: ${{ hashFiles('package-lock.json', 'frontend/package-lock.json', '**/package-lock.json') != '' }}
+      # Node 설치 (LTS 권장)
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            frontend/package-lock.json
             **/package-lock.json
 
-      # ✅ lock이 없으면 캐시 없이 진행 (에러 방지)
-      - name: Setup Node (no cache)
-        if: ${{ hashFiles('package-lock.json', 'frontend/package-lock.json', '**/package-lock.json') == '' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      # 설치 & 빌드 (루트에 Vite)
+      # 설치 & 빌드
       - name: Install & Build (Vite)
         working-directory: ${{ env.FRONTEND_DIR }}
         run: |
@@ -51,44 +34,44 @@ jobs:
           echo "---- dist tree ----"
           ls -la ${{ env.BUILD_DIR }}
 
-      # SSH 키 파일 저장 (멀티라인 안전)
-      - name: Write SSH key
-        run: |
-          echo "${{ secrets.EC2_KEY }}" > key.pem
-          chmod 600 key.pem
-
       # 원격 업로드 폴더 보장
       - name: Ensure remote upload dir
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key_path: key.pem
+          key: ${{ secrets.EC2_KEY }}            # ← key_path 대신 key 사용 (권장)
+          port: 22
           script: mkdir -p /home/${{ secrets.EC2_USER }}/upload/frontend
 
-      # dist 업로드
+      # dist 전체 업로드
       - name: Upload dist/ to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key_path: key.pem
-          source: ${{ env.FRONTEND_DIR }}/${{ env.BUILD_DIR }}/**
+          key: ${{ secrets.EC2_KEY }}            # ← key 사용 → permission denied 방지
+          port: 22
+          source: ${{ env.FRONTEND_DIR }}/${{ env.BUILD_DIR }}/**   # dist의 모든 파일/폴더
           target: /home/${{ secrets.EC2_USER }}/upload/frontend
           overwrite: true
+          strip_components: 0
 
-      # 릴리스 전환 + Nginx 리로드
+      # 릴리즈 전환 + 권한 조정 + Nginx 리로드
       - name: Activate on Nginx
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key_path: key.pem
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
           script: |
-            set -e
+            set -euo pipefail
             RELEASE_ID=$(date +%Y%m%d%H%M%S)
             sudo mkdir -p /var/www/bus/releases/${RELEASE_ID}
             sudo cp -r /home/${{ secrets.EC2_USER }}/upload/frontend/* /var/www/bus/releases/${RELEASE_ID}/
             sudo ln -sfn /var/www/bus/releases/${RELEASE_ID} /var/www/bus/current
+            sudo chown -R www-data:www-data /var/www/bus
+            # 오래된 릴리즈 5개만 남기기
             ls -1dt /var/www/bus/releases/* | tail -n +6 | xargs -r sudo rm -rf
             sudo nginx -t && sudo systemctl reload nginx
