@@ -1,4 +1,4 @@
-// vite.config.ts
+// vite.config.ts (핵심 수정)
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -45,7 +45,7 @@ export default defineConfig({
           },
           // 2) 실시간 버스 API (same-origin /bus)
           {
-            urlPattern: /https?:\/\/[^/]+\/bus(?:\?.*)?$/i,
+            urlPattern: /https?:\/\/[^/]+\/bus(?:[/?].*)?$/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-bus-live',
@@ -86,8 +86,6 @@ export default defineConfig({
     }),
   ],
   server: {
-    proxy: {
-      '/bus': 'http://localhost:8080',
-    },
+    proxy: { '/bus': 'http://localhost:8080' },
   },
 })
