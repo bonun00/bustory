@@ -19,61 +19,53 @@ export default defineConfig({
         start_url: '/',
         scope: '/',
         icons: [
-          { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-          { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-          { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
-          { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
-        ]
+          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icons/maskable-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable any' },
+          { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable any' },
+        ],
       },
+      strategies: 'generateSW',
       workbox: {
         cleanupOutdatedCaches: true,
         navigateFallback: 'index.html',
         runtimeCaching: [
-          // 1) 정적 시간표(JSON, public/ 하위) - 거의 안 바뀌므로 CacheFirst
+          // 1) 정적 JSON (public/data/**)
           {
-            urlPattern: ({url}) =>
-                url.origin === self.location.origin &&
-                (url.pathname.startsWith('/data/') || url.pathname.endsWith('.json')),
+            urlPattern: /https?:\/\/[^/]+\/data\/.*\.json$/i,
             handler: 'CacheFirst',
             options: {
               cacheName: 'bus-static-json',
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 }, // 30일
+              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
               cacheableResponse: { statuses: [0, 200] },
               purgeOnQuotaError: true,
             },
           },
-
-          // 2) 실시간 버스 API(백엔드 경유) - 최신 우선, 오프라인 시 마지막 응답 사용
+          // 2) 실시간 버스 API - 동일 도메인 /bus
           {
-            urlPattern: ({url, request}) =>
-                request.method === 'GET' &&
-                url.origin === self.location.origin &&
-                url.pathname === '/bus',
+            urlPattern: /https?:\/\/[^/]+\/bus(?:\?.*)?$/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-bus-live',
               networkTimeoutSeconds: 3,
-              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 5 }, // 5분
+              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 5 },
               cacheableResponse: { statuses: [0, 200] },
               purgeOnQuotaError: true,
             },
           },
-
           // 3) Kakao Maps SDK(JS)
           {
-            urlPattern: ({url}) => url.hostname === 'dapi.kakao.com',
+            urlPattern: /^https?:\/\/dapi\.kakao\.com\/.*/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'kakao-sdk',
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 7 }, // 7일
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [0, 200] },
             },
           },
-
-          // 4) Kakao 지도 타일(이미지) - 빠른 응답(SWR)
+          // 4) Kakao 지도 타일
           {
-            urlPattern: ({url}) =>
-                /(^https:\/\/t\d\.daumcdn\.net)|(^https:\/\/map\d?\.daumcdn\.net)/.test(url.href),
+            urlPattern: /^https:\/\/(?:t\d\.daumcdn\.net|map\d?\.daumcdn\.net)\/.*/i,
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'kakao-tiles',
@@ -82,14 +74,13 @@ export default defineConfig({
               purgeOnQuotaError: true,
             },
           },
-
-          // 5) 네이버 애널리틱스 - 캐시 X
+          // 5) 네이버 애널리틱스
           {
-            urlPattern: ({url}) => url.hostname === 'wcs.naver.net',
+            urlPattern: /^https?:\/\/wcs\.naver\.net\/.*/i,
             handler: 'NetworkOnly',
           },
         ],
-      }
+      },
     })
   ],
   server: {
