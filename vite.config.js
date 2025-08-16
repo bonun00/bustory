@@ -30,7 +30,6 @@ export default defineConfig({
       },
       workbox: {
         cleanupOutdatedCaches: true,
-        navigateFallback: 'index.html',
         runtimeCaching: [
           {
             // /data/*.json (same-origin)
