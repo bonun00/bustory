@@ -32,57 +32,70 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         navigateFallback: 'index.html',
         runtimeCaching: [
-          // 1) 정적 JSON (same-origin /data/*.json)
           {
+            // /data/*.json (same-origin)
             urlPattern: /https?:\/\/[^/]+\/data\/.*\.json$/i,
             handler: 'CacheFirst',
             options: {
               cacheName: 'bus-static-json',
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 30,
+                purgeOnQuotaError: true, // 👈 여기로 이동
+              },
               cacheableResponse: { statuses: [0, 200] },
-              purgeOnQuotaError: true,
             },
           },
-          // 2) 실시간 버스 API (same-origin /bus)
           {
+            // /bus (same-origin)
             urlPattern: /https?:\/\/[^/]+\/bus(?:[/?].*)?$/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-bus-live',
               networkTimeoutSeconds: 3,
-              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 5 },
+              expiration: {
+                maxEntries: 200,
+                maxAgeSeconds: 60 * 5,
+                purgeOnQuotaError: true,
+              },
               cacheableResponse: { statuses: [0, 200] },
-              purgeOnQuotaError: true,
             },
           },
-          // 3) Kakao Maps SDK
           {
+            // Kakao Maps SDK
             urlPattern: /^https?:\/\/dapi\.kakao\.com\/.*/i,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'kakao-sdk',
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 7 },
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7,
+                purgeOnQuotaError: true,
+              },
               cacheableResponse: { statuses: [0, 200] },
             },
           },
-          // 4) Kakao 지도 타일
           {
+            // Kakao 타일
             urlPattern: /^https:\/\/(?:t\d\.daumcdn\.net|map\d?\.daumcdn\.net)\/.*/i,
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'kakao-tiles',
-              expiration: { maxEntries: 300, maxAgeSeconds: 60 * 60 * 24 * 7 },
+              expiration: {
+                maxEntries: 300,
+                maxAgeSeconds: 60 * 60 * 24 * 7,
+                purgeOnQuotaError: true,
+              },
               cacheableResponse: { statuses: [0, 200] },
-              purgeOnQuotaError: true,
             },
           },
-          // 5) 네이버 애널리틱스 (캐시 X)
           {
+            // 네이버 애널리틱스
             urlPattern: /^https?:\/\/wcs\.naver\.net\/.*/i,
             handler: 'NetworkOnly',
           },
         ],
-      },
+      }
     }),
   ],
   server: {
