@@ -1,13 +1,16 @@
+// vite.config.ts
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      strategies: 'generateSW',
       devOptions: { enabled: false },
       manifest: {
         name: 'Bustory',
@@ -25,12 +28,11 @@ export default defineConfig({
           { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable any' },
         ],
       },
-      strategies: 'generateSW',
       workbox: {
         cleanupOutdatedCaches: true,
         navigateFallback: 'index.html',
         runtimeCaching: [
-          // 1) 정적 JSON (public/data/**)
+          // 1) 정적 JSON (same-origin /data/*.json)
           {
             urlPattern: /https?:\/\/[^/]+\/data\/.*\.json$/i,
             handler: 'CacheFirst',
@@ -41,7 +43,7 @@ export default defineConfig({
               purgeOnQuotaError: true,
             },
           },
-          // 2) 실시간 버스 API - 동일 도메인 /bus
+          // 2) 실시간 버스 API (same-origin /bus)
           {
             urlPattern: /https?:\/\/[^/]+\/bus(?:\?.*)?$/i,
             handler: 'NetworkFirst',
@@ -53,7 +55,7 @@ export default defineConfig({
               purgeOnQuotaError: true,
             },
           },
-          // 3) Kakao Maps SDK(JS)
+          // 3) Kakao Maps SDK
           {
             urlPattern: /^https?:\/\/dapi\.kakao\.com\/.*/i,
             handler: 'NetworkFirst',
@@ -81,7 +83,7 @@ export default defineConfig({
           },
         ],
       },
-    })
+    }),
   ],
   server: {
     proxy: {
