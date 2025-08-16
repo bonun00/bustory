@@ -14,7 +14,7 @@ const Home = () => {
     return (
         <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center px-6">
             {/* 제목 */}
-            <h1 className="text-2xl font-medium text-gray-800 mb-8 text-center">
+            <h1 className="text-5xl font-extrabold text-green-800 mb-8 text-center">
                 함안 - 마산 버스 시간
             </h1>
 
