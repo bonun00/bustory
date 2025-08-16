@@ -1,10 +1,7 @@
 /*global kakao*/
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
-const BUS_API_BASE =
-    (typeof import.meta !== "undefined" && import.meta.env?.VITE_BUS_API) ||
-    (typeof process !== "undefined" && process.env?.REACT_APP_BUS_API) ||
-    "http://localhost:8080"; // fallback
+const BUS_API_BASE = import.meta.env.VITE_BUS_API_BASE || '/api';
 
 const BusMap = () => {
     const containerRef = useRef(null);
