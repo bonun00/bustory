@@ -1,15 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-    <link href="/src/index.css" rel="stylesheet">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95f4d1dfe3c42e0ed190d54b737fd8e8&autoload=false&libraries=clusterer"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUSTORY</title>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="/bustoryLogo.png" />
+
+  <!-- iOS 홈화면 아이콘 -->
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+
+  <!-- 설치/상태바 색상 -->
+  <meta name="theme-color" content="#0C4D2A" />
+
+  <!-- Kakao SDK -->
+  <script defer src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=95f4d1dfe3c42e0ed190d54b737fd8e8&autoload=false&libraries=clusterer"></script>
+
+  <!-- Naver Analytics: 스크립트만 로드 (wcs_do는 React에서 호출) -->
+  <script defer src="https://wcs.naver.net/wcslog.js"></script>
+  <script>
+    window.wcs_add = window.wcs_add || {};
+    window.wcs_add.wa = "8b6a8f1d9b67d8";
+  </script>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
