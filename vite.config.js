@@ -92,4 +92,9 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    proxy: {
+      '/bus': 'http://localhost:8080',
+    },
+  },
 })
