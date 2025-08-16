@@ -76,7 +76,7 @@ export default defineConfig({
               purgeOnQuotaError: true,
             },
           },
-          // 5) 네이버 애널리틱스
+          // 5) 네이버 애널리틱스 (캐시 X)
           {
             urlPattern: /^https?:\/\/wcs\.naver\.net\/.*/i,
             handler: 'NetworkOnly',
