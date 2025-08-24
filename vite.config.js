@@ -1,4 +1,4 @@
-// vite.config.ts (핵심 수정)
+// vite.config.ts
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -28,13 +28,16 @@ export default defineConfig({
           { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable any' },
         ],
       },
+      // ← Workbox 설정
       workbox: {
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
+        // SPA 네비게이션 폴백에서 /api 요청은 제외 (서비스워커가 html로 응답하지 않도록)
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
+          // 같은 출처의 /data/*.json 은 정적 캐시
           {
-            // /data/*.json (same-origin)
             urlPattern: /https?:\/\/[^/]+\/data\/.*\.json$/i,
             handler: 'CacheFirst',
             options: {
@@ -42,15 +45,15 @@ export default defineConfig({
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 30,
-                purgeOnQuotaError: true, // 👈 여기로 이동
+                purgeOnQuotaError: true,
               },
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          // 라이브 버스 API: /api/bus → 네트워크 우선(원하면 NetworkOnly로 교체)
           {
-            // /bus (same-origin)
-            urlPattern: /https?:\/\/[^/]+\/bus(?:[/?].*)?$/i,
-            handler: 'NetworkFirst',
+            urlPattern: /https?:\/\/[^/]+\/api\/bus(?:[/?].*)?$/i,
+            handler: 'NetworkFirst',          // 또는 'NetworkOnly'
             options: {
               cacheName: 'api-bus-live',
               networkTimeoutSeconds: 3,
@@ -62,8 +65,8 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          // Kakao Maps SDK
           {
-            // Kakao Maps SDK
             urlPattern: /^https?:\/\/dapi\.kakao\.com\/.*/i,
             handler: 'NetworkFirst',
             options: {
@@ -76,8 +79,8 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          // Kakao 타일
           {
-            // Kakao 타일
             urlPattern: /^https:\/\/(?:t\d\.daumcdn\.net|map\d?\.daumcdn\.net)\/.*/i,
             handler: 'StaleWhileRevalidate',
             options: {
@@ -90,16 +93,24 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          // 네이버 애널리틱스는 캐시 X
           {
-            // 네이버 애널리틱스
             urlPattern: /^https?:\/\/wcs\.naver\.net\/.*/i,
             handler: 'NetworkOnly',
           },
         ],
-      }
+      },
     }),
   ],
+
+  // 🔧 개발 서버 프록시: 프로덕션과 동일하게 /api 사용
   server: {
-    proxy: { '/bus': 'http://localhost:8080' },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // /api/bus -> /bus
+      },
+    },
   },
 })
