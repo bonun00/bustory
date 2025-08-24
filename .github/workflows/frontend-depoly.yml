@@ -34,13 +34,16 @@ jobs:
           npm run build
           tar -C dist -czf /tmp/dist.tar.gz .
 
+      - name: Prepare artifact in workspace
+        run: mv /tmp/dist.tar.gz ./dist.tar.gz
+
       - name: Upload artifact to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}     # 예: 13.209.213.142 (EIP)
           username: ${{ secrets.EC2_USER }} # 예: ubuntu
           key: ${{ secrets.EC2_KEY }}       # 멀티라인 프라이빗키 원문 그대로
-          source: /tmp/dist.tar.gz
+          source: dist.tar.gz
           target: /home/${{ secrets.EC2_USER }}/fe_release/
 
       - name: Deploy on EC2 (atomic rsync)
