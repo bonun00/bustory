@@ -1,7 +1,14 @@
 /*global kakao*/
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
-const BUS_API_BASE = import.meta.env.VITE_BUS_API_BASE || '/api';
+const isProdHost =
+    typeof window !== 'undefined' &&
+    !/^(localhost|127\.0\.0\.1)$/i.test(location.hostname);
+
+let BUS_API_BASE = import.meta.env.VITE_BUS_API_BASE || '/api';
+if (isProdHost && /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(BUS_API_BASE)) {
+    BUS_API_BASE = '/api';
+}
 
 const BusMap = () => {
     const containerRef = useRef(null);
