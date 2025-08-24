@@ -21,6 +21,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Force Vite production env
+        run: |
+          printf "VITE_BUS_API_BASE=/api\n" > .env.production
+
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -33,6 +37,15 @@ jobs:
           if [ -f package-lock.json ]; then npm ci; else npm i; fi
           npm run build
           tar -C dist -czf /tmp/dist.tar.gz .
+
+      - name: Sanity check built assets (no localhost)
+        run: |
+          if grep -R "http://localhost:8080" -n dist; then
+            echo "[ERROR] Found hardcoded localhost in build" >&2
+            exit 1
+          else
+            echo "[OK] No hardcoded localhost endpoint in build"
+          fi
 
       - name: Prepare artifact in workspace
         run: mv /tmp/dist.tar.gz ./dist.tar.gz
