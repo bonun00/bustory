@@ -1,74 +1,99 @@
-name: CI/CD (Frontend → GHCR → EC2)
+name: Frontend CI/CD (Vite → EC2 static)
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-deploy.yml"
   workflow_dispatch: {}
 
 concurrency:
   group: fe-cicd-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      GHCR_USER: ${{ secrets.GHCR_USER }}   # PAT 소유자
-      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }} # read:packages 필요(EC2 pull용)
-    steps:
-      - uses: actions/checkout@v4
+    defaults:
+      run:
+        working-directory: frontend   # 프론트 폴더 경로 (루트면 이 줄 삭제)
 
-      # Node 빌드 (Vite)
-      - name: Setup Node
+    env:
+      # 운영은 /api 프록시 사용 (브라우저가 http(s)://도메인/api/... 로 호출)
+      VITE_BUS_API_BASE: /api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
-      - name: Build (Vite)
+      - name: Install & Build (Vite)
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          if [ -f package-lock.json ]; then npm ci; else npm i; fi
           npm run build
-          ls -la dist || true
+          tar -C dist -czf /tmp/dist.tar.gz .
 
-      # GHCR 로그인 & 이미지 푸시
-      - name: GHCR login (push)
-        uses: docker/login-action@v3
+      - name: Upload artifact to EC2
+        uses: appleboy/scp-action@v0.1.7
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          host: ${{ secrets.EC2_HOST }}     # 예: 13.209.213.142 (EIP)
+          username: ${{ secrets.EC2_USER }} # 예: ubuntu
+          key: ${{ secrets.EC2_KEY }}       # 멀티라인 프라이빗키 원문 그대로
+          source: /tmp/dist.tar.gz
+          target: /home/${{ secrets.EC2_USER }}/fe_release/
 
-      - name: Build & Push frontend image
-        run: |
-          IMAGE="ghcr.io/${{ github.repository_owner }}/bus-frontend:${{ github.sha }}"
-          docker build -f Dockerfile.frontend -t "$IMAGE" .
-          docker push "$IMAGE"
-          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
-
-      # (선택) SSH 키 파일로 저장
-      - name: Write SSH key
-        run: |
-          echo "${{ secrets.EC2_KEY }}" > key.pem
-          chmod 600 key.pem
-
-      # EC2에서 pull & run (백엔드 방식과 동일)
-      - name: Deploy frontend on EC2
+      - name: Deploy on EC2 (atomic rsync)
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key_path: key.pem
-          port: 22
-          timeout: 1m
-          command_timeout: 15m
+          key: ${{ secrets.EC2_KEY }}
           script_stop: true
-          debug: true
-          envs: IMAGE,GHCR_USER,GHCR_TOKEN
+          command_timeout: 15m
           script: |
-            echo "Deploying $IMAGE"
-            bash ~/deploy_docker_frontend.sh "${IMAGE}"
+            set -euo pipefail
+            REL_ROOT="$HOME/fe_release"
+            TS="$(date +%Y%m%d-%H%M%S)"
+            NEW_DIR="$REL_ROOT/releases/$TS"
+            TARGET_DIR="/var/www/bustory"
+
+            echo "[INFO] Prepare dirs"
+            mkdir -p "$REL_ROOT/releases" "$NEW_DIR"
+
+            echo "[INFO] Extract artifact"
+            # scp-action이 target 폴더를 한 단계 더 만들어둘 수 있어 둘 다 시도
+            if [ -f "$REL_ROOT/dist.tar.gz" ]; then
+              tar -xzf "$REL_ROOT/dist.tar.gz" -C "$NEW_DIR"
+              rm -f "$REL_ROOT/dist.tar.gz"
+            elif [ -f "$REL_ROOT/fe_release/dist.tar.gz" ]; then
+              tar -xzf "$REL_ROOT/fe_release/dist.tar.gz" -C "$NEW_DIR"
+              rm -f "$REL_ROOT/fe_release/dist.tar.gz"
+              rmdir "$REL_ROOT/fe_release" || true
+            else
+              echo "[ERROR] dist.tar.gz not found"; exit 1
+            fi
+
+            echo "[INFO] Sync to target"
+            sudo mkdir -p "$TARGET_DIR"
+            sudo rsync -a --delete "$NEW_DIR"/ "$TARGET_DIR"/
+
+            echo "[INFO] Ownership (nginx)"
+            if id www-data >/dev/null 2>&1; then
+              sudo chown -R www-data:www-data "$TARGET_DIR"
+            fi
+
+            echo "[INFO] Nginx reload"
+            if command -v nginx >/dev/null 2>&1; then
+              sudo nginx -t && sudo systemctl reload nginx || true
+            fi
+
+            echo "[INFO] Healthcheck"
+            curl -fsS http://localhost/ >/dev/null || echo "[WARN] root check failed"
+            curl -fsS http://localhost/api/actuator/health || echo "[WARN] api check failed"
