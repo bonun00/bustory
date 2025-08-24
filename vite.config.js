@@ -1,10 +1,12 @@
-// vite.config.ts
+// vite.config.js
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
+// 프로덕션 빌드에 localhost 프록시가 섞이지 않도록
+// mode가 'development'일 때만 dev 서버 프록시를 활성화합니다.
+export default defineConfig(({ mode }) => ({
   plugins: [
     tailwindcss(),
     react(),
@@ -52,7 +54,7 @@ export default defineConfig({
           },
           // 라이브 버스 API: /api/bus → 네트워크 우선(원하면 NetworkOnly로 교체)
           {
-            urlPattern: /https?:\/\/[^/]+\/api\/bus(?:[/?].*)?$/i,
+            urlPattern: /https?:\/\/[^/]+\/api\/bus(?:[\/?].*)?$/i,
             handler: 'NetworkFirst',          // 또는 'NetworkOnly'
             options: {
               cacheName: 'api-bus-live',
@@ -103,8 +105,8 @@ export default defineConfig({
     }),
   ],
 
-  // 🔧 개발 서버 프록시: 프로덕션과 동일하게 /api 사용
-  server: {
+  // 🔧 개발 서버 프록시: 프로덕션과 동일하게 /api 사용 (개발 모드에서만)
+  server: mode === 'development' ? {
     proxy: {
       '/api': {
         target: 'http://localhost:8080',
@@ -112,5 +114,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''), // /api/bus -> /bus
       },
     },
-  },
-})
+  } : undefined,
+}))
