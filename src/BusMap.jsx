@@ -11,6 +11,21 @@ if (isProdHost && /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(BUS_API_BASE)) {
     BUS_API_BASE = "/api";
 }
 
+/** 새 백엔드 응답(배열, 카멜케이스) → UI용 배열로 정규화 */
+function normalizeFromArray(raw) {
+    const list = Array.isArray(raw) ? raw : (raw ? [raw] : []);
+    return list.map((it) => ({
+        routeNo: it.routeNo ?? "",
+        arrPrevStationCnt: Number(it.arrPrevStationCnt ?? 0) || 0,
+        arrSec: Math.max(0, Number(it.arrTime ?? it.arrSec ?? 0) || 0), // ⬅️ 핵심: 초 → arrSec
+        nodeId: it.nodeId ?? "",
+        nodeNm: it.nodeNm ?? "",
+        routeId: it.routeId ?? "",
+        routeTp: it.routeTp ?? "",
+        vehicleTp: it.vehicleTp ?? "",
+    }));
+}
+
 const BusMap = () => {
     const containerRef = useRef(null);
     const mapRef = useRef(null);
@@ -18,83 +33,80 @@ const BusMap = () => {
     const markersRef = useRef([]); // [{ stop, marker, overlay }]
     const abortRef = useRef(null);
     const overlayCssInjectedRef = useRef(false);
-    const pendingSelectRef = useRef(null); // 다른 방향 즐겨찾기 클릭 시 대기 선택
 
-    // UI
-    const [directionFilter, setDirectionFilter] = useState("마산");
+    // 지도 제한
+    const allowedBoundsRef = useRef(null);
+    const maxLevelRef = useRef(null);
+
+    // 오버레이 z-index
+    const overlayZCounterRef = useRef(1000);
+
+    // 내 위치
+    const userMarkerRef = useRef(null);
+    const userCircleRef = useRef(null);
+    const [locStatus, setLocStatus] = useState("idle"); // idle | locating | ok | error
+
+    // 준비 상태
+    const [mapReady, setMapReady] = useState(false);
+
+    // 검색 UI
     const [rawSearch, setRawSearch] = useState("");
     const [search, setSearch] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
 
     // Data
-    const [busStops, setBusStops] = useState([]);
+    const [busStops, setBusStops] = useState([]); // 전체 정류장
     const [selectedStop, setSelectedStop] = useState(null);
-    const [arrivalInfo, setArrivalInfo] = useState([]);
+    const [arrivalInfo, setArrivalInfo] = useState([]); // [{routeNo, arrPrevStationCnt, arrSec, ...}]
     const [arrStatus, setArrStatus] = useState("idle"); // idle | loading | ok | error
 
-    // 뒤로가기
     const navigate = useNavigate();
     const goBack = () => {
         if (window.history.length > 1) navigate(-1);
         else navigate("/");
     };
 
-    // 즐겨찾기 (방향별)
-    const [favoritesByDir, setFavoritesByDir] = useState(() => {
+    // 즐겨찾기
+    const [favorites, setFavorites] = useState(() => {
         try {
-            const saved = JSON.parse(localStorage.getItem("favoritesByDir"));
-            return saved ?? { 마산: [], 칠원: [] };
+            const byDir = JSON.parse(localStorage.getItem("favoritesByDir"));
+            if (byDir && (byDir["마산"] || byDir["칠원"])) {
+                const merged = [...(byDir["마산"] || []), ...(byDir["칠원"] || [])];
+                localStorage.setItem("favorites", JSON.stringify(merged));
+                localStorage.removeItem("favoritesByDir");
+                return merged;
+            }
+            const saved = JSON.parse(localStorage.getItem("favorites"));
+            return saved ?? [];
         } catch {
-            return { 마산: [], 칠원: [] };
+            return [];
         }
     });
-    // ref로 최신 즐겨찾기 유지 → effect 재실행 방지
-    const favoritesRef = useRef(favoritesByDir);
+    const favoritesRef = useRef(favorites);
     useEffect(() => {
-        favoritesRef.current = favoritesByDir;
-    }, [favoritesByDir]);
-
-    const dirOf = (stop) => stop.direction || directionFilter;
-
-    const toggleFavorite = useCallback(
-        (stop) => {
-            const dir = dirOf(stop);
-            setFavoritesByDir((prev) => {
-                const list = prev[dir] ?? [];
-                const exists = list.some((f) => f.node_id === stop.node_id);
-                const updatedDirList = exists
-                    ? list.filter((f) => f.node_id !== stop.node_id)
-                    : [...list, stop];
-                const next = { ...prev, [dir]: updatedDirList };
-                localStorage.setItem("favoritesByDir", JSON.stringify(next));
-                return next;
-            });
-        },
-        [directionFilter]
-    );
+        favoritesRef.current = favorites;
+    }, [favorites]);
 
     const isFavoriteNow = useCallback(
-        (stop) => {
-            const dir = (stop && stop.direction) || directionFilter;
-            const list = favoritesRef.current[dir] ?? [];
-            return list.some((f) => f.node_id === stop.node_id);
-        },
-        [directionFilter]
+        (stop) => (favoritesRef.current || []).some((f) => f.node_id === stop.node_id),
+        []
     );
+    const toggleFavorite = useCallback((stop) => {
+        setFavorites((prev) => {
+            const exists = prev.some((f) => f.node_id === stop.node_id);
+            const next = exists ? prev.filter((f) => f.node_id !== stop.node_id) : [...prev, stop];
+            localStorage.setItem("favorites", JSON.stringify(next));
+            return next;
+        });
+    }, []);
 
-    // 파생 값
-    const filteredStops = useMemo(
-        () => busStops.filter((s) => s.direction === directionFilter),
-        [busStops, directionFilter]
-    );
-
+    // 파생
+    const allStops = useMemo(() => busStops, [busStops]);
     const suggestions = useMemo(() => {
         if (!search.trim()) return [];
-        return filteredStops
-            .filter((s) => s.node_nm.includes(search.trim()))
-            .slice(0, 8);
-    }, [filteredStops, search]);
+        return allStops.filter((s) => s.node_nm.includes(search.trim())).slice(0, 8);
+    }, [allStops, search]);
 
     // 검색 디바운스
     useEffect(() => {
@@ -114,7 +126,7 @@ const BusMap = () => {
         };
     }, []);
 
-    // Kakao맵 & 클러스터러 1회 생성
+    // 카카오맵 & 클러스터러 생성
     useEffect(() => {
         if (!containerRef.current) return;
         if (!(window.kakao && window.kakao.maps)) return;
@@ -123,10 +135,7 @@ const BusMap = () => {
             if (mapRef.current) return;
 
             const center = new kakao.maps.LatLng(35.227, 128.681);
-            mapRef.current = new kakao.maps.Map(containerRef.current, {
-                center,
-                level: 5,
-            });
+            mapRef.current = new kakao.maps.Map(containerRef.current, { center, level: 5 });
 
             clustererRef.current = new kakao.maps.MarkerClusterer({
                 map: mapRef.current,
@@ -136,7 +145,7 @@ const BusMap = () => {
                     {
                         width: "36px",
                         height: "36px",
-                        background: "rgba(16,185,129,0.92)", // emerald-500 톤
+                        background: "rgba(16,185,129,0.92)",
                         color: "#fff",
                         borderRadius: "18px",
                         textAlign: "center",
@@ -147,68 +156,93 @@ const BusMap = () => {
                     },
                 ],
             });
+
+            setMapReady(true);
         });
     }, []);
 
-    // 말풍선 CSS 1회 주입 (컬러 톤 통일)
+    // 오버레이 CSS 1회 주입
     const ensureOverlayStyles = useCallback(() => {
         if (overlayCssInjectedRef.current) return;
         const css = `
-    .bus-overlay {
-      background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:10px 12px;min-width:190px;
-      transform:translateY(-6px); position:relative; padding-bottom: 42px;
-    }
-    .bus-overlay .title {
-      display:flex;align-items:center;gap:8px;font-weight:700;color:#064e3b;font-size:14px;
-    }
-    .bus-overlay .badge {
-      background:#059669;color:#fff;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;
-    }
-    .bus-overlay .fav-action{
-      position:absolute; right:8px; bottom:8px; background:#f59e0b;
-      color:#111827; border:none; border-radius:6px; padding:6px 10px;
-      font-size:12px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.20);
-    }
-    .bus-overlay .fav-action:hover{ filter:brightness(0.95); }
-    .bus-overlay .subtitle { color:#6b7280;font-size:12px;margin-top:4px; }
-    .bus-overlay .close {
-      position:absolute;top:6px;right:6px;background:transparent;border:none;
-      color:#9ca3af;cursor:pointer;font-size:14px;
-    }
-    .bus-overlay-arrow {
-      width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;
-      border-top:10px solid #fff;filter:drop-shadow(0 -1px 0 rgba(0,0,0,0.08));
-      position:absolute;left:50%;transform:translateX(-50%);bottom:-10px;
-    }`;
+      .bus-overlay {
+        background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;
+        box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:10px 12px;min-width:190px;
+        transform:translateY(-6px); position:relative; padding-bottom: 42px; z-index:1;
+      }
+      .bus-overlay .title { display:flex;align-items:center;gap:8px;font-weight:700;color:#064e3b;font-size:14px; }
+      .bus-overlay .badge { background:#059669;color:#fff;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700; }
+      .bus-overlay .fav-action{ position:absolute; right:8px; bottom:8px; background:#f59e0b; color:#111827; border:none; border-radius:6px; padding:6px 10px; font-size:12px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.20); }
+      .bus-overlay .fav-action:hover{ filter:brightness(0.95); }
+      .bus-overlay .subtitle { color:#6b7280;font-size:12px;margin-top:4px; }
+      .bus-overlay .close { position:absolute;top:6px;right:6px;background:transparent;border:none;color:#9ca3af;cursor:pointer;font-size:14px; }
+      .bus-overlay-arrow { width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #fff;filter:drop-shadow(0 -1px 0 rgba(0,0,0,0.08));position:absolute;left:50%;transform:translateX(-50%);bottom:-10px; }
+    `;
         const style = document.createElement("style");
         style.innerHTML = css;
         document.head.appendChild(style);
         overlayCssInjectedRef.current = true;
     }, []);
 
-    // 선택 실행 (줌/말풍선/도착정보)
+    // 중심/줌 제한
+    const clampCenterAndZoom = useCallback(() => {
+        const map = mapRef.current;
+        const bounds = allowedBoundsRef.current;
+        if (!map || !bounds) return;
+
+        if (typeof maxLevelRef.current === "number") {
+            const curLevel = map.getLevel();
+            if (curLevel > maxLevelRef.current) {
+                map.setLevel(maxLevelRef.current, { animate: false });
+                return;
+            }
+        }
+
+        const center = map.getCenter();
+        if (bounds.contain(center)) return;
+
+        const sw = bounds.getSouthWest();
+        const ne = bounds.getNorthEast();
+        const clampedLat = Math.min(Math.max(center.getLat(), sw.getLat()), ne.getLat());
+        const clampedLng = Math.min(Math.max(center.getLng(), sw.getLng()), ne.getLng());
+        map.panTo(new kakao.maps.LatLng(clampedLat, clampedLng));
+    }, []);
+
+    // 지도 제한 이벤트
+    useEffect(() => {
+        if (!mapRef.current) return;
+        const map = mapRef.current;
+
+        const onDragEnd = () => clampCenterAndZoom();
+        const onZoomChanged = () => clampCenterAndZoom();
+        const onIdle = () => clampCenterAndZoom();
+
+        kakao.maps.event.addListener(map, "dragend", onDragEnd);
+        kakao.maps.event.addListener(map, "zoom_changed", onZoomChanged);
+        kakao.maps.event.addListener(map, "idle", onIdle);
+
+        return () => {
+            kakao.maps.event.removeListener(map, "dragend", onDragEnd);
+            kakao.maps.event.removeListener(map, "zoom_changed", onZoomChanged);
+            kakao.maps.event.removeListener(map, "idle", onIdle);
+        };
+    }, [clampCenterAndZoom]);
+
+    // 정류장 클릭 → 데이터 로드
     const handleStopClick = useCallback(
         async (stop, options = {}) => {
             setSelectedStop(stop);
             setArrivalInfo([]);
             setArrStatus("loading");
 
-            // 모든 오버레이 닫고 대상 오픈
+            // 오버레이 제어
             markersRef.current.forEach(({ overlay }) => overlay && overlay.close());
-            const found = markersRef.current.find(
-                (m) => m.stop.node_id === stop.node_id
-            );
+            const found = markersRef.current.find((m) => m.stop.node_id === stop.node_id);
             if (found?.overlay) {
+                found.overlay.setZIndex(overlayZCounterRef.current++);
                 found.overlay.open(mapRef.current);
-                // 버튼 라벨 현재 상태로 동기화
-                const favBtn = found.overlay.getContent()?.querySelector?.(
-                    ".fav-action"
-                );
-                if (favBtn)
-                    favBtn.textContent = isFavoriteNow(stop)
-                        ? "즐겨찾기 해제"
-                        : "즐겨찾기 추가";
+                const favBtn = found.overlay.getContent()?.querySelector?.(".fav-action");
+                if (favBtn) favBtn.textContent = isFavoriteNow(stop) ? "즐겨찾기 해제" : "즐겨찾기 추가";
             }
 
             const map = mapRef.current;
@@ -244,8 +278,11 @@ const BusMap = () => {
                     { signal: controller.signal }
                 );
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                setArrivalInfo(Array.isArray(data) ? data : []);
+                const raw = await res.json();
+
+                const normalized = normalizeFromArray(raw); // ⬅️ 새 응답 포맷
+                // console.log("RAW", raw, "NORMALIZED", normalized);
+                setArrivalInfo(normalized);
                 setArrStatus("ok");
             } catch (e) {
                 if (e.name === "AbortError") {
@@ -260,12 +297,14 @@ const BusMap = () => {
         [isFavoriteNow]
     );
 
-    // 방향 변경 시 마커/클러스터 갱신 + bounds (CustomOverlay 포함)
+    // 모든 마커 표시 + 영역/줌 한계 설정
     useEffect(() => {
+        if (!mapReady) return;
         if (!mapRef.current || !clustererRef.current) return;
 
         ensureOverlayStyles();
 
+        // 초기화
         clustererRef.current.clear();
         markersRef.current.forEach(({ marker, overlay }) => {
             marker.setMap && marker.setMap(null);
@@ -273,16 +312,18 @@ const BusMap = () => {
         });
         markersRef.current = [];
 
-        if (!filteredStops.length) return;
+        if (!allStops.length) return;
 
         const markers = [];
         const bounds = new kakao.maps.LatLngBounds();
 
-        filteredStops.forEach((stop) => {
+        allStops.forEach((stop) => {
             const pos = new kakao.maps.LatLng(stop.latitude, stop.longitude);
-            const marker = new kakao.maps.Marker({ position: pos });
 
-            // 오버레이(즐겨찾기 버튼만)
+            // 마커
+            const marker = new kakao.maps.Marker({ position: pos, zIndex: 1 });
+
+            // 오버레이
             const root = document.createElement("div");
             root.style.position = "relative";
             root.innerHTML = `
@@ -293,9 +334,7 @@ const BusMap = () => {
             <span>${stop.node_nm}</span>
           </div>
           <div class="subtitle">ID: ${stop.node_id}</div>
-          <button class="fav-action">${
-                isFavoriteNow(stop) ? "즐겨찾기 해제" : "즐겨찾기 추가"
-            }</button>
+          <button class="fav-action">${isFavoriteNow(stop) ? "즐겨찾기 해제" : "즐겨찾기 추가"}</button>
           <div class="bus-overlay-arrow"></div>
         </div>
       `;
@@ -306,22 +345,28 @@ const BusMap = () => {
                 xAnchor: 0.5,
                 yAnchor: 1.15,
                 clickable: true,
+                zIndex: overlayZCounterRef.current++,
             });
-            overlay.open = (map) => overlay.setMap(map);
+
+            overlay.open = (map) => {
+                overlay.setZIndex(overlayZCounterRef.current++);
+                overlay.setMap(map);
+            };
             overlay.close = () => overlay.setMap(null);
 
-            // 버튼 액션
             root.querySelector(".close").onclick = () => overlay.close();
 
             const favBtn = root.querySelector(".fav-action");
             favBtn.onclick = () => {
+                overlay.setZIndex(overlayZCounterRef.current++);
                 const nextIsFav = !isFavoriteNow(stop);
                 toggleFavorite(stop);
                 favBtn.textContent = nextIsFav ? "즐겨찾기 해제" : "즐겨찾기 추가";
             };
 
             kakao.maps.event.addListener(marker, "click", () => {
-                handleStopClick(stop); // 확대 없이 선택
+                overlay.open(mapRef.current);
+                handleStopClick(stop);
             });
 
             markersRef.current.push({ stop, marker, overlay });
@@ -330,144 +375,91 @@ const BusMap = () => {
         });
 
         clustererRef.current.addMarkers(markers);
-        if (!bounds.isEmpty()) mapRef.current.setBounds(bounds, 30, 30, 30, 140);
-    }, [filteredStops, ensureOverlayStyles]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // 다른 방향 즐겨찾기 점프: 방향 전환 → 선택
-    const jumpToStop = useCallback(
-        (stop) => {
-            if (stop.direction && stop.direction !== directionFilter) {
-                pendingSelectRef.current = stop;
-                setDirectionFilter(stop.direction);
-                return;
-            }
-            handleStopClick(stop, { zoom: true });
-        },
-        [directionFilter, handleStopClick]
-    );
+        if (!bounds.isEmpty()) {
+            const PAD = 40;
+            mapRef.current.relayout();
+            mapRef.current.setBounds(bounds, PAD, PAD, PAD, PAD);
 
-    // 방향 변경 후 마커가 갱신되면 대기 중인 선택 실행
+            allowedBoundsRef.current = bounds;
+
+            setTimeout(() => {
+                if (mapRef.current) {
+                    maxLevelRef.current = mapRef.current.getLevel();
+                    clampCenterAndZoom(); // 초기 1회 보정
+                }
+            }, 0);
+        }
+    }, [
+        mapReady,
+        allStops,
+        ensureOverlayStyles,
+        clampCenterAndZoom,
+        isFavoriteNow,
+        toggleFavorite,
+        handleStopClick,
+    ]);
+
+    // 바텀시트/리사이즈 보정
+    const [sheetPct, setSheetPct] = useState(0.45);
     useEffect(() => {
-        if (!pendingSelectRef.current) return;
-        if (!filteredStops.length) return;
-        const target = pendingSelectRef.current;
-        const inList = filteredStops.find((s) => s.node_id === target.node_id);
-        if (inList) {
-            pendingSelectRef.current = null;
-            handleStopClick(inList, { zoom: true });
-        }
-    }, [filteredStops, handleStopClick]);
+        if (!mapReady || !mapRef.current) return;
+        mapRef.current.relayout();
+        clampCenterAndZoom();
+    }, [mapReady, sheetPct, clampCenterAndZoom]);
 
-    // 검색 제출
-    const submitSearch = useCallback(() => {
-        if (!mapRef.current || !filteredStops.length) return;
+    useEffect(() => {
+        const onResize = () => {
+            if (!mapRef.current) return;
+            mapRef.current.relayout();
+            clampCenterAndZoom();
+        };
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, [clampCenterAndZoom]);
 
-        if (selectedSuggestion >= 0 && suggestions[selectedSuggestion]) {
-            handleStopClick(suggestions[selectedSuggestion], { zoom: true });
-            setShowSuggestions(false);
-            return;
-        }
+    // ✅ 초 단위 카운트다운
+    useEffect(() => {
+        if (!arrivalInfo || arrivalInfo.length === 0) return;
+        const t = setInterval(() => {
+            setArrivalInfo((prev) =>
+                prev.map((b) => ({
+                    ...b,
+                    arrSec: b.arrSec > 0 ? b.arrSec - 1 : 0,
+                }))
+            );
+        }, 1000);
+        return () => clearInterval(t);
+    }, [arrivalInfo.length]);
 
-        const q = search.trim();
-        if (!q) return;
+    // ✅ 30초마다 서버값으로 보정
+    useEffect(() => {
+        if (!selectedStop) return;
+        const id = setInterval(() => {
+            refreshArrival();
+        }, 30000);
+        return () => clearInterval(id);
+    }, [selectedStop]);
 
-        const matched = filteredStops.find((s) => s.node_nm.includes(q));
-        if (matched) {
-            handleStopClick(matched, { zoom: true });
-            setShowSuggestions(false);
-        } else {
-            alert("일치하는 정류장이 없습니다.");
-        }
-    }, [filteredStops, search, selectedSuggestion, suggestions, handleStopClick]);
-
-    const onSearchKeyDown = (e) => {
-        if (!showSuggestions || suggestions.length === 0) {
-            if (e.key === "Enter") submitSearch();
-            return;
-        }
-        if (e.key === "ArrowDown") {
-            e.preventDefault();
-            setSelectedSuggestion((p) => (p + 1) % suggestions.length);
-        } else if (e.key === "ArrowUp") {
-            e.preventDefault();
-            setSelectedSuggestion((p) => (p - 1 + suggestions.length) % suggestions.length);
-        } else if (e.key === "Enter") {
-            e.preventDefault();
-            submitSearch();
-        } else if (e.key === "Escape") {
-            setShowSuggestions(false);
-        }
-    };
-
-    // minimalist SVG (이모지 대체)
-    const TargetIcon = ({ className }) => (
-        <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2"/>
-            <circle cx="12" cy="12" r="3" fill="currentColor"/>
-        </svg>
-    );
-    const RefreshIcon = ({ className }) => (
-        <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-            {/* 반원 + 화살촉 */}
-            <path d="M20 12a8 8 0 10-3.3 6.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M20 8v4h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-    );
-
-    // ===== 바텀시트: 자유 스크롤 + 드래그 리사이즈 =====
-    const [sheetPct, setSheetPct] = useState(0.45); // 0~1 (기본 45%)
-    const [dragging, setDragging] = useState(false);
-    const startRef = useRef({ y: 0, pct: 0 });
-    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-
-    const onHandlePointerDown = (e) => {
-        setDragging(true);
-        const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
-        startRef.current = { y: clientY, pct: sheetPct };
-        e.currentTarget.setPointerCapture?.(e.pointerId ?? 0);
-        document.body.style.userSelect = "none";
-    };
-    const onHandlePointerMove = (e) => {
-        if (!dragging) return;
-        const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
-        const deltaY = clientY - startRef.current.y; // 아래로 +값
-        const vh = window.innerHeight || 1;
-        const next = startRef.current.pct - (deltaY / vh);
-        setSheetPct(clamp(next, 0.2, 0.9)); // 최소 20%, 최대 90%
-    };
-    const onHandlePointerUp = () => {
-        if (!dragging) return;
-        setDragging(false);
-        document.body.style.userSelect = "";
-    };
-
-    // 선택 정류장 도착 정보만 새로고침
+    // 도착 정보 새로고침
     const refreshArrival = useCallback(async () => {
         if (!selectedStop) return;
         setArrStatus("loading");
-
-        // 이전 요청 중단
         if (abortRef.current) abortRef.current.abort();
         const controller = new AbortController();
         abortRef.current = controller;
 
-        // 최소 2초 대기 함수
-        const wait = (ms) => new Promise((res) => setTimeout(res, ms));
-
         try {
-            const res = await Promise.all([
-                fetch(
-                    `${BUS_API_BASE}/bus?nodeId=${encodeURIComponent(selectedStop.node_id)}`,
-                    { signal: controller.signal }
-                ).then((r) => {
-                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                    return r.json();
-                }),
-                wait(2000), // 최소 2초 로딩
-            ]);
+            const res = await fetch(
+                `${BUS_API_BASE}/bus?nodeId=${encodeURIComponent(selectedStop.node_id)}`,
+                { signal: controller.signal }
+            );
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const raw = await res.json();
 
-            const data = res[0];
-            setArrivalInfo(Array.isArray(data) ? data : []);
+            const normalized = normalizeFromArray(raw);
+            // console.log("RAW", raw, "NORMALIZED", normalized);
+            setArrivalInfo(normalized);
             setArrStatus("ok");
         } catch (e) {
             if (e.name === "AbortError") {
@@ -479,6 +471,162 @@ const BusMap = () => {
             abortRef.current = null;
         }
     }, [selectedStop]);
+
+    // 내 위치 찾기
+    const locateMe = useCallback(() => {
+        if (!mapRef.current) return;
+        if (!navigator.geolocation) {
+            alert("이 브라우저는 위치 기능을 지원하지 않습니다.");
+            return;
+        }
+        setLocStatus("locating");
+
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const { latitude, longitude, accuracy } = pos.coords;
+                const latlng = new kakao.maps.LatLng(latitude, longitude);
+                const map = mapRef.current;
+
+                // 내 위치 마커
+                if (!userMarkerRef.current) {
+                    const markerEl = document.createElement("div");
+                    markerEl.style.width = "14px";
+                    markerEl.style.height = "14px";
+                    markerEl.style.borderRadius = "50%";
+                    markerEl.style.background = "#3b82f6";
+                    markerEl.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.25)";
+                    userMarkerRef.current = new kakao.maps.CustomOverlay({
+                        content: markerEl,
+                        position: latlng,
+                        xAnchor: 0.5,
+                        yAnchor: 0.5,
+                        zIndex: 9999,
+                        clickable: false,
+                    });
+                } else {
+                    userMarkerRef.current.setPosition(latlng);
+                }
+                userMarkerRef.current.setMap(map);
+
+                // 정확도 원
+                const radius = Math.max(accuracy || 0, 30);
+                if (!userCircleRef.current) {
+                    userCircleRef.current = new kakao.maps.Circle({
+                        center: latlng,
+                        radius,
+                        strokeWeight: 2,
+                        strokeColor: "#3b82f6",
+                        strokeOpacity: 0.6,
+                        strokeStyle: "shortdash",
+                        fillColor: "#3b82f6",
+                        fillOpacity: 0.15,
+                        zIndex: 9998,
+                    });
+                } else {
+                    userCircleRef.current.setOptions({ center: latlng, radius });
+                }
+                userCircleRef.current.setMap(map);
+
+                // 영역 처리
+                setLocStatus("ok");
+                const bounds = allowedBoundsRef.current;
+                if (bounds && !bounds.contain(latlng)) {
+                    alert("현재 위치가 서비스 영역 밖이에요. 서비스 영역 중심으로 이동합니다.");
+                    map.panTo(bounds.getCenter());
+                } else {
+                    map.panTo(latlng);
+                    if (map.getLevel() > 3) map.setLevel(3, { animate: true });
+                }
+            },
+            (err) => {
+                setLocStatus("error");
+                const msg =
+                    err.code === err.PERMISSION_DENIED
+                        ? "위치 권한이 거부되었습니다."
+                        : err.code === err.POSITION_UNAVAILABLE
+                            ? "위치 정보를 사용할 수 없습니다."
+                            : err.code === err.TIMEOUT
+                                ? "위치 요청이 시간 초과되었습니다."
+                                : "내 위치를 가져오지 못했습니다.";
+                alert(msg);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000 }
+        );
+    }, []);
+
+    // 검색 제출
+    const submitSearch = useCallback(() => {
+        if (!mapRef.current || !allStops.length) return;
+
+        if (selectedSuggestion >= 0 && suggestions[selectedSuggestion]) {
+            handleStopClick(suggestions[selectedSuggestion], { zoom: true });
+            setShowSuggestions(false);
+            return;
+        }
+
+        const q = search.trim();
+        if (!q) return;
+
+        const matched = allStops.find((s) => s.node_nm.includes(q));
+        if (matched) {
+            handleStopClick(matched, { zoom: true });
+            setShowSuggestions(false);
+        } else {
+            alert("일치하는 정류장이 없습니다.");
+        }
+    }, [allStops, search, selectedSuggestion, suggestions, handleStopClick]);
+
+    // 아이콘
+    const GPSIcon = ({ className }) => (
+        <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="2" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </svg>
+    );
+    const RefreshIcon = ({ className }) => (
+        <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+            <path d="M20 12a8 8 0 10-3.3 6.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M20 8v4h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+
+    // 바텀시트 드래그
+    const [dragging, setDragging] = useState(false);
+    const startRef = useRef({ y: 0, pct: 0 });
+    const clamp01 = (v, min, max) => Math.max(min, Math.min(max, v));
+    const onHandlePointerDown = (e) => {
+        setDragging(true);
+        const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
+        startRef.current = { y: clientY, pct: sheetPct };
+        e.currentTarget.setPointerCapture?.(e.pointerId ?? 0);
+        document.body.style.userSelect = "none";
+    };
+    const onHandlePointerMove = (e) => {
+        if (!dragging) return;
+        const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
+        const deltaY = clientY - startRef.current.y;
+        const vh = window.innerHeight || 1;
+        const next = startRef.current.pct - deltaY / vh;
+        setSheetPct(clamp01(next, 0.2, 0.9));
+    };
+    const onHandlePointerUp = () => {
+        if (!dragging) return;
+        setDragging(false);
+        document.body.style.userSelect = "";
+    };
+
+    // ETA 포맷
+    // 지금: 분만 보이거나 초만 보임 → 교체!
+    const formatETA = (sec) => {
+        const remain = Math.max(0, Math.floor(Number(sec) || 0)); // 안전가드
+        if (remain <= 0) return "도착";
+        const m = Math.floor(remain / 60);
+        const s = remain % 60;
+        // 3분 05초처럼 두 자리 초 표기
+        const s2 = String(s).padStart(2, "0");
+        return `${m}분 ${s2}초`;
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100">
@@ -494,43 +642,24 @@ const BusMap = () => {
                                 title="뒤로가기"
                             >
                                 <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
-                                    <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                                <span className="text-sm font-medium">뒤로</span>
                             </button>
-                            {/* 브랜드 배지 + 타이틀 */}
                             <span className="inline-block px-2.5 py-1 text-[11px] font-semibold tracking-wider text-emerald-700 bg-emerald-100 rounded-full">
                 Bustory
               </span>
                             <h1 className="text-lg font-bold text-emerald-900 tracking-tight">실시간 버스</h1>
                         </div>
-                        {/* 세그먼트 토글 */}
-                        <div className="inline-flex rounded-xl border border-emerald-200 bg-emerald-50 p-1">
-                            {["마산", "칠원"].map((dir) => (
-                                <button
-                                    key={dir}
-                                    onClick={() => setDirectionFilter(dir)}
-                                    className={
-                                        "px-3 py-1.5 rounded-lg text-sm font-semibold transition " +
-                                        (directionFilter === dir
-                                            ? "bg-white text-emerald-900 shadow"
-                                            : "text-emerald-700 hover:text-emerald-900")
-                                    }
-                                >
-                                    {dir}
-                                </button>
-                            ))}
-                        </div>
                     </div>
 
-                    {/* 즐겨찾기 바 (현재 방향만) */}
-                    {(favoritesByDir[directionFilter]?.length ?? 0) > 0 && (
+                    {/* 즐겨찾기 바 */}
+                    {(favorites?.length ?? 0) > 0 && (
                         <div className="mt-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
                             <span className="text-xs text-emerald-700 shrink-0">즐겨찾기:</span>
-                            {favoritesByDir[directionFilter].map((fav) => (
+                            {favorites.map((fav) => (
                                 <button
                                     key={fav.node_id}
-                                    onClick={() => jumpToStop(fav)}
+                                    onClick={() => handleStopClick(fav, { zoom: true })}
                                     className="shrink-0 px-3 py-1.5 rounded-full text-sm bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-white hover:shadow-sm transition"
                                     title={fav.node_nm}
                                 >
@@ -542,12 +671,12 @@ const BusMap = () => {
                 </div>
             </header>
 
-            {/* 지도 영역 */}
+            {/* 지도 */}
             <main className="relative">
                 <div ref={containerRef} className="w-full h-[72vh] sm:h-[74vh] bg-emerald-100/40" />
 
-                {/* 지도 위 검색 바 */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-screen-md px-2 z-20">
+                {/* 검색 바 */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-screen-md px-2 z-40">
                     <div className="relative">
                         <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-2xl shadow-sm px-3 py-2.5">
                             <input
@@ -556,9 +685,29 @@ const BusMap = () => {
                                     setRawSearch(e.target.value);
                                     setShowSuggestions(true);
                                 }}
-                                onKeyDown={onSearchKeyDown}
+                                onKeyDown={(e) => {
+                                    if (!showSuggestions || suggestions.length === 0) {
+                                        if (e.key === "Enter") submitSearch();
+                                        return;
+                                    }
+                                    if (e.key === "ArrowDown") {
+                                        e.preventDefault();
+                                        setSelectedSuggestion((p) => (p + 1) % suggestions.length);
+                                    } else if (e.key === "ArrowUp") {
+                                        e.preventDefault();
+                                        setSelectedSuggestion((p) => (p - 1 + suggestions.length) % suggestions.length);
+                                    } else if (e.key === "Enter") {
+                                        e.preventDefault();
+                                        submitSearch();
+                                    } else if (e.key === "Escape") {
+                                        setShowSuggestions(false);
+                                    }
+                                }}
+                                inputMode="search"
+                                enterKeyHint="search"
+                                autoComplete="off"
+                                className="w-full outline-none text-base text-emerald-900 placeholder:text-emerald-400"
                                 placeholder="정류장 이름 검색"
-                                className="w-full outline-none text-sm text-emerald-900 placeholder:text-emerald-400"
                             />
                             <button
                                 onClick={submitSearch}
@@ -577,7 +726,7 @@ const BusMap = () => {
                                         key={s.node_id}
                                         onMouseDown={() => {
                                             setShowSuggestions(false);
-                                            handleStopClick(s, { zoom: true }); // 검색 선택 시 확대
+                                            handleStopClick(s, { zoom: true });
                                         }}
                                         className={
                                             "px-3 py-2 text-sm cursor-pointer " +
@@ -592,31 +741,28 @@ const BusMap = () => {
                     </div>
                 </div>
 
-                {/* FAB: 선택 정류장으로 이동 */}
+                {/* FAB: 내 위치 찾기 */}
                 <div className="absolute right-4 bottom-[28vh] sm:bottom-[26vh] z-20">
                     <button
-                        onClick={() => {
-                            if (!selectedStop) return;
-                            const latlng = new kakao.maps.LatLng(
-                                selectedStop.latitude,
-                                selectedStop.longitude
-                            );
-                            mapRef.current && mapRef.current.panTo(latlng);
-                        }}
+                        onClick={locateMe}
                         className="w-12 h-12 rounded-full bg-white shadow-lg border border-emerald-200 grid place-items-center hover:shadow-xl active:scale-95 transition"
-                        title="선택 정류장으로 이동"
-                        aria-label="선택 정류장으로 이동"
+                        title="내 위치 찾기"
+                        aria-label="내 위치 찾기"
                     >
-                        <TargetIcon className="w-5 h-5 text-emerald-700" />
+                        {locStatus === "locating" ? (
+                            <svg viewBox="0 0 24 24" className="w-5 h-5 animate-spin" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" opacity="0.2" />
+                                <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            </svg>
+                        ) : (
+                            <GPSIcon className="w-5 h-5 text-emerald-700" />
+                        )}
                     </button>
                 </div>
 
-                {/* 바텀 시트: 드래그 높이 + 내부 스크롤 */}
+                {/* 바텀 시트 */}
                 <section className="fixed bottom-0 left-0 right-0 z-30">
-                    <div
-                        className="max-w-screen-md mx-auto px-4"
-                        style={{ height: `${Math.round(sheetPct * 100)}vh` }} // 시트 높이
-                    >
+                    <div className="max-w-screen-md mx-auto px-4" style={{ height: `${Math.round(sheetPct * 100)}vh` }}>
                         <div className="bg-white border border-emerald-200 rounded-t-2xl shadow-lg h-full flex flex-col">
                             {/* 드래그 핸들 */}
                             <div
@@ -631,11 +777,10 @@ const BusMap = () => {
                             >
                                 <div
                                     className="w-12 h-1.5 bg-emerald-300 rounded-full mx-auto cursor-grab active:cursor-grabbing select-none"
-                                    style={{ touchAction: "none" }} // 드래그 우선
+                                    style={{ touchAction: "none" }}
                                     aria-label="바텀시트 높이 조절"
                                     role="separator"
                                 />
-                                {/* 빠른 토글 버튼 (25%/75%) */}
                                 <button
                                     className="absolute right-3 top-1.5 text-xs text-emerald-700 hover:text-emerald-900 px-2 py-0.5 rounded-md hover:bg-emerald-50 transition"
                                     onClick={() => setSheetPct((p) => (p >= 0.6 ? 0.25 : 0.75))}
@@ -644,7 +789,7 @@ const BusMap = () => {
                                 </button>
                             </div>
 
-                            {/* 내용: 독립 스크롤 영역 */}
+                            {/* 내용 */}
                             <div className="flex-1 min-h-0 overflow-y-auto p-4">
                                 {selectedStop ? (
                                     <>
@@ -654,15 +799,10 @@ const BusMap = () => {
                                                     <div className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
                                                 </div>
                                                 <div>
-                                                    <h2 className="text-base font-bold text-emerald-900">
-                                                        {selectedStop.node_nm}
-                                                    </h2>
+                                                    <h2 className="text-base font-bold text-emerald-900">{selectedStop.node_nm}</h2>
                                                     <p className="text-xs text-emerald-700">정류장 도착 정보</p>
                                                 </div>
                                             </div>
-
-                                            {/* 우측 액션: 새로고침 */}
-                                            {/* 우측 액션: 새로고침 (아이콘만) */}
                                             <button
                                                 onClick={refreshArrival}
                                                 disabled={!selectedStop || arrStatus === "loading"}
@@ -676,7 +816,6 @@ const BusMap = () => {
                                                 aria-label="도착 정보 새로고침"
                                             >
                                                 {arrStatus === "loading" ? (
-                                                    // 로딩 중엔 아이콘을 회전
                                                     <RefreshIcon className="w-4 h-4 animate-spin" />
                                                 ) : (
                                                     <RefreshIcon className="w-4 h-4" />
@@ -711,41 +850,44 @@ const BusMap = () => {
                                                     <h4 className="text-sm font-semibold text-emerald-700">
                                                         도착 예정 버스 ({arrivalInfo.length}개)
                                                     </h4>
-                                                    {arrivalInfo.map((bus, idx) => (
-                                                        <div
-                                                            key={idx}
-                                                            className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-100"
-                                                        >
-                                                            <div className="flex items-center gap-3">
-                                                                <div className="w-8 h-8 bg-emerald-600 text-white rounded-full grid place-items-center text-xs font-bold">
-                                                                    {bus.routeNo}
+                                                    {arrivalInfo.map((bus, idx) => {
+                                                        const remain = Math.max(0, Number(bus.arrSec) || 0);
+                                                        const urgent = remain <= 60;
+                                                        const soon = remain <= 180;
+                                                        return (
+                                                            <div
+                                                                key={idx}
+                                                                className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-100"
+                                                            >
+                                                                <div className="flex items-center gap-3">
+                                                                    <div className="w-8 h-8 bg-emerald-600 text-white rounded-full grid place-items-center text-xs font-bold">
+                                                                        {bus.routeNo}
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="font-semibold text-emerald-900">
+                                                                            {bus.routeNo}번 버스
+                                                                        </p>
+                                                                        <p className="text-xs text-emerald-700">
+                                                                            {bus.arrPrevStationCnt}개 정류장 전
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div>
-                                                                    <p className="font-semibold text-emerald-900">
-                                                                        {bus.routeNo}번 버스
-                                                                    </p>
-                                                                    <p className="text-xs text-emerald-700">
-                                                                        {bus.arrPrevStationCnt}개 정류장 전
-                                                                    </p>
+                                                                <div className="text-right">
+                                                                    <div
+                                                                        className={
+                                                                            "text-lg font-bold " +
+                                                                            (urgent ? "text-red-500" : soon ? "text-orange-500" : "text-emerald-900")
+                                                                        }
+                                                                    >
+                                                                        {formatETA(remain)}
+                                                                    </div>
+                                                                    <div className="text-xs text-emerald-700">
+                                                                        {remain <= 0 ? "곧 도착" : "후 도착"}
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="text-right">
-                                                                <div
-                                                                    className={
-                                                                        "text-lg font-bold " +
-                                                                        (bus.arrTime <= 1
-                                                                            ? "text-red-500"
-                                                                            : bus.arrTime <= 3
-                                                                                ? "text-orange-500"
-                                                                                : "text-emerald-900")
-                                                                    }
-                                                                >
-                                                                    {bus.arrTime}분
-                                                                </div>
-                                                                <div className="text-xs text-emerald-700">후 도착</div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
+                                                        );
+                                                    })}
                                                 </div>
                                             )}
                                         </div>

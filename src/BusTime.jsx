@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function useQuery() {
@@ -31,8 +31,9 @@ const BusTime = () => {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
-    // 헤더 축소 상태
+    // 헤더 축소 상태 (센티넬 관찰로 전환)
     const [isCompact, setIsCompact] = useState(false);
+    const sentinelRef = useRef(null);
 
     // 원본 데이터
     const [data, setData] = useState([]);
@@ -43,9 +44,6 @@ const BusTime = () => {
     const [selectedBusNumber, setSelectedBusNumber] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [expandedRow, setExpandedRow] = useState(null);
-
-    // 정류장 검색
-    const [stopQuery, setStopQuery] = useState("");
 
     // “지금 이후만” 토글
     const [onlyUpcoming, setOnlyUpcoming] = useState(false);
@@ -139,7 +137,7 @@ const BusTime = () => {
                 /* ignore */
             }
 
-            // 상태 복원
+            // 상태 복원 (검색어 제거)
             try {
                 const raw = localStorage.getItem(STATE_KEY(jsonFile));
                 if (raw) {
@@ -147,7 +145,6 @@ const BusTime = () => {
                     if (!mounted) return;
                     setSelectedBusNumber(parsed.selectedBusNumber || []);
                     setSelectedLocation(parsed.selectedLocation || "");
-                    setStopQuery(parsed.stopQuery || "");
                     setOnlyUpcoming(Boolean(parsed.onlyUpcoming));
                 } else {
                     setSelectedBusNumber([]);
@@ -165,7 +162,7 @@ const BusTime = () => {
         };
     }, [jsonFile]);
 
-    // 상태 저장(딥링크 & 로컬)
+    // 상태 저장(딥링크 & 로컬) — 검색 관련 제거
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         params.set("json", jsonFile);
@@ -179,29 +176,34 @@ const BusTime = () => {
 
         nav({ search: params.toString() }, { replace: true });
 
-        const payload = { selectedBusNumber, selectedLocation, stopQuery, onlyUpcoming };
+        const payload = { selectedBusNumber, selectedLocation, onlyUpcoming };
         localStorage.setItem(STATE_KEY(jsonFile), JSON.stringify(payload));
-    }, [jsonFile, selectedLocation, selectedBusNumber, stopQuery, onlyUpcoming, nav]);
+    }, [jsonFile, selectedLocation, selectedBusNumber, onlyUpcoming, nav]);
 
-    // 헤더 축소: 스크롤 위치로 제어
+    // 헤더 축소: IntersectionObserver로 부드럽게
     useEffect(() => {
-        const onScroll = () => {
-            const y = window.scrollY || document.documentElement.scrollTop;
-            setIsCompact(y > 24);
-        };
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
+        const target = sentinelRef.current;
+        if (!target) return;
+
+        const obs = new IntersectionObserver(
+            (entries) => {
+                const e = entries[0];
+                // 상단에서 24px 이상 스크롤되면 컴팩트
+                const topPassed = e.boundingClientRect.top < -24 || e.intersectionRatio < 1;
+                setIsCompact(topPassed);
+            },
+            {
+                root: null, // viewport
+                threshold: [1], // sentinel이 완전히 보일 때만 1
+                rootMargin: "-24px 0px 0px 0px", // 24px 지나면 compact
+            }
+        );
+        obs.observe(target);
+        return () => obs.disconnect();
     }, []);
 
-    // 정류장 검색 목록
-    const filteredLocations = useMemo(
-        () =>
-            locations.filter((l) =>
-                l.toLowerCase().includes(stopQuery.toLowerCase())
-            ),
-        [locations, stopQuery]
-    );
+    // 정류장 목록 (검색 제거 → 전부 그대로)
+    const filteredLocations = locations;
 
     // 필터링 + 정렬 (+ 지금 이후만)
     const filteredData = useMemo(() => {
@@ -316,7 +318,7 @@ const BusTime = () => {
                 <div className={`border-t border-green-100 transition-all ${isCompact ? "py-1" : ""}`}>
                     <div className={`max-w-4xl mx-auto px-4 transition-all ${isCompact ? "py-1.5" : "py-3"}`}>
                         {isCompact ? (
-                            // 👇 컴팩트 모드: "정류장 드롭다운"만 노출
+                            // 👇 컴팩트 모드: "정류장 드롭다운"만 노출 (검색 제거)
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
                                 <label className="sm:col-span-1 block text-emerald-900 text-xs font-medium">
                                     정류장
@@ -330,7 +332,7 @@ const BusTime = () => {
                                 >
                                     <option value="" disabled>정류장을 선택하세요</option>
                                     {filteredLocations.length === 0 ? (
-                                        <option value="" disabled>검색 결과가 없습니다</option>
+                                        <option value="" disabled>목록이 없습니다</option>
                                     ) : (
                                         filteredLocations.map((location, index) => (
                                             <option key={index} value={location}>
@@ -341,7 +343,7 @@ const BusTime = () => {
                                 </select>
                             </div>
                         ) : (
-                            // 👇 일반 모드: 기존 전체 UI (빠른 액션/칩/검색/즐겨찾기)
+                            // 👇 일반 모드: 전체 UI(검색 제거)
                             <>
                                 {/* 노선 빠른 액션 */}
                                 <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -386,7 +388,7 @@ const BusTime = () => {
                                     </div>
                                 </div>
 
-                                {/* 노선 칩(토글) — 크기 업! */}
+                                {/* 노선 칩(토글) */}
                                 <div className="flex flex-wrap gap-2.5">
                                     {busNumbers.map((n) => {
                                         const active = selectedBusNumber.includes(n);
@@ -414,24 +416,12 @@ const BusTime = () => {
                                     })}
                                 </div>
 
-                                {/* 정류장 검색 콤보 + 즐겨찾기 */}
+                                {/* 정류장 선택 (검색 제거) */}
                                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
                                     <div className="sm:col-span-2">
                                         <label className="block text-emerald-900 text-sm font-medium mb-1">
                                             정류장
                                         </label>
-                                        <input
-                                            value={stopQuery}
-                                            onChange={(e) => setStopQuery(e.target.value)}
-                                            onKeyDown={(e) => {
-                                                if (e.key === "Enter" && filteredLocations.length > 0) {
-                                                    setSelectedLocation(filteredLocations[0]);
-                                                }
-                                            }}
-                                            placeholder="정류장 검색 (예: 용호, 칠서)"
-                                            className="w-full p-2.5 rounded-md border border-emerald-300
-                         focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-2 bg-white"
-                                        />
                                         <select
                                             value={selectedLocation || ""}
                                             onChange={(e) => setSelectedLocation(e.target.value)}
@@ -440,7 +430,7 @@ const BusTime = () => {
                                         >
                                             <option value="" disabled>정류장을 선택하세요</option>
                                             {filteredLocations.length === 0 ? (
-                                                <option value="" disabled>검색 결과가 없습니다</option>
+                                                <option value="" disabled>목록이 없습니다</option>
                                             ) : (
                                                 filteredLocations.map((location, index) => (
                                                     <option key={index} value={location}>
@@ -449,11 +439,10 @@ const BusTime = () => {
                                                 ))
                                             )}
                                         </select>
-                                        {(selectedLocation || stopQuery) && (
+                                        {(selectedLocation) && (
                                             <button
                                                 type="button"
                                                 onClick={() => {
-                                                    setStopQuery("");
                                                     setSelectedLocation("");
                                                 }}
                                                 className="mt-2 text-xs text-emerald-700 underline"
@@ -488,7 +477,7 @@ const BusTime = () => {
                                                             className="relative inline-flex items-center gap-2 bg-yellow-100 hover:bg-yellow-200
                                  text-yellow-900 px-3 py-1.5 rounded-full border border-yellow-200
                                  shadow-sm active:scale-95 transition"
-                                                            title={`${bus}번 - ${loc}`}
+                                                            title={`${bus}번 · ${loc}`}
                                                         >
                                                             <span className="text-xs font-medium">{bus}번 · {loc}</span>
                                                             <span
@@ -516,6 +505,9 @@ const BusTime = () => {
                     </div>
                 </div>
             </header>
+
+            {/* 스크롤 센티넬: 헤더 바로 아래에 두어서 스크롤 지점 감지 */}
+            <div ref={sentinelRef} aria-hidden="true" className="h-0.5 w-full" />
 
             {/* 본문 */}
             <main className="max-w-4xl mx-auto px-4 py-6">
@@ -568,12 +560,11 @@ const BusTime = () => {
                                         onKeyDown={(e) => e.key === "Enter" && handleRowClick(index)}
                                     >
                                         <div className="flex items-center gap-3">
-                                            {/* 번호 배지 크기 업 */}
+                                            {/* 번호 배지 */}
                                             <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-emerald-600 text-white text-base font-bold">
                         {prefix}
                       </span>
                                             <div className="text-emerald-900">
-                                                {/* 시간 글자 크기 업 */}
                                                 <div className="font-extrabold text-lg md:text-xl">
                                                     {row.time}{" "}
                                                     <span className="text-emerald-700 text-sm font-medium">
