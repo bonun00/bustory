@@ -17,7 +17,7 @@ function normalizeFromArray(raw) {
     return list.map((it) => ({
         routeNo: it.routeNo ?? "",
         arrPrevStationCnt: Number(it.arrPrevStationCnt ?? 0) || 0,
-        arrSec: Math.max(0, Number(it.arrTime ?? it.arrSec ?? 0) || 0), // ⬅️ 핵심: 초 → arrSec
+        arrSec: Math.max(0, Number(it.arrTime ?? it.arrSec ?? 0) || 0), // 서버가 준 "남은 초"
         nodeId: it.nodeId ?? "",
         nodeNm: it.nodeNm ?? "",
         routeId: it.routeId ?? "",
@@ -25,6 +25,9 @@ function normalizeFromArray(raw) {
         vehicleTp: it.vehicleTp ?? "",
     }));
 }
+
+// 개별 버스 식별 키 (routeId 우선, 없으면 routeNo+nodeId 조합)
+const busKeyOf = (b) => b.routeId || `${b.routeNo}__${b.nodeId}`;
 
 const BusMap = () => {
     const containerRef = useRef(null);
@@ -60,6 +63,10 @@ const BusMap = () => {
     const [selectedStop, setSelectedStop] = useState(null);
     const [arrivalInfo, setArrivalInfo] = useState([]); // [{routeNo, arrPrevStationCnt, arrSec, ...}]
     const [arrStatus, setArrStatus] = useState("idle"); // idle | loading | ok | error
+
+    // ⬇️ 새로고침 시에도 자연스럽게 줄어들도록 하는 핵심 상태
+    const [lastSyncMs, setLastSyncMs] = useState(0);         // 마지막 서버 동기화 시각(ms)
+    const [nowMs, setNowMs] = useState(() => Date.now());    // 현재 시각(ms) - 매초 갱신
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -228,6 +235,51 @@ const BusMap = () => {
         };
     }, [clampCenterAndZoom]);
 
+    // 표시용 남은 초 계산: 서버 초(arrSec) - (지금 - lastSync)
+    const getRemainSec = useCallback(
+        (serverSec) => {
+            if (!lastSyncMs) return Math.max(0, Math.floor(Number(serverSec) || 0));
+            const elapsed = Math.floor((nowMs - lastSyncMs) / 1000);
+            return Math.max(0, (Number(serverSec) || 0) - elapsed);
+        },
+        [nowMs, lastSyncMs]
+    );
+
+    // 매초 nowMs만 갱신 (arrivalInfo는 건드리지 않음)
+    useEffect(() => {
+        const t = setInterval(() => setNowMs(Date.now()), 1000);
+        return () => clearInterval(t);
+    }, []);
+
+    // ✨ 연속성 병합: 새 서버 값과 이전 표시값을 비교해 시간이 거꾸로 늘지 않게 함
+    const mergeWithContinuity = useCallback(
+        (prevList, nextList) => {
+            const prevMap = new Map(prevList.map((b) => [busKeyOf(b), b]));
+            const merged = nextList.map((n) => {
+                const key = busKeyOf(n);
+                const p = prevMap.get(key);
+                if (!p) return n; // 신규 항목은 그대로
+                // 이전 표시 기준 남은 초
+                const prevRemain = getRemainSec(p.arrSec);
+                // 서버가 준 남은 초
+                const serverRemain = Math.max(0, Number(n.arrSec) || 0);
+
+                // 서버가 더 크거나(=뒤로 감) 거의 동일하면 이전 흐름 유지
+                // 약간의 지연 허용을 위해 2초 허용 범위
+                const EPS = 2;
+                const usePrev = serverRemain >= prevRemain - EPS;
+
+                return {
+                    ...n,
+                    arrSec: usePrev ? prevRemain : Math.min(prevRemain, serverRemain),
+                };
+            });
+            // 사라진 버스는 자동 제거(서버 기준)
+            return merged;
+        },
+        [getRemainSec]
+    );
+
     // 정류장 클릭 → 데이터 로드
     const handleStopClick = useCallback(
         async (stop, options = {}) => {
@@ -280,10 +332,10 @@ const BusMap = () => {
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const raw = await res.json();
 
-                const normalized = normalizeFromArray(raw); // ⬅️ 새 응답 포맷
-                // console.log("RAW", raw, "NORMALIZED", normalized);
+                const normalized = normalizeFromArray(raw);
                 setArrivalInfo(normalized);
                 setArrStatus("ok");
+                setLastSyncMs(Date.now()); // 새 기준 시각
             } catch (e) {
                 if (e.name === "AbortError") {
                     setArrStatus("idle");
@@ -418,21 +470,6 @@ const BusMap = () => {
         return () => window.removeEventListener("resize", onResize);
     }, [clampCenterAndZoom]);
 
-    // ✅ 초 단위 카운트다운
-    useEffect(() => {
-        if (!arrivalInfo || arrivalInfo.length === 0) return;
-        const t = setInterval(() => {
-            setArrivalInfo((prev) =>
-                prev.map((b) => ({
-                    ...b,
-                    arrSec: b.arrSec > 0 ? b.arrSec - 1 : 0,
-                }))
-            );
-        }, 1000);
-        return () => clearInterval(t);
-    }, [arrivalInfo.length]);
-
-    // ✅ 30초마다 서버값으로 보정
     useEffect(() => {
         if (!selectedStop) return;
         const id = setInterval(() => {
@@ -458,9 +495,10 @@ const BusMap = () => {
             const raw = await res.json();
 
             const normalized = normalizeFromArray(raw);
-            // console.log("RAW", raw, "NORMALIZED", normalized);
-            setArrivalInfo(normalized);
+
+            setArrivalInfo((prev) => mergeWithContinuity(prev, normalized));
             setArrStatus("ok");
+            setLastSyncMs(Date.now()); // 새 기준 시각
         } catch (e) {
             if (e.name === "AbortError") {
                 setArrStatus("idle");
@@ -470,7 +508,7 @@ const BusMap = () => {
         } finally {
             abortRef.current = null;
         }
-    }, [selectedStop]);
+    }, [selectedStop, mergeWithContinuity]);
 
     // 내 위치 찾기
     const locateMe = useCallback(() => {
@@ -617,16 +655,19 @@ const BusMap = () => {
     };
 
     // ETA 포맷
-    // 지금: 분만 보이거나 초만 보임 → 교체!
     const formatETA = (sec) => {
-        const remain = Math.max(0, Math.floor(Number(sec) || 0)); // 안전가드
+        const remain = Math.max(0, Math.floor(Number(sec) || 0));
         if (remain <= 0) return "도착";
         const m = Math.floor(remain / 60);
         const s = remain % 60;
-        // 3분 05초처럼 두 자리 초 표기
         const s2 = String(s).padStart(2, "0");
         return `${m}분 ${s2}초`;
     };
+
+    // 🔽 정렬: 남은 시간이 적은 순
+    const sortedArrival = useMemo(() => {
+        return [...arrivalInfo].sort((a, b) => getRemainSec(a.arrSec) - getRemainSec(b.arrSec));
+    }, [arrivalInfo, getRemainSec]);
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100">
@@ -839,24 +880,24 @@ const BusMap = () => {
                                                 </div>
                                             )}
 
-                                            {arrStatus === "ok" && Array.isArray(arrivalInfo) && arrivalInfo.length === 0 && (
+                                            {arrStatus === "ok" && Array.isArray(sortedArrival) && sortedArrival.length === 0 && (
                                                 <div className="text-center py-6">
                                                     <p className="text-emerald-700">운행 중인 버스가 없습니다</p>
                                                 </div>
                                             )}
 
-                                            {arrStatus === "ok" && Array.isArray(arrivalInfo) && arrivalInfo.length > 0 && (
+                                            {arrStatus === "ok" && Array.isArray(sortedArrival) && sortedArrival.length > 0 && (
                                                 <div className="space-y-3">
                                                     <h4 className="text-sm font-semibold text-emerald-700">
-                                                        도착 예정 버스 ({arrivalInfo.length}개)
+                                                        도착 예정 버스 ({sortedArrival.length}개)
                                                     </h4>
-                                                    {arrivalInfo.map((bus, idx) => {
-                                                        const remain = Math.max(0, Number(bus.arrSec) || 0);
+                                                    {sortedArrival.map((bus, idx) => {
+                                                        const remain = getRemainSec(bus.arrSec); // 표시용 남은 초
                                                         const urgent = remain <= 60;
                                                         const soon = remain <= 180;
                                                         return (
                                                             <div
-                                                                key={idx}
+                                                                key={busKeyOf(bus) + "_" + idx}
                                                                 className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-100"
                                                             >
                                                                 <div className="flex items-center gap-3">
