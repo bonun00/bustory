@@ -1,0 +1,9 @@
+# robots.txt for Bustory
+User-agent: *
+Allow: /
+
+# 크롤러가 너무 자주 긁지 않도록(선택)
+Crawl-delay: 1
+
+# 사이트맵 위치
+Sitemap: https://bustory.kr/sitemap.xml
