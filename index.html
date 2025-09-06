@@ -1,37 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>함안 마산 농어촌 버스 시간표 | Bustory</title>
-  <meta name="description" content="Bustory는 칠원 함안 마산 간 버스 시간을 확인 할 수 있습니다">
-  <meta name="keywords" content="함안 버스 시간표, 마산 버스 시간표, 칠원 버스, 대산 버스, 농어촌 버스, Bustory">
+
+  <!-- 단 하나의 타이틀 -->
+  <title>함안·마산 농어촌 버스 시간표 | Bustory</title>
+
+  <meta name="description" content="Bustory에서 함안·마산 농어촌 버스 시간표와 실시간 도착 정보를 확인하세요." />
+  <meta name="keywords" content="
+함안 버스 시간표, 마산 버스 시간표, 칠원 버스, 대산 버스, 군북 버스,
+농어촌 버스 시간표, 함안 → 마산 버스, 마산 → 함안 버스,
+창원행 버스, 남마산 버스, 시외버스 시간표, 실시간 버스 도착 정보,
+함안 교통편, 마산 교통편, 함안 창원 버스, 함안 시내버스, 함안 마산 대중교통
+">
   <meta name="naver-site-verification" content="8ad64c9bd9bc2eaa13306e96ea2e06591e32889a" />
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Bustory">
-  <meta property="og:title" content="Bustory - 함안/마산 농어촌 버스 시간 안내">
-  <meta property="og:description" content="실시간 도착정보와 시간표를 한눈에 확인하세요. Bustory와 함께 더 편리하게 버스를 이용해 보세요.">
-  <meta property="og:url" content="https://bustory.kr/">
-  <meta property="og:image" content="https://bustory.kr/icons/og-image.png">
+  <!-- Canonical (중복 URL 방지) -->
+  <link rel="canonical" href="https://bustory.kr/">
 
-  <title>BUSTORY</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Bustory" />
+  <meta property="og:title" content="함안·마산 농어촌 버스 시간표 | Bustory" />
+  <meta property="og:description" content="실시간 도착정보와 시간표를 한눈에." />
+  <meta property="og:url" content="https://bustory.kr/" />
+  <meta property="og:image" content="https://bustory.kr/icons/bus-icon-192.png" />
 
-  <!-- favicon -->
+  <!-- Twitter Card (선택) -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- favicon / PWA -->
   <link rel="icon" type="image/png" href="/bustoryLogoF.png" />
-
-  <link rel="manifest" href="/manifest.json" />
-
-  <!-- iOS 홈화면 아이콘 -->
   <link rel="apple-touch-icon" href="/bustoryLogo.png" sizes="180x180" />
-
-  <!-- 설치/상태바 색상 -->
+  <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0C4D2A" />
 
-  <!-- Kakao SDK -->
+  <!-- Kakao Maps -->
   <script defer src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=95f4d1dfe3c42e0ed190d54b737fd8e8&autoload=false&libraries=clusterer"></script>
 
-  <!-- Naver Analytics: 스크립트만 로드 (wcs_do는 React에서 호출) -->
+  <!-- Naver Analytics -->
   <script defer src="https://wcs.naver.net/wcslog.js"></script>
   <script>
     window.wcs_add = window.wcs_add || {};
