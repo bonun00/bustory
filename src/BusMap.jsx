@@ -11,19 +11,44 @@ if (isProdHost && /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(BUS_API_BASE)) {
     BUS_API_BASE = "/api";
 }
 
-/** 새 백엔드 응답(배열, 카멜케이스) → UI용 배열로 정규화 */
+/** 새 백엔드 응답(배열, 카멜케이스) → UI용 배열로 정규화
+ *  - 기본: expireAt(ISO 또는 epochMillis)을 읽어서 expireAtMs로 변환
+ *  - 호환: expireAt이 없으면 arrTime/arrSec로부터 expireAtMs 계산
+ */
 function normalizeFromArray(raw) {
     const list = Array.isArray(raw) ? raw : (raw ? [raw] : []);
-    return list.map((it) => ({
-        routeNo: it.routeNo ?? "",
-        arrPrevStationCnt: Number(it.arrPrevStationCnt ?? 0) || 0,
-        arrSec: Math.max(0, Number(it.arrTime ?? it.arrSec ?? 0) || 0), // 서버가 준 "남은 초"
-        nodeId: it.nodeId ?? "",
-        nodeNm: it.nodeNm ?? "",
-        routeId: it.routeId ?? "",
-        routeTp: it.routeTp ?? "",
-        vehicleTp: it.vehicleTp ?? "",
-    }));
+    const now = Date.now();
+
+    return list.map((it) => {
+        // expireAt 읽기 (ISO string or epoch millis)
+        const expRaw = it.expireAt ?? it.expire_at ?? null;
+        let expireAtMs =
+            typeof expRaw === "number"
+                ? expRaw
+                : expRaw
+                    ? Date.parse(expRaw)
+                    : NaN;
+
+        // fallback: arrTime/arrSec로 계산
+        if (!Number.isFinite(expireAtMs)) {
+            const remainSec = Math.max(
+                0,
+                Number(it.arrTime ?? it.arrSec ?? 0) || 0
+            );
+            expireAtMs = now + remainSec * 1000;
+        }
+
+        return {
+            routeNo: it.routeNo ?? "",
+            arrPrevStationCnt: Number(it.arrPrevStationCnt ?? 0) || 0,
+            expireAtMs: Number.isFinite(expireAtMs) ? expireAtMs : now, // 안전장치
+            nodeId: it.nodeId ?? "",
+            nodeNm: it.nodeNm ?? "",
+            routeId: it.routeId ?? "",
+            routeTp: it.routeTp ?? "",
+            vehicleTp: it.vehicleTp ?? "",
+        };
+    });
 }
 
 // 개별 버스 식별 키 (routeId 우선, 없으면 routeNo+nodeId 조합)
@@ -61,12 +86,15 @@ const BusMap = () => {
     // Data
     const [busStops, setBusStops] = useState([]); // 전체 정류장
     const [selectedStop, setSelectedStop] = useState(null);
-    const [arrivalInfo, setArrivalInfo] = useState([]); // [{routeNo, arrPrevStationCnt, arrSec, ...}]
+    const [arrivalInfo, setArrivalInfo] = useState([]); // [{routeNo, arrPrevStationCnt, expireAtMs, ...}]
     const [arrStatus, setArrStatus] = useState("idle"); // idle | loading | ok | error
 
-    // ⬇️ 새로고침 시에도 자연스럽게 줄어들도록 하는 핵심 상태
-    const [lastSyncMs, setLastSyncMs] = useState(0);         // 마지막 서버 동기화 시각(ms)
-    const [nowMs, setNowMs] = useState(() => Date.now());    // 현재 시각(ms) - 매초 갱신
+    // 매초 현재 시각 갱신 (표시용 남은 시간 감소)
+    const [nowMs, setNowMs] = useState(() => Date.now());
+    useEffect(() => {
+        const t = setInterval(() => setNowMs(Date.now()), 1000);
+        return () => clearInterval(t);
+    }, []);
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -235,21 +263,11 @@ const BusMap = () => {
         };
     }, [clampCenterAndZoom]);
 
-    // 표시용 남은 초 계산: 서버 초(arrSec) - (지금 - lastSync)
+    // 표시용 남은 초 계산: (expireAtMs - nowMs)
     const getRemainSec = useCallback(
-        (serverSec) => {
-            if (!lastSyncMs) return Math.max(0, Math.floor(Number(serverSec) || 0));
-            const elapsed = Math.floor((nowMs - lastSyncMs) / 1000);
-            return Math.max(0, (Number(serverSec) || 0) - elapsed);
-        },
-        [nowMs, lastSyncMs]
+        (expireAtMs) => Math.max(0, Math.floor(((Number(expireAtMs) || 0) - nowMs) / 1000)),
+        [nowMs]
     );
-
-    // 매초 nowMs만 갱신 (arrivalInfo는 건드리지 않음)
-    useEffect(() => {
-        const t = setInterval(() => setNowMs(Date.now()), 1000);
-        return () => clearInterval(t);
-    }, []);
 
     // ✨ 연속성 병합: 새 서버 값과 이전 표시값을 비교해 시간이 거꾸로 늘지 않게 함
     const mergeWithContinuity = useCallback(
@@ -259,25 +277,28 @@ const BusMap = () => {
                 const key = busKeyOf(n);
                 const p = prevMap.get(key);
                 if (!p) return n; // 신규 항목은 그대로
-                // 이전 표시 기준 남은 초
-                const prevRemain = getRemainSec(p.arrSec);
-                // 서버가 준 남은 초
-                const serverRemain = Math.max(0, Number(n.arrSec) || 0);
+
+                const prevRemain = getRemainSec(p.expireAtMs);   // 이전 표시 기준 남은 초
+                const serverRemain = getRemainSec(n.expireAtMs); // 서버 기준 남은 초
+                const EPS = 2;
 
                 // 서버가 더 크거나(=뒤로 감) 거의 동일하면 이전 흐름 유지
-                // 약간의 지연 허용을 위해 2초 허용 범위
-                const EPS = 2;
-                const usePrev = serverRemain >= prevRemain - EPS;
-
+                if (serverRemain >= prevRemain - EPS) {
+                    return {
+                        ...n,
+                        expireAtMs: nowMs + prevRemain * 1000,
+                    };
+                }
+                // 그 외에는 점프 최소화(더 작은 값을 기준으로)
+                const keep = Math.min(prevRemain, serverRemain);
                 return {
                     ...n,
-                    arrSec: usePrev ? prevRemain : Math.min(prevRemain, serverRemain),
+                    expireAtMs: nowMs + keep * 1000,
                 };
             });
-            // 사라진 버스는 자동 제거(서버 기준)
             return merged;
         },
-        [getRemainSec]
+        [getRemainSec, nowMs]
     );
 
     // 정류장 클릭 → 데이터 로드
@@ -335,7 +356,6 @@ const BusMap = () => {
                 const normalized = normalizeFromArray(raw);
                 setArrivalInfo(normalized);
                 setArrStatus("ok");
-                setLastSyncMs(Date.now()); // 새 기준 시각
             } catch (e) {
                 if (e.name === "AbortError") {
                     setArrStatus("idle");
@@ -470,6 +490,7 @@ const BusMap = () => {
         return () => window.removeEventListener("resize", onResize);
     }, [clampCenterAndZoom]);
 
+    // 30초마다 새로고침
     useEffect(() => {
         if (!selectedStop) return;
         const id = setInterval(() => {
@@ -495,10 +516,8 @@ const BusMap = () => {
             const raw = await res.json();
 
             const normalized = normalizeFromArray(raw);
-
             setArrivalInfo((prev) => mergeWithContinuity(prev, normalized));
             setArrStatus("ok");
-            setLastSyncMs(Date.now()); // 새 기준 시각
         } catch (e) {
             if (e.name === "AbortError") {
                 setArrStatus("idle");
@@ -655,8 +674,8 @@ const BusMap = () => {
     };
 
     // ETA 포맷
-    const formatETA = (sec) => {
-        const remain = Math.max(0, Math.floor(Number(sec) || 0));
+    const formatETA = (remainSec) => {
+        const remain = Math.max(0, Math.floor(Number(remainSec) || 0));
         if (remain <= 0) return "도착";
         const m = Math.floor(remain / 60);
         const s = remain % 60;
@@ -666,7 +685,7 @@ const BusMap = () => {
 
     // 🔽 정렬: 남은 시간이 적은 순
     const sortedArrival = useMemo(() => {
-        return [...arrivalInfo].sort((a, b) => getRemainSec(a.arrSec) - getRemainSec(b.arrSec));
+        return [...arrivalInfo].sort((a, b) => getRemainSec(a.expireAtMs) - getRemainSec(b.expireAtMs));
     }, [arrivalInfo, getRemainSec]);
 
     return (
@@ -892,7 +911,7 @@ const BusMap = () => {
                                                         도착 예정 버스 ({sortedArrival.length}개)
                                                     </h4>
                                                     {sortedArrival.map((bus, idx) => {
-                                                        const remain = getRemainSec(bus.arrSec); // 표시용 남은 초
+                                                        const remain = getRemainSec(bus.expireAtMs); // 표시용 남은 초
                                                         const urgent = remain <= 60;
                                                         const soon = remain <= 180;
                                                         return (
