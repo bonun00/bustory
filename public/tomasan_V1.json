@@ -43,6 +43,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "06:25"
+      },
+      {
         "stop": "기공A",
         "time": "06:25"
       },
@@ -293,7 +297,15 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "07:10"
+      },
+      {
         "stop": "기공A",
+        "time": "07:10"
+      },
+      {
+        "stop": "기공",
         "time": "07:10"
       },
       {
@@ -331,6 +343,10 @@
     "busNumber": "113-60",
     "startPoint": "내 봉 촌",
     "route": [
+      {
+      "stop": "내봉촌",
+      "time": "06:50"
+      },
       {
         "stop": "이룡",
         "time": "07:05"
@@ -383,6 +399,10 @@
     "startPoint": "함     안",
     "route": [
       {
+        "stop": "함안",
+        "time": "06:40"
+      },
+      {
         "stop": "로봇고",
         "time": "07:00"
       },
@@ -406,7 +426,11 @@
     "startPoint": "에이스A",
     "route": [
       {
-        "stop": "기공A",
+        "stop": "에이스A",
+        "time": "07:25"
+      },
+      {
+        "stop": "기공",
         "time": "07:25"
       },
       {
@@ -444,6 +468,10 @@
     "busNumber": "113-74",
     "startPoint": "남     양",
     "route": [
+      {
+        "stop": "남양",
+        "time": "07:15"
+      },
       {
         "stop": "칠북",
         "time": "07:18"
@@ -542,6 +570,10 @@
     "busNumber": "113-29",
     "startPoint": "두     곡",
     "route": [
+      {
+        "stop": "두곡",
+        "time": "07:15"
+      },
       {
         "stop": "대산",
         "time": "07:35"
@@ -680,6 +712,10 @@
     "startPoint": "남     지",
     "route": [
       {
+        "stop": "남지",
+        "time": "08:15"
+      },
+      {
         "stop": "신계",
         "time": "08:20"
       },
@@ -731,6 +767,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "08:35"
+      },
+      {
         "stop": "기공A",
         "time": "08:35"
       },
@@ -769,6 +809,10 @@
     "busNumber": "113-34",
     "startPoint": "장     포",
     "route": [
+      {
+        "stop": "장포",
+        "time": "07:55"
+      },
       {
         "stop": "대산",
         "time": "08:30"
@@ -821,6 +865,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "08:55"
+      },
+      {
         "stop": "기공A",
         "time": "08:55"
       },
@@ -859,6 +907,10 @@
     "busNumber": "113-03",
     "startPoint": "호     곡",
     "route": [
+      {
+        "stop": "호곡",
+        "time": "09:05"
+      },
       {
         "stop": "오곡",
         "time": "09:08"
@@ -902,6 +954,10 @@
     "busNumber": "250-41",
     "startPoint": "내 봉 촌",
     "route": [
+    {
+        "stop": "내봉촌",
+        "time": "09:00"
+      },
       {
         "stop": "칠북",
         "time": "09:15"
@@ -945,6 +1001,10 @@
     "busNumber": "113-80",
     "startPoint": "남     지",
     "route": [
+      {
+        "stop": "남지",
+        "time": "09:00"
+      },
       {
         "stop": "이룡",
         "time": "09:10"
@@ -997,6 +1057,10 @@
     "startPoint": "취     무",
     "route": [
       {
+        "stop": "취무",
+        "time": "09:15"
+      },
+      {
         "stop": "대산",
         "time": "09:25"
       },
@@ -1019,6 +1083,10 @@
     "busNumber": "113-38",
     "startPoint": "남     지",
     "route": [
+      {
+        "stop": "남지",
+        "time": "09:00"
+      },
       {
         "stop": "칠서 공단",
         "time": "09:05"
@@ -1071,6 +1139,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "09:55"
+      },
+      {
         "stop": "기공A",
         "time": "09:55"
       },
@@ -1109,6 +1181,10 @@
     "busNumber": "113-76",
     "startPoint": "남     양",
     "route": [
+      {
+       "stop": "남양",
+       "time": "09:50"
+      },
       {
         "stop": "칠북",
         "time": "09:53"
@@ -1208,6 +1284,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "10:25"
+      },
+      {
         "stop": "기공A",
         "time": "10:25"
       },
@@ -1246,6 +1326,10 @@
     "busNumber": "113-33",
     "startPoint": "두     곡",
     "route": [
+      {
+        "stop": "두곡",
+        "time": "10:00"
+      },
       {
         "stop": "대산",
         "time": "10:20"
@@ -1302,6 +1386,10 @@
     "startPoint": "내 봉 촌",
     "route": [
       {
+        "stop": "내봉촌",
+        "time": "10:35"
+      },
+      {
         "stop": "칠북",
         "time": "10:50"
       },
@@ -1345,6 +1433,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "10:55"
+      },
+      {
         "stop": "기공A",
         "time": "10:55"
       },
@@ -1383,6 +1475,10 @@
     "busNumber": "113-06",
     "startPoint": "장     암",
     "route": [
+      {
+        "stop": "장암",
+        "time": "11:15"
+      },
       {
         "stop": "유원",
         "time": "11:20"
@@ -1470,6 +1566,10 @@
     "startPoint": "동     촌",
     "route": [
       {
+        "stop": "동촌",
+        "time": "11:25"
+      },
+      {
         "stop": "대산",
         "time": "11:35"
       },
@@ -1517,6 +1617,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "11:55"
+      },
+      {
         "stop": "기공A",
         "time": "11:55"
       },
@@ -1555,6 +1659,10 @@
     "busNumber": "113-81",
     "startPoint": "남     지",
     "route": [
+      {
+        "stop": "남지",
+        "time": "11:40"
+      },
       {
         "stop": "이룡",
         "time": "11:45"
@@ -1603,6 +1711,10 @@
     "startPoint": "남     지",
     "route": [
       {
+        "stop": "남지",
+        "time": "12:20"
+      },
+      {
         "stop": "칠서 공단",
         "time": "12:27"
       },
@@ -1650,6 +1762,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "12:40"
+      },
+      {
         "stop": "기공A",
         "time": "12:40"
       },
@@ -1689,6 +1805,10 @@
     "startPoint": "산     정",
     "route": [
       {
+        "stop": "산정",
+        "time": "12:35"
+      },
+      {
         "stop": "기공A",
         "time": "12:50"
       },
@@ -1727,6 +1847,10 @@
     "busNumber": "113-74",
     "startPoint": "남     양",
     "route": [
+      {
+        "stop": "남양",
+        "time": "13:00"
+      },
       {
         "stop": "칠북",
         "time": "13:03"
@@ -1775,6 +1899,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "13:35"
+      },
+      {
         "stop": "기공A",
         "time": "13:35"
       },
@@ -1808,12 +1936,6 @@
       }
     ],
     "endPoint": "남마산TR"
-  },
-  {
-    "busNumber": "nan",
-    "startPoint": "서     촌",
-    "route": [],
-    "endPoint": ""
   },
   {
     "busNumber": "113-53",
@@ -2020,6 +2142,10 @@
     "startPoint": "함     안",
     "route": [
       {
+        "stop": "함안",
+        "time": "13:40"
+      },
+      {
         "stop": "대산",
         "time": "14:00"
       },
@@ -2046,6 +2172,10 @@
     "busNumber": "113-28",
     "startPoint": "득     소",
     "route": [
+      {
+        "stop": "득소",
+        "time": "14:00"
+      },
       {
         "stop": "대산",
         "time": "14:15"
@@ -2094,6 +2224,10 @@
     "startPoint": "기  공 A",
     "route": [
       {
+        "stop": "기공A",
+        "time": "14:45"
+      },
+      {
         "stop": "유원",
         "time": "14:53"
       },
@@ -2133,6 +2267,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "14:55"
+      },
+      {
         "stop": "기공A",
         "time": "14:55"
       },
@@ -2171,6 +2309,10 @@
     "busNumber": "113-84",
     "startPoint": "내 봉 촌",
     "route": [
+      {
+        "stop": "내봉촌",
+        "time": "14:50"
+      },
       {
         "stop": "칠북",
         "time": "15:05"
@@ -2215,6 +2357,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "15:35"
+      },
+      {
         "stop": "기공A",
         "time": "15:35"
       },
@@ -2253,6 +2399,10 @@
     "busNumber": "113-31",
     "startPoint": "두     곡",
     "route": [
+      {
+        "stop": "두곡",
+        "time": "15:05"
+      },
       {
         "stop": "대산",
         "time": "15:25"
@@ -2300,6 +2450,10 @@
     "busNumber": "113-07",
     "startPoint": "장     암",
     "route": [
+      {
+        "stop": "장암",
+        "time": "15:40"
+      },
       {
         "stop": "유원",
         "time": "15:45"
@@ -2359,6 +2513,10 @@
     "startPoint": "남     지",
     "route": [
       {
+        "stop": "남지",
+        "time": "15:40"
+      },
+      {
         "stop": "칠서 공단",
         "time": "15:47"
       },
@@ -2405,6 +2563,10 @@
     "busNumber": "113-73",
     "startPoint": "남     양",
     "route": [
+      {
+        "stop": "남양",
+        "time": "15:55"
+      },
       {
         "stop": "칠북",
         "time": "15:58"
@@ -2503,6 +2665,10 @@
     "busNumber": "113-84",
     "startPoint": "내 봉 촌",
     "route": [
+      {
+        "stop": "내봉촌",
+        "time": "16:20"
+      },
       {
         "stop": "칠북",
         "time": "16:35"
@@ -2696,6 +2862,10 @@
     "startPoint": "내 봉 촌",
     "route": [
       {
+        "stop": "내봉촌",
+        "time": "16:50"
+      },
+      {
         "stop": "이룡",
         "time": "17:05"
       },
@@ -2747,6 +2917,10 @@
     "startPoint": "장     포",
     "route": [
       {
+        "stop": "장포",
+        "time": "17:05"
+      },
+      {
         "stop": "대산",
         "time": "17:25"
       },
@@ -2793,6 +2967,10 @@
     "busNumber": "113-82",
     "startPoint": "남     지",
     "route": [
+      {
+        "stop": "남지",
+        "time": "17:25"
+      },
       {
         "stop": "이룡",
         "time": "17:30"
@@ -2841,6 +3019,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "18:05"
+      },
+      {
         "stop": "기공A",
         "time": "18:05"
       },
@@ -2879,6 +3061,10 @@
     "busNumber": "113-75",
     "startPoint": "남     양",
     "route": [
+      {
+        "stop": "남양",
+        "time": "17:55"
+      },
       {
         "stop": "칠북",
         "time": "17:58"
@@ -2927,6 +3113,10 @@
     "startPoint": "남     지",
     "route": [
       {
+        "stop": "남지",
+        "time": "18:15"
+      },
+      {
         "stop": "칠서 공단",
         "time": "18:22"
       },
@@ -2973,6 +3163,10 @@
     "busNumber": "250-10",
     "startPoint": "에이스A",
     "route": [
+      {
+        "stop": "에이스A",
+        "time": "18:45"
+      },
       {
         "stop": "기공A",
         "time": "18:45"
@@ -3111,6 +3305,10 @@
     "startPoint": "두     곡",
     "route": [
       {
+        "stop": "두곡",
+        "time": "18:40"
+      },
+      {
         "stop": "대산",
         "time": "19:05"
       },
@@ -3158,6 +3356,10 @@
     "startPoint": "내 봉 촌",
     "route": [
       {
+        "stop": "내봉촌",
+        "time": "19:30"
+      },
+      {
         "stop": "칠북",
         "time": "19:45"
       },
@@ -3201,6 +3403,10 @@
     "startPoint": "에이스A",
     "route": [
       {
+        "stop": "에이스A",
+        "time": "19:55"
+      },
+      {
         "stop": "기공A",
         "time": "19:55"
       },
@@ -3236,15 +3442,13 @@
     "endPoint": "남마산TR"
   },
   {
-    "busNumber": "nan",
-    "startPoint": "서     촌",
-    "route": [],
-    "endPoint": ""
-  },
-  {
     "busNumber": "113-39",
     "startPoint": "남     지",
     "route": [
+      {
+        "stop": "남지",
+        "time": "19:35"
+      },
       {
         "stop": "신계",
         "time": "19:40"
@@ -3328,6 +3532,10 @@
     "startPoint": "남     양",
     "route": [
       {
+        "stop": "남양",
+        "time": "20:20"
+      },
+      {
         "stop": "칠북",
         "time": "20:23"
       },
@@ -3371,7 +3579,7 @@
     "startPoint": "에이스A",
     "route": [
       {
-        "stop": "기공A",
+        "stop": "에이스A",
         "time": "20:35"
       },
       {
@@ -3409,6 +3617,10 @@
     "busNumber": "113-37",
     "startPoint": "장     포",
     "route": [
+      {
+        "stop": "장포",
+        "time": "20:45"
+      },
       {
         "stop": "대산",
         "time": "21:00"
@@ -3464,6 +3676,10 @@
     "busNumber": "250-10",
     "startPoint": "에이스A",
     "route": [
+      {
+        "stop": "에이스A",
+        "time": "21:35"
+      },
       {
         "stop": "기공A",
         "time": "21:35"
