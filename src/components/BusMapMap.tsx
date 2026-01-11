@@ -6,11 +6,21 @@ type MapProps = {
     locStatus: "idle" | "locating" | "ok" | "error";
 };
 
-const GPSIcon = ({ className }: { className: string }) => (
+const BusStopFinderIcon = ({ className }: { className: string }) => (
     <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden="true">
-        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="2" />
-        <circle cx="12" cy="12" r="2" fill="currentColor" />
+        {/* 지도 핀 */}
+        <path
+            d="M12 22s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinejoin="round"
+        />
+        <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="2" />
+
+        {/* 버스 */}
+        <rect x="8" y="6.5" width="8" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="10" cy="12.5" r="0.8" fill="currentColor" />
+        <circle cx="14" cy="12.5" r="0.8" fill="currentColor" />
     </svg>
 );
 
@@ -31,7 +41,7 @@ export const Map: React.FC<MapProps> = ({ containerRef, locateMe, locStatus }) =
                             <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" fill="none" />
                         </svg>
                     ) : (
-                        <GPSIcon className="w-5 h-5 text-emerald-700" />
+                        <BusStopFinderIcon className="w-5 h-5 text-emerald-700" />
                     )}
                 </button>
             </div>

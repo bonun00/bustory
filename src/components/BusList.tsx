@@ -1,6 +1,7 @@
 import React from 'react';
 import { BusData, RouteInfo } from '../types';
 import { minutesLeftFromNow } from '../hooks/useBusData';
+import {useNavigate} from 'react-router-dom';
 
 interface BusListProps {
     loading: boolean;
@@ -25,10 +26,38 @@ export const BusList: React.FC<BusListProps> = ({
     favoritesForThisFile,
     toggleFavorite,
 }) => {
+    const navigate = useNavigate();
     const handleRowClick = (index: number) => {
         setExpandedRow(expandedRow === index ? null : index);
+
+
+
+
     };
 
+    const getRegionFromQuery = () => {
+        const sp = new URLSearchParams(location.search);
+        return (sp.get("json") || "").toLowerCase();
+    };
+
+    const routeIdJsonByRegion = (region: string) => {
+        if (region.includes("masan")) return "/masan_nodeId.json";
+        return "/haman_nodeId.json";
+    };
+
+    const findFocusRouteId = async (stopName: string) => {
+        const region = getRegionFromQuery();
+        const url = routeIdJsonByRegion(region);
+
+        const res = await fetch(url, { cache: "no-store" });
+        const list = await res.json();
+
+        const found = Array.isArray(list)
+            ? list.find((x: any) => (x?.stop || "").trim() === stopName.trim())
+            : null;
+
+        return found?.route_id || null;
+    };
     return (
         <main className="max-w-4xl mx-auto px-4 py-6">
             {loading ? (
@@ -48,6 +77,34 @@ export const BusList: React.FC<BusListProps> = ({
                         <h3 className="text-lg font-bold text-emerald-900">
                             {selectedLocation} 버스 시간
                         </h3>
+                        <button
+                            onClick={async () => {
+                                try {
+                                    const stopName = (selectedLocation || "").trim();
+                                    const focusRouteId = await findFocusRouteId(stopName);
+
+                                    navigate("/map", { state: { focusRouteId } });
+                                } catch (e) {
+                                }
+                            }}
+                            className="
+                                        group flex items-center gap-2
+                                        px-4 py-2 rounded-full
+                                         text-black
+                                        text-sm font-semibold
+                                        border border-emerald-200
+
+                                        active:scale-95
+                                        transition
+                                      "
+                        >
+                                  <span className="relative flex h-2.5 w-2.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"/>
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"/>
+                                </span>
+                            {selectedLocation}의 실시간 버스시간 확인
+                        </button>
+
                         <button
                             onClick={() => {
                                 setSelectedBusNumber([]);
