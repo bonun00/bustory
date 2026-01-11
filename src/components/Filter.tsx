@@ -39,11 +39,11 @@ export const Filter: React.FC<FilterProps> = ({
                 isCompact ? "py-1" : "py-3"
             }`}
             style={{
-                top: isCompact ? 48 : 64, // Header 높이에 맞춰 고정
+                top: isCompact ? 48 : 64,
             }}
         >
             <div className="max-w-4xl mx-auto px-4 transition-all">
-                {/* ✅ compact 모드일 땐 '정류장 셀렉트'만 보여줌 */}
+
                 {isCompact ? (
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
                         <label className="sm:col-span-1 block text-emerald-900 text-xs font-medium">
