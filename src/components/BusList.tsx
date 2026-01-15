@@ -56,7 +56,7 @@ export const BusList: React.FC<BusListProps> = ({
             ? list.find((x: any) => (x?.stop || "").trim() === stopName.trim())
             : null;
 
-        return found?.route_id || null;
+        return found?.node_id || null;
     };
     return (
         <main className="max-w-4xl mx-auto px-4 py-6">
