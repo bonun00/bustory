@@ -81,10 +81,11 @@ export function useKakaoMap(
 
     useEffect(() => {
         if (!mapReady || !mapRef.current || !clustererRef.current) return;
-
+        const imageSrc = '/bus_marker.png';
+        const imageSize = new window.kakao.maps.Size(64, 69);
+        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
         ensureOverlayStyles();
 
-        // 기존 제거
         clustererRef.current.clear();
         markersRef.current.forEach(({ marker, overlay }) => {
             marker.setMap && marker.setMap(null);
@@ -99,7 +100,7 @@ export function useKakaoMap(
 
         allStops.forEach((stop) => {
             const pos = new window.kakao.maps.LatLng(stop.latitude, stop.longitude);
-            const marker = new window.kakao.maps.Marker({ position: pos, zIndex: 1 });
+            const marker = new window.kakao.maps.Marker({ position: pos, zIndex: 1, image: markerImage});
 
             const root = document.createElement("div");
             root.style.position = "relative";
