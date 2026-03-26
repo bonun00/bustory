@@ -28,6 +28,6 @@
 
 ## 🚀 링크(Getting Started)
 
-https://bustory.kr
+#https://bustory.kr
 
 
