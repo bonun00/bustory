@@ -1,6 +1,9 @@
 # 🚌 군 지역 버스 정보 서비스 
 
-![App Screenshot](https://github.com/user-attachments/assets/42c59c1d-9108-4c91-bf08-611abfccfb3d)
+<img width="380" height="823" alt="1" src="https://github.com/user-attachments/assets/d8f72053-0e15-4f2e-afdd-dceff7fbbcd0" />
+<img width="494" height="826" alt="2" src="https://github.com/user-attachments/assets/2aabc929-9226-405a-887e-a2e4f0758075" />
+<img width="380" height="819" alt="3" src="https://github.com/user-attachments/assets/056cabe0-522f-41b5-9a96-3a8f593ec081" />
+
 
 > **버스 정보가 부족한 군 지역 주민들을 위한 맞춤형 실시간 버스 정보 서비스입니다.**
 
