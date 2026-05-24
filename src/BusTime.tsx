@@ -68,7 +68,7 @@ const BusTime: React.FC = () => {
     const clearAllRoutes = () => setSelectedBusNumber([]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100">
+        <div className="min-h-screen bg-gradient-to-b from-stone-50 to-green-50/20">
             <Header
                 isCompact={isCompact}
                 title={title}

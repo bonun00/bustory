@@ -21,9 +21,6 @@ const RefreshIcon = ({ className }: { className: string }) => (
     </svg>
 );
 
-
-
-
 const formatETA = (remainSec: number) => {
     const remain = Math.max(0, Math.floor(Number(remainSec) || 0));
     if (remain <= 60) return "곧 도착";
@@ -58,10 +55,11 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
 
         return () => window.clearInterval(id);
     }, [selectedStop]);
+
     return (
         <section className="fixed bottom-0 left-0 right-0 z-30">
             <div className="max-w-screen-md mx-auto px-4" style={{ height: `${Math.round(sheetPct * 100)}vh` }}>
-                <div className="bg-white border border-emerald-200 rounded-t-2xl shadow-lg h-full flex flex-col">
+                <div className="bg-white border border-stone-100 rounded-t-2xl shadow-xl shadow-stone-200/50 h-full flex flex-col">
                     <div
                         className="relative pt-2"
                         onPointerDown={onHandlePointerDown}
@@ -73,13 +71,13 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                         onTouchEnd={onHandlePointerUp}
                     >
                         <div
-                            className="w-12 h-1.5 bg-emerald-300 rounded-full mx-auto cursor-grab active:cursor-grabbing select-none"
+                            className="w-12 h-1.5 bg-stone-200 rounded-full mx-auto cursor-grab active:cursor-grabbing select-none"
                             style={{ touchAction: "none" }}
                             aria-label="바텀시트 높이 조절"
                             role="separator"
                         />
                         <button
-                            className="absolute right-3 top-1.5 text-xs text-emerald-700 hover:text-emerald-900 px-2 py-0.5 rounded-md hover:bg-emerald-50 transition"
+                            className="absolute right-3 top-1.5 text-xs text-green-900 hover:text-green-700 px-2 py-0.5 rounded-md hover:bg-stone-50 transition"
                             onClick={() => setSheetPct(sheetPct >= 0.6 ? 0.25 : 0.75)}
                         >
                             {sheetPct >= 0.6 ? "아래로" : "위로"}
@@ -92,8 +90,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-3">
                                         <div>
-                                            <h2 className="text-2xl font-bold text-emerald-900">{selectedStop.node_nm}</h2>
-                                            <p className="text-xs text-emerald-700">정류장 도착 정보</p>
+                                            <h2 className="text-2xl font-bold text-green-950">{selectedStop.node_nm}</h2>
+                                            <p className="text-xs text-stone-400">정류장 도착 정보</p>
                                         </div>
                                     </div>
                                     <button
@@ -102,8 +100,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                                         className={
                                             "w-8 h-8 rounded-full border grid place-items-center active:scale-95 transition " +
                                             (arrStatus === "loading"
-                                                ? "border-emerald-200 text-emerald-300 cursor-not-allowed"
-                                                : "border-emerald-300 text-emerald-700 hover:bg-emerald-50")
+                                                ? "border-stone-200 text-stone-300 cursor-not-allowed"
+                                                : "border-stone-200 text-green-900 hover:bg-stone-50")
                                         }
                                         title="도착 정보 새로고침"
                                         aria-label="도착 정보 새로고침"
@@ -116,31 +114,31 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                                     </button>
                                 </div>
 
-                                <div className="border-top border-emerald-100 pt-4">
+                                <div className="border-t border-stone-100 pt-4">
                                     {arrStatus === "loading" && (
                                         <div className="space-y-2">
                                             {[...Array(6)].map((_, i) => (
-                                                <div key={i} className="h-14 rounded-lg bg-emerald-100/60 animate-pulse" />
+                                                <div key={i} className="h-14 rounded-xl bg-stone-100 animate-pulse" />
                                             ))}
                                         </div>
                                     )}
 
                                     {arrStatus === "error" && (
                                         <div className="text-center py-6">
-                                            <p className="text-red-600 font-medium">정보를 불러올 수 없습니다</p>
-                                            <p className="text-xs text-emerald-700 mt-1">잠시 후 다시 시도해 주세요.</p>
+                                            <p className="text-red-500 font-medium">정보를 불러올 수 없습니다</p>
+                                            <p className="text-xs text-stone-400 mt-1">잠시 후 다시 시도해 주세요.</p>
                                         </div>
                                     )}
 
                                     {arrStatus === "ok" && Array.isArray(sortedArrival) && sortedArrival.length === 0 && (
                                         <div className="text-center py-6">
-                                            <p className="text-emerald-700">운행 중인 버스가 없습니다</p>
+                                            <p className="text-stone-500">운행 중인 버스가 없습니다</p>
                                         </div>
                                     )}
 
                                     {arrStatus === "ok" && Array.isArray(sortedArrival) && sortedArrival.length > 0 && (
                                         <div className="space-y-3">
-                                            <h4 className="text-sm font-semibold text-emerald-700">
+                                            <h4 className="text-sm font-semibold text-stone-500">
                                                 도착 예정 버스 ({sortedArrival.length}개)
                                             </h4>
                                             {sortedArrival.map((bus, idx) => {
@@ -150,17 +148,17 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                                                 return (
                                                     <div
                                                         key={busKeyOf(bus) + "_" + idx}
-                                                        className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-100"
+                                                        className="flex items-center justify-between p-3 bg-stone-50 rounded-xl border border-stone-100"
                                                     >
                                                         <div className="flex items-center gap-3">
-                                                            <div className="w-8 h-8 bg-emerald-600 text-white rounded-full grid place-items-center text-xs font-bold">
+                                                            <div className="w-8 h-8 bg-green-900 text-white rounded-full grid place-items-center text-xs font-bold">
                                                                 {bus.routeNo.split("-")[0]}
                                                             </div>
                                                             <div>
-                                                                <p className="font-semibold text-emerald-900">
+                                                                <p className="font-semibold text-green-950">
                                                                     {bus.routeNo}번 버스
                                                                 </p>
-                                                                <p className="text-xs text-emerald-700">
+                                                                <p className="text-xs text-stone-400">
                                                                     {bus.arrPrevStationCnt}개 정류장 전
                                                                 </p>
                                                             </div>
@@ -169,12 +167,12 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                                                             <div
                                                                 className={
                                                                     "text-lg font-bold " +
-                                                                    (urgent ? "text-red-500" : soon ? "text-orange-500" : "text-emerald-900")
+                                                                    (urgent ? "text-red-500" : soon ? "text-orange-500" : "text-green-950")
                                                                 }
                                                             >
                                                                 {formatETA(remain)}
                                                             </div>
-                                                            <div className="text-xs text-emerald-700">
+                                                            <div className="text-xs text-stone-400">
                                                                 {remain <= 60 ? "곧 도착" : "후 도착"}
                                                             </div>
                                                         </div>
@@ -187,8 +185,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                             </>
                         ) : (
                             <div className="py-10 text-center">
-                                <p className="text-emerald-900 font-semibold">정류장을 선택하세요</p>
-                                <p className="text-emerald-700 text-sm mt-1">
+                                <p className="text-green-950 font-semibold">정류장을 선택하세요</p>
+                                <p className="text-stone-400 text-sm mt-1">
                                     지도에서 정류장을 누르거나 상단 검색창을 이용해 찾을 수 있습니다.
                                 </p>
                             </div>
