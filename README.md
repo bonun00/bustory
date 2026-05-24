@@ -20,6 +20,7 @@
 
 📈 서비스 운영 및 수요 분석 (Metrics & Analytics)
 
+<img width="721" height="571" alt="네이버 애널리틱스" src="https://github.com/user-attachments/assets/c7386387-66af-448a-ab58-a8a9d6c3abb5" />
 Bustory는 단순히 개발에서 끝나지 않고, 네이버 애널리틱스(Naver Analytics)를 연동하여 실제 사용자들의 유입과 행동 패턴을 모니터링하며 지속적으로 개선하고 있습니다.
 
 실제 유저 기반의 운영: 일평균 10명 내외의 지역 주민 및 고정 이용자가 출퇴근 및 이동 목적으로 꾸준히 방문하는 '살아있는 서비스'입니다.
