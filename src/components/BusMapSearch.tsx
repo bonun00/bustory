@@ -27,7 +27,7 @@ export const Search: React.FC<SearchProps> = ({
     return (
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-screen-md px-2 z-40">
             <div className="relative">
-                <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-2xl shadow-sm px-3 py-2.5">
+                <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-2xl shadow-md shadow-stone-200/50 px-3 py-2.5">
                     <input
                         value={rawSearch}
                         onChange={(e) => {
@@ -55,12 +55,12 @@ export const Search: React.FC<SearchProps> = ({
                         inputMode="search"
                         enterKeyHint="search"
                         autoComplete="off"
-                        className="w-full outline-none text-base text-emerald-900 placeholder:text-emerald-400"
+                        className="w-full outline-none text-base text-stone-800 placeholder:text-stone-400"
                         placeholder="정류장 이름 검색"
                     />
                     <button
                         onClick={submitSearch}
-                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-emerald-700 text-white hover:bg-emerald-600 active:scale-95 transition"
+                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-green-900 text-white hover:bg-green-800 active:scale-95 transition"
                         aria-label="검색"
                     >
                         검색
@@ -68,7 +68,7 @@ export const Search: React.FC<SearchProps> = ({
                 </div>
 
                 {showSuggestions && suggestions.length > 0 && (
-                    <ul className="absolute mt-2 w-full bg-white border border-emerald-200 rounded-xl shadow-lg max-h-64 overflow-auto">
+                    <ul className="absolute mt-2 w-full bg-white border border-stone-100 rounded-xl shadow-lg shadow-stone-200/50 max-h-64 overflow-auto">
                         {suggestions.map((s, idx) => (
                             <li
                                 key={s.node_id}
@@ -77,8 +77,8 @@ export const Search: React.FC<SearchProps> = ({
                                     handleStopClick(s, { zoom: true });
                                 }}
                                 className={
-                                    "px-3 py-2 text-sm cursor-pointer " +
-                                    (selectedSuggestion === idx ? "bg-emerald-50" : "hover:bg-emerald-50/60")
+                                    "px-3 py-2 text-sm cursor-pointer text-stone-800 " +
+                                    (selectedSuggestion === idx ? "bg-stone-50" : "hover:bg-stone-50/60")
                                 }
                             >
                                 {s.node_nm}
