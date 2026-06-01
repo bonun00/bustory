@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: BusTime_backend
+  config:
+    import: optional:file:.env[.properties]
+
+  cache:
+    type: redis
+  data:
+    redis:
+      host: ${spring.data.redis.host:127.0.0.1}
+      port: ${spring.data.redis.port:6379}
+      database: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+
+public-api:
+  service-key: ${public-api.service-key}

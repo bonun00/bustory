@@ -1,0 +1,147 @@
+package bonun.bustime_backend.service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import bonun.bustime_backend.dto.ArrivalInfo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+@Slf4j
+public class StopTimeClient {
+
+    @Value("${public-api.service-key}")
+    private String serviceKey;
+
+    private final ObjectMapper objectMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    private Duration computeTtlSeconds(int minArrTimeSec) {
+
+        if (minArrTimeSec <= 0 || minArrTimeSec == Integer.MAX_VALUE) {
+            return Duration.ofSeconds(60);
+        }
+
+        int ttl;
+        if (minArrTimeSec <= 60) {
+            ttl = 10;
+        } else if (minArrTimeSec <= 180) {
+            ttl = 30;
+        } else if (minArrTimeSec <= 600) {
+            ttl = 60;
+        } else {
+            ttl = 180;
+        }
+
+        return Duration.ofSeconds(ttl);
+    }
+
+    public List<ArrivalInfo> getArrivalInfoByNodeId(String nodeId) {
+        String redisKey = "arrivalInfo:" + nodeId;
+
+
+        Object cached = redisTemplate.opsForValue().get(redisKey);
+        if (cached != null && cached instanceof List<?>) {
+            log.info("Redis 캐시에서 조회됨: {}", redisKey);
+            return (List<ArrivalInfo>) cached;
+        }
+
+
+        try {
+            URI uri = UriComponentsBuilder
+                .fromUriString("https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList")
+                .queryParam("serviceKey", serviceKey)
+                .queryParam("pageNo", 1)
+                .queryParam("numOfRows", 100)
+                .queryParam("_type", "json")
+                .queryParam("cityCode", 38320)
+                .queryParam("nodeId", nodeId)
+                .build(true)
+                .toUri();
+
+            log.info("외부 API 요청: {}", uri);
+            ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
+            JsonNode itemsNode = objectMapper.readTree(response.getBody())
+                .path("response").path("body").path("items").path("item");
+
+            List<ArrivalInfo> result = new ArrayList<>();
+            int minArrTimeSec = Integer.MAX_VALUE;
+            int minPrevStationCnt = Integer.MAX_VALUE;
+
+            if (itemsNode.isArray()) {
+                for (JsonNode item : itemsNode) {
+                    String routeno = item.path("routeno").asText();
+                    if (routeno.startsWith("113") || routeno.startsWith("250")) {
+                        int arrTimeSec = item.path("arrtime").asInt(Integer.MAX_VALUE);
+                        int prevCnt = item.path("arrprevstationcnt").asInt(Integer.MAX_VALUE);
+                        if (arrTimeSec > 0) {
+                            minArrTimeSec = Math.min(minArrTimeSec, arrTimeSec);
+                        }
+                        if (prevCnt > 0) {
+                            minPrevStationCnt = Math.min(minPrevStationCnt, prevCnt);
+                        }
+                        result.add(parseArrivalInfo(item));
+                    }
+                }
+            } else if (itemsNode.isObject()) {
+                String routeno = itemsNode.path("routeno").asText();
+                if (routeno.startsWith("113") || routeno.startsWith("250")) {
+                    int arrTimeSec = itemsNode.path("arrtime").asInt(Integer.MAX_VALUE);
+                    int prevCnt = itemsNode.path("arrprevstationcnt").asInt(Integer.MAX_VALUE);
+                    if (arrTimeSec > 0) {
+                        minArrTimeSec = Math.min(minArrTimeSec, arrTimeSec);
+                    }
+                    if (prevCnt > 0) {
+                        minPrevStationCnt = Math.min(minPrevStationCnt, prevCnt);
+                    }
+                    result.add(parseArrivalInfo(itemsNode));
+                }
+            }
+
+            Duration ttl = computeTtlSeconds(minArrTimeSec);
+            log.info("API 조회 후 Redis에 저장: {} (ttl={}s, minArrTime={}s, minPrevStationCnt={})",
+                redisKey, ttl.getSeconds(), minArrTimeSec, minPrevStationCnt);
+            redisTemplate.opsForValue().set(redisKey, result, ttl);
+
+            return result;
+
+        } catch (Exception e) {
+            log.error("API 호출 실패 - nodeId={}", nodeId, e);
+            return Collections.emptyList();
+        }
+    }
+
+    private ArrivalInfo parseArrivalInfo(JsonNode item) {
+        int arrTime = item.path("arrtime").asInt();
+        long expireAt = System.currentTimeMillis() + (Math.max(0, arrTime) * 1000L);
+
+        return new ArrivalInfo(
+            item.path("nodeid").asText(),
+            item.path("nodenm").asText(),
+            item.path("routeid").asText(),
+            item.path("routeno").asText(),
+            item.path("routetp").asText(),
+            item.path("vehicletp").asText(),
+            arrTime,
+            item.path("arrprevstationcnt").asInt(),
+            expireAt
+        );
+    }
+}
