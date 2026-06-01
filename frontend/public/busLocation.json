@@ -1,0 +1,4187 @@
+[
+  {
+    "latitude": 35.399353,
+    "longitude": 128.405027,
+    "id": 1,
+    "direction": "마산",
+    "node_id": "TSB389000303",
+    "node_nm": "두곡",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.399156,
+    "longitude": 128.407032,
+    "id": 2,
+    "direction": "마산",
+    "node_id": "TSB389000417",
+    "node_nm": "두곡마을-하두곡",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.398992,
+    "longitude": 128.41465,
+    "id": 3,
+    "direction": "마산",
+    "node_id": "TSB389000419",
+    "node_nm": "관동",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.401113,
+    "longitude": 128.423936,
+    "id": 4,
+    "direction": "마산",
+    "node_id": "TSB389000644",
+    "node_nm": "성산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.401734,
+    "longitude": 128.425907,
+    "id": 5,
+    "direction": "마산",
+    "node_id": "TSB389000080",
+    "node_nm": "성산마을",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.399665,
+    "longitude": 128.428111,
+    "id": 6,
+    "direction": "마산",
+    "node_id": "TSB389000072",
+    "node_nm": "성산마을",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.392199,
+    "longitude": 128.43006,
+    "id": 7,
+    "direction": "마산",
+    "node_id": "TSB389000420",
+    "node_nm": "성산마을",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.390749,
+    "longitude": 128.420402,
+    "id": 8,
+    "direction": "마산",
+    "node_id": "TSB389000388",
+    "node_nm": "수월",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.387874,
+    "longitude": 128.413174,
+    "id": 9,
+    "direction": "마산",
+    "node_id": "TSB389000074",
+    "node_nm": "다솜농장",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.385013,
+    "longitude": 128.405459,
+    "id": 10,
+    "direction": "마산",
+    "node_id": "TSB389000387",
+    "node_nm": "웅곡",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.378144,
+    "longitude": 128.393021,
+    "id": 11,
+    "direction": "마산",
+    "node_id": "TSB389000384",
+    "node_nm": "나림",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.369012,
+    "longitude": 128.407786,
+    "id": 12,
+    "direction": "마산",
+    "node_id": "TSB389000688",
+    "node_nm": "포외",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.366293,
+    "longitude": 128.410352,
+    "id": 13,
+    "direction": "마산",
+    "node_id": "TSB389000299",
+    "node_nm": "마산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.364035,
+    "longitude": 128.412546,
+    "id": 14,
+    "direction": "마산",
+    "node_id": "TSB389000687",
+    "node_nm": "마산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.356431,
+    "longitude": 128.424422,
+    "id": 15,
+    "direction": "마산",
+    "node_id": "TSB390000503",
+    "node_nm": "구혜",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.356002,
+    "longitude": 128.425015,
+    "id": 16,
+    "direction": "마산",
+    "node_id": "TSB390000247",
+    "node_nm": "구혜",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.354792,
+    "longitude": 128.426232,
+    "id": 17,
+    "direction": "마산",
+    "node_id": "TSB390000527",
+    "node_nm": "매산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.353153,
+    "longitude": 128.427894,
+    "id": 18,
+    "direction": "마산",
+    "node_id": "TSB390000525",
+    "node_nm": "대산시장",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.351853,
+    "longitude": 128.429167,
+    "id": 19,
+    "direction": "마산",
+    "node_id": "TSB390000522",
+    "node_nm": "경희의원",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.349961,
+    "longitude": 128.431134,
+    "id": 20,
+    "direction": "마산",
+    "node_id": "TSB390000520",
+    "node_nm": "대산면사무소",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.349239,
+    "longitude": 128.432529,
+    "id": 21,
+    "direction": "마산",
+    "node_id": "TSB390000518",
+    "node_nm": "함안양로원",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.346876,
+    "longitude": 128.438206,
+    "id": 22,
+    "direction": "마산",
+    "node_id": "TSB390000516",
+    "node_nm": "경남로봇고등학교",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.344546,
+    "longitude": 128.442693,
+    "id": 23,
+    "direction": "마산",
+    "node_id": "TSB390000240",
+    "node_nm": "중앙동",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.342416,
+    "longitude": 128.446589,
+    "id": 24,
+    "direction": "마산",
+    "node_id": "TSB390000514",
+    "node_nm": "고원",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.326375,
+    "longitude": 128.460218,
+    "id": 25,
+    "direction": "마산",
+    "node_id": "TSB390000071",
+    "node_nm": "대사",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.31267,
+    "longitude": 128.477695,
+    "id": 26,
+    "direction": "마산",
+    "node_id": "TSB390000357",
+    "node_nm": "어령마을",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.308792,
+    "longitude": 128.490172,
+    "id": 27,
+    "direction": "마산",
+    "node_id": "TSB390000358",
+    "node_nm": "회산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.312829,
+    "longitude": 128.498354,
+    "id": 28,
+    "direction": "마산",
+    "node_id": "TSB390000359",
+    "node_nm": "신산-안기",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.31331,
+    "longitude": 128.502743,
+    "id": 29,
+    "direction": "마산",
+    "node_id": "TSB390000361",
+    "node_nm": "칠평",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.315063,
+    "longitude": 128.507436,
+    "id": 30,
+    "direction": "마산",
+    "node_id": "TSB390000364",
+    "node_nm": "쇠만이",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.315732,
+    "longitude": 128.510013,
+    "id": 31,
+    "direction": "마산",
+    "node_id": "TSB390000425",
+    "node_nm": "기공아파트",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.310338,
+    "longitude": 128.515283,
+    "id": 32,
+    "direction": "마산",
+    "node_id": "TSB390000366",
+    "node_nm": "장미아파트",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.30705,
+    "longitude": 128.5176,
+    "id": 33,
+    "direction": "마산",
+    "node_id": "TSB390000328",
+    "node_nm": "용산",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.305162,
+    "longitude": 128.518312,
+    "id": 34,
+    "direction": "마산",
+    "node_id": "TSB390000430",
+    "node_nm": "이현",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.303796,
+    "longitude": 128.519485,
+    "id": 35,
+    "direction": "마산",
+    "node_id": "TSB390000370",
+    "node_nm": "남구마을",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.303072,
+    "longitude": 128.521306,
+    "id": 36,
+    "direction": "마산",
+    "node_id": "TSB390000373",
+    "node_nm": "금안아파트",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.299118,
+    "longitude": 128.532948,
+    "id": 37,
+    "direction": "마산",
+    "node_id": "TSB390000306",
+    "node_nm": "무기",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.294925,
+    "longitude": 128.533418,
+    "id": 38,
+    "direction": "마산",
+    "node_id": "TSB390000310",
+    "node_nm": "무기",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.286648,
+    "longitude": 128.529569,
+    "id": 39,
+    "direction": "마산",
+    "node_id": "TSB390000312",
+    "node_nm": "석전동",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.278285,
+    "longitude": 128.530096,
+    "id": 40,
+    "direction": "마산",
+    "node_id": "TSB390000375",
+    "node_nm": "예곡",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.274293,
+    "longitude": 128.531265,
+    "id": 41,
+    "direction": "마산",
+    "node_id": "TSB390000314",
+    "node_nm": "수정그린아파트",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.267524,
+    "longitude": 128.529876,
+    "id": 42,
+    "direction": "마산",
+    "node_id": "TSB417000089",
+    "node_nm": "평성사거리",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.266511,
+    "longitude": 128.527558,
+    "id": 43,
+    "direction": "마산",
+    "node_id": "TSB417000090",
+    "node_nm": "신우타워",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.265526,
+    "longitude": 128.525799,
+    "id": 44,
+    "direction": "마산",
+    "node_id": "TSB417000001",
+    "node_nm": "코오롱아파트-주상가앞",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.25999,
+    "longitude": 128.522618,
+    "id": 45,
+    "direction": "마산",
+    "node_id": "TSB417000069",
+    "node_nm": "호계농협-가고파정비앞",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.256512,
+    "longitude": 128.521622,
+    "id": 46,
+    "direction": "마산",
+    "node_id": "TSB417000071",
+    "node_nm": "동서병원",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.253531,
+    "longitude": 128.520856,
+    "id": 47,
+    "direction": "마산",
+    "node_id": "TSB417000072",
+    "node_nm": "구미동",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.250807,
+    "longitude": 128.521277,
+    "id": 48,
+    "direction": "마산",
+    "node_id": "TSB417000074",
+    "node_nm": "현대아파트",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.248412,
+    "longitude": 128.5239,
+    "id": 49,
+    "direction": "마산",
+    "node_id": "TSB417000061",
+    "node_nm": "중리삼거리-학촌불교회관",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.244499,
+    "longitude": 128.529084,
+    "id": 50,
+    "direction": "마산",
+    "node_id": "TSB417000058",
+    "node_nm": "구슬골-마재고개방면",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.241759,
+    "longitude": 128.536972,
+    "id": 51,
+    "direction": "마산",
+    "node_id": "TSB417000057",
+    "node_nm": "마재고개-내서초등학교방면",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.23779,
+    "longitude": 128.543202,
+    "id": 52,
+    "direction": "마산",
+    "node_id": "TSB417000055",
+    "node_nm": "두척-한국거성화물맞은편",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.236804,
+    "longitude": 128.546857,
+    "id": 53,
+    "direction": "마산",
+    "node_id": "TSB417000052",
+    "node_nm": "내서초등학교-맞은편",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.235289,
+    "longitude": 128.552043,
+    "id": 54,
+    "direction": "마산",
+    "node_id": "TSB417000050",
+    "node_nm": "약수터가든",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.233847,
+    "longitude": 128.557977,
+    "id": 55,
+    "direction": "마산",
+    "node_id": "TSB417000048",
+    "node_nm": "한효국화맨션",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.233356,
+    "longitude": 128.561224,
+    "id": 56,
+    "direction": "마산",
+    "node_id": "TSB417000047",
+    "node_nm": "교도소입구-맞은편",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.232,
+    "longitude": 128.565813,
+    "id": 57,
+    "direction": "마산",
+    "node_id": "TSB417000021",
+    "node_nm": "보문주유소-앞",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.231278,
+    "longitude": 128.568093,
+    "id": 58,
+    "direction": "마산",
+    "node_id": "TSB417000023",
+    "node_nm": "북성초등학교-맞은편",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.229414,
+    "longitude": 128.572603,
+    "id": 59,
+    "direction": "마산",
+    "node_id": "TSB417000025",
+    "node_nm": "석전동육교",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.2306,
+    "longitude": 128.576724,
+    "id": 60,
+    "direction": "마산",
+    "node_id": "TSB417000027",
+    "node_nm": "경남은행본점",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.233666,
+    "longitude": 128.579089,
+    "id": 61,
+    "direction": "마산",
+    "node_id": "TSB417000030",
+    "node_nm": "마산역-365병원",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.235245,
+    "longitude": 128.58031,
+    "id": 62,
+    "direction": "마산",
+    "node_id": "TSB417000031",
+    "node_nm": "마산역",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.237897,
+    "longitude": 128.582369,
+    "id": 63,
+    "direction": "마산",
+    "node_id": "TSB417000033",
+    "node_nm": "마산시외버스터미널",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.239287,
+    "longitude": 128.58373,
+    "id": 64,
+    "direction": "마산",
+    "node_id": "TSB417000102",
+    "node_nm": "마산시외버스터미널",
+    "route_id": "TSB390000051"
+  },
+  {
+    "latitude": 35.289401,
+    "longitude": 128.475291,
+    "id": 65,
+    "direction": "마산",
+    "node_id": "TSB390000842",
+    "node_nm": "장암마을",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.294376,
+    "longitude": 128.47775,
+    "id": 66,
+    "direction": "마산",
+    "node_id": "TSB390000336",
+    "node_nm": "장암",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.301704,
+    "longitude": 128.480251,
+    "id": 67,
+    "direction": "마산",
+    "node_id": "TSB390000778",
+    "node_nm": "예은테크앞",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.30168,
+    "longitude": 128.491179,
+    "id": 68,
+    "direction": "마산",
+    "node_id": "TSB390000776",
+    "node_nm": "유상",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.300941,
+    "longitude": 128.494725,
+    "id": 69,
+    "direction": "마산",
+    "node_id": "TSB390000775",
+    "node_nm": "유상",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.299743,
+    "longitude": 128.498853,
+    "id": 70,
+    "direction": "마산",
+    "node_id": "TSB390000331",
+    "node_nm": "유원",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.300444,
+    "longitude": 128.504063,
+    "id": 71,
+    "direction": "마산",
+    "node_id": "TSB390000330",
+    "node_nm": "양정새동네",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.301702,
+    "longitude": 128.507782,
+    "id": 72,
+    "direction": "마산",
+    "node_id": "TSB390000324",
+    "node_nm": "양정마을",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.302253,
+    "longitude": 128.514141,
+    "id": 73,
+    "direction": "마산",
+    "node_id": "TSB390000326",
+    "node_nm": "동성아파트입구",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.277521,
+    "longitude": 128.524511,
+    "id": 74,
+    "direction": "마산",
+    "node_id": "TSB390000376",
+    "node_nm": "야촌",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.277059,
+    "longitude": 128.520104,
+    "id": 75,
+    "direction": "마산",
+    "node_id": "TSB390000345",
+    "node_nm": "벽산블루밍",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.277384,
+    "longitude": 128.518356,
+    "id": 76,
+    "direction": "마산",
+    "node_id": "TSB390000850",
+    "node_nm": "벽산블루밍종점",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.277279,
+    "longitude": 128.518323,
+    "id": 77,
+    "direction": "마산",
+    "node_id": "TSB390000346",
+    "node_nm": "벽산블루밍종점",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.276925,
+    "longitude": 128.52008,
+    "id": 78,
+    "direction": "마산",
+    "node_id": "TSB390000344",
+    "node_nm": "벽산블루밍",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.276103,
+    "longitude": 128.522815,
+    "id": 79,
+    "direction": "마산",
+    "node_id": "TSB390000319",
+    "node_nm": "자이아파트",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.273364,
+    "longitude": 128.526315,
+    "id": 80,
+    "direction": "마산",
+    "node_id": "TSB390000317",
+    "node_nm": "자이아파트정문",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.271261,
+    "longitude": 128.525932,
+    "id": 81,
+    "direction": "마산",
+    "node_id": "TSB390000316",
+    "node_nm": "자이아파트입구",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.270058,
+    "longitude": 128.52643,
+    "id": 82,
+    "direction": "마산",
+    "node_id": "TSB390000834",
+    "node_nm": "칠원-내장교",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.269051,
+    "longitude": 128.529482,
+    "id": 83,
+    "direction": "마산",
+    "node_id": "TSB390000378",
+    "node_nm": "하은교회",
+    "route_id": "TSB390000052"
+  },
+  {
+    "latitude": 35.365271,
+    "longitude": 128.521167,
+    "id": 84,
+    "direction": "마산",
+    "node_id": "TSB390000272",
+    "node_nm": "남양마을",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.36318,
+    "longitude": 128.51985,
+    "id": 85,
+    "direction": "마산",
+    "node_id": "TSB390000061",
+    "node_nm": "남양",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.356998,
+    "longitude": 128.51723,
+    "id": 86,
+    "direction": "마산",
+    "node_id": "TSB390000456",
+    "node_nm": "남양입구삼거리",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.351954,
+    "longitude": 128.518716,
+    "id": 87,
+    "direction": "마산",
+    "node_id": "TSB390000458",
+    "node_nm": "남양",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.34692,
+    "longitude": 128.521787,
+    "id": 88,
+    "direction": "마산",
+    "node_id": "TSB390000273",
+    "node_nm": "유계",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.347098,
+    "longitude": 128.525269,
+    "id": 89,
+    "direction": "마산",
+    "node_id": "TSB390000059",
+    "node_nm": "검단삼거리",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.347509,
+    "longitude": 128.530314,
+    "id": 90,
+    "direction": "마산",
+    "node_id": "TSB390000452",
+    "node_nm": "단계마을",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.348037,
+    "longitude": 128.532897,
+    "id": 91,
+    "direction": "마산",
+    "node_id": "TSB390000454",
+    "node_nm": "단계",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.349372,
+    "longitude": 128.539093,
+    "id": 92,
+    "direction": "마산",
+    "node_id": "TSB390000455",
+    "node_nm": "검단-상촌동",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.349527,
+    "longitude": 128.539223,
+    "id": 93,
+    "direction": "마산",
+    "node_id": "TSB390000348",
+    "node_nm": "검단-상촌동",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.348139,
+    "longitude": 128.532852,
+    "id": 94,
+    "direction": "마산",
+    "node_id": "TSB390000453",
+    "node_nm": "단계",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.347615,
+    "longitude": 128.530286,
+    "id": 95,
+    "direction": "마산",
+    "node_id": "TSB390000451",
+    "node_nm": "단계마을",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.347206,
+    "longitude": 128.525263,
+    "id": 96,
+    "direction": "마산",
+    "node_id": "TSB390000058",
+    "node_nm": "검단삼거리",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.342727,
+    "longitude": 128.526443,
+    "id": 97,
+    "direction": "마산",
+    "node_id": "TSB390000449",
+    "node_nm": "못골",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.337753,
+    "longitude": 128.52785,
+    "id": 98,
+    "direction": "마산",
+    "node_id": "TSB390000275",
+    "node_nm": "어연",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.334238,
+    "longitude": 128.529966,
+    "id": 99,
+    "direction": "마산",
+    "node_id": "TSB390000446",
+    "node_nm": "가연",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.332,
+    "longitude": 128.533413,
+    "id": 100,
+    "direction": "마산",
+    "node_id": "TSB390000276",
+    "node_nm": "영동",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.330912,
+    "longitude": 128.53629,
+    "id": 101,
+    "direction": "마산",
+    "node_id": "TSB390000827",
+    "node_nm": "천석가든",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.329909,
+    "longitude": 128.539001,
+    "id": 102,
+    "direction": "마산",
+    "node_id": "TSB390000279",
+    "node_nm": "동태",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.327654,
+    "longitude": 128.543086,
+    "id": 103,
+    "direction": "마산",
+    "node_id": "TSB390000445",
+    "node_nm": "동태공단입구",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.321918,
+    "longitude": 128.542571,
+    "id": 104,
+    "direction": "마산",
+    "node_id": "TSB390000280",
+    "node_nm": "양촌",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.319823,
+    "longitude": 128.542514,
+    "id": 105,
+    "direction": "마산",
+    "node_id": "TSB390000439",
+    "node_nm": "양촌",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.317792,
+    "longitude": 128.542204,
+    "id": 106,
+    "direction": "마산",
+    "node_id": "TSB390000441",
+    "node_nm": "운곡삼거리",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.317504,
+    "longitude": 128.540406,
+    "id": 107,
+    "direction": "마산",
+    "node_id": "TSB390000442",
+    "node_nm": "운동",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.316852,
+    "longitude": 128.537087,
+    "id": 108,
+    "direction": "마산",
+    "node_id": "TSB390000282",
+    "node_nm": "학동마을",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.31654,
+    "longitude": 128.533182,
+    "id": 109,
+    "direction": "마산",
+    "node_id": "TSB390000284",
+    "node_nm": "운서",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.309571,
+    "longitude": 128.519387,
+    "id": 110,
+    "direction": "마산",
+    "node_id": "TSB390000286",
+    "node_nm": "덕산",
+    "route_id": "TSB390000053"
+  },
+  {
+    "latitude": 35.307241,
+    "longitude": 128.5175,
+    "id": 111,
+    "direction": "마산",
+    "node_id": "TSB390000368",
+    "node_nm": "용산",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.302414,
+    "longitude": 128.513988,
+    "id": 112,
+    "direction": "마산",
+    "node_id": "TSB390000327",
+    "node_nm": "동성아파트입구",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.301846,
+    "longitude": 128.507835,
+    "id": 113,
+    "direction": "마산",
+    "node_id": "TSB390000325",
+    "node_nm": "양정마을",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.297174,
+    "longitude": 128.509951,
+    "id": 114,
+    "direction": "마산",
+    "node_id": "TSB390000830",
+    "node_nm": "양정마을",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.29628,
+    "longitude": 128.510947,
+    "id": 115,
+    "direction": "마산",
+    "node_id": "TSB390000773",
+    "node_nm": "예용마을",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.287087,
+    "longitude": 128.519644,
+    "id": 116,
+    "direction": "마산",
+    "node_id": "TSB390000398",
+    "node_nm": "구성마을",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.284504,
+    "longitude": 128.52162,
+    "id": 117,
+    "direction": "마산",
+    "node_id": "TSB390000322",
+    "node_nm": "석전마을",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.278241,
+    "longitude": 128.524004,
+    "id": 118,
+    "direction": "마산",
+    "node_id": "TSB390000772",
+    "node_nm": "야촌",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.278262,
+    "longitude": 128.515123,
+    "id": 119,
+    "direction": "마산",
+    "node_id": "TSB390000343",
+    "node_nm": "호곡",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.28286,
+    "longitude": 128.510625,
+    "id": 120,
+    "direction": "마산",
+    "node_id": "TSB390000341",
+    "node_nm": "부곡",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.287736,
+    "longitude": 128.5045,
+    "id": 121,
+    "direction": "마산",
+    "node_id": "TSB390000338",
+    "node_nm": "오곡",
+    "route_id": "TSB390000054"
+  },
+  {
+    "latitude": 35.391549,
+    "longitude": 128.484073,
+    "id": 122,
+    "direction": "마산",
+    "node_id": "TSB391000635",
+    "node_nm": "남지버스터미널",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.383158,
+    "longitude": 128.488645,
+    "id": 123,
+    "direction": "마산",
+    "node_id": "TSB390000512",
+    "node_nm": "아랫담",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.381353,
+    "longitude": 128.486727,
+    "id": 124,
+    "direction": "마산",
+    "node_id": "TSB390000403",
+    "node_nm": "진동",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.378028,
+    "longitude": 128.479085,
+    "id": 125,
+    "direction": "마산",
+    "node_id": "TSB390000259",
+    "node_nm": "내내",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.372869,
+    "longitude": 128.479304,
+    "id": 126,
+    "direction": "마산",
+    "node_id": "TSB390000479",
+    "node_nm": "계내",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.366962,
+    "longitude": 128.482212,
+    "id": 127,
+    "direction": "마산",
+    "node_id": "TSB390000257",
+    "node_nm": "칠서지방산업단지",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.361437,
+    "longitude": 128.480909,
+    "id": 128,
+    "direction": "마산",
+    "node_id": "TSB390000481",
+    "node_nm": "칠서산업단지",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.360903,
+    "longitude": 128.477841,
+    "id": 129,
+    "direction": "마산",
+    "node_id": "TSB390000483",
+    "node_nm": "대치",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.363201,
+    "longitude": 128.471064,
+    "id": 130,
+    "direction": "마산",
+    "node_id": "TSB390000485",
+    "node_nm": "지원유압앞",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.363648,
+    "longitude": 128.465218,
+    "id": 131,
+    "direction": "마산",
+    "node_id": "TSB390000255",
+    "node_nm": "부촌",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.362149,
+    "longitude": 128.462269,
+    "id": 132,
+    "direction": "마산",
+    "node_id": "TSB390000487",
+    "node_nm": "부촌-신촌",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.36314,
+    "longitude": 128.45332,
+    "id": 133,
+    "direction": "마산",
+    "node_id": "TSB390000490",
+    "node_nm": "부목삼거리",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.357816,
+    "longitude": 128.452681,
+    "id": 134,
+    "direction": "마산",
+    "node_id": "TSB390000250",
+    "node_nm": "마산",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.356868,
+    "longitude": 128.449577,
+    "id": 135,
+    "direction": "마산",
+    "node_id": "TSB390000248",
+    "node_nm": "마산마을",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.351564,
+    "longitude": 128.439612,
+    "id": 136,
+    "direction": "마산",
+    "node_id": "TSB390000504",
+    "node_nm": "월포",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.349283,
+    "longitude": 128.432838,
+    "id": 137,
+    "direction": "마산",
+    "node_id": "TSB390000517",
+    "node_nm": "대산LG할인마트",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.350011,
+    "longitude": 128.43122,
+    "id": 138,
+    "direction": "마산",
+    "node_id": "TSB390000519",
+    "node_nm": "대산면사무소",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.352034,
+    "longitude": 128.429156,
+    "id": 139,
+    "direction": "마산",
+    "node_id": "TSB390000523",
+    "node_nm": "경희의원",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.353215,
+    "longitude": 128.427981,
+    "id": 140,
+    "direction": "마산",
+    "node_id": "TSB390000524",
+    "node_nm": "대산시장",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.354861,
+    "longitude": 128.426334,
+    "id": 141,
+    "direction": "마산",
+    "node_id": "TSB390000526",
+    "node_nm": "매산",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.356078,
+    "longitude": 128.425109,
+    "id": 142,
+    "direction": "마산",
+    "node_id": "TSB390000246",
+    "node_nm": "구혜",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.307434,
+    "longitude": 128.501857,
+    "id": 143,
+    "direction": "마산",
+    "node_id": "TSB390000333",
+    "node_nm": "회문",
+    "route_id": "TSB390000057"
+  },
+  {
+    "latitude": 35.38117,
+    "longitude": 128.486968,
+    "id": 144,
+    "direction": "마산",
+    "node_id": "TSB390000405",
+    "node_nm": "진동",
+    "route_id": "TSB390000058"
+  },
+  {
+    "latitude": 35.376574,
+    "longitude": 128.492017,
+    "id": 145,
+    "direction": "마산",
+    "node_id": "TSB390000407",
+    "node_nm": "본용성",
+    "route_id": "TSB390000058"
+  },
+  {
+    "latitude": 35.374501,
+    "longitude": 128.490528,
+    "id": 146,
+    "direction": "마산",
+    "node_id": "TSB390000408",
+    "node_nm": "신계동",
+    "route_id": "TSB390000058"
+  },
+  {
+    "latitude": 35.368407,
+    "longitude": 128.483041,
+    "id": 147,
+    "direction": "마산",
+    "node_id": "TSB390000412",
+    "node_nm": "삼현사거리",
+    "route_id": "TSB390000058"
+  },
+  {
+    "latitude": 35.361648,
+    "longitude": 128.485049,
+    "id": 148,
+    "direction": "마산",
+    "node_id": "TSB390000293",
+    "node_nm": "칠서공단-대치",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.357537,
+    "longitude": 128.4862,
+    "id": 149,
+    "direction": "마산",
+    "node_id": "TSB390000414",
+    "node_nm": "대치",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.353286,
+    "longitude": 128.487622,
+    "id": 150,
+    "direction": "마산",
+    "node_id": "TSB390000292",
+    "node_nm": "태곡",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.344368,
+    "longitude": 128.494398,
+    "id": 151,
+    "direction": "마산",
+    "node_id": "TSB390000422",
+    "node_nm": "삼영엠텍",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.335698,
+    "longitude": 128.495615,
+    "id": 152,
+    "direction": "마산",
+    "node_id": "TSB390000294",
+    "node_nm": "창동마을",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.333434,
+    "longitude": 128.49879,
+    "id": 153,
+    "direction": "마산",
+    "node_id": "TSB390000295",
+    "node_nm": "청계",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.320479,
+    "longitude": 128.509373,
+    "id": 154,
+    "direction": "마산",
+    "node_id": "TSB390000298",
+    "node_nm": "에이스아파트",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.318079,
+    "longitude": 128.508905,
+    "id": 155,
+    "direction": "마산",
+    "node_id": "TSB390000299",
+    "node_nm": "산성",
+    "route_id": "TSB390000059"
+  },
+  {
+    "latitude": 35.352886,
+    "longitude": 128.426751,
+    "id": 156,
+    "direction": "마산",
+    "node_id": "TSB390000814",
+    "node_nm": "대산버스터미널",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.344526,
+    "longitude": 128.453341,
+    "id": 157,
+    "direction": "마산",
+    "node_id": "TSB390000542",
+    "node_nm": "고원-구평림",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.343413,
+    "longitude": 128.45763,
+    "id": 158,
+    "direction": "마산",
+    "node_id": "TSB390000291",
+    "node_nm": "뎃질",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.337355,
+    "longitude": 128.462949,
+    "id": 159,
+    "direction": "마산",
+    "node_id": "TSB390000544",
+    "node_nm": "송라",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.333482,
+    "longitude": 128.46779,
+    "id": 160,
+    "direction": "마산",
+    "node_id": "TSB390000288",
+    "node_nm": "사촌마을",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.328679,
+    "longitude": 128.464343,
+    "id": 161,
+    "direction": "마산",
+    "node_id": "TSB390000546",
+    "node_nm": "대사",
+    "route_id": "TSB390000076"
+  },
+  {
+    "latitude": 35.364623,
+    "longitude": 128.564993,
+    "id": 162,
+    "direction": "마산",
+    "node_id": "TSB390000107",
+    "node_nm": "내봉촌",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.36835,
+    "longitude": 128.565522,
+    "id": 163,
+    "direction": "마산",
+    "node_id": "TSB390000268",
+    "node_nm": "내봉촌",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.368788,
+    "longitude": 128.56319,
+    "id": 164,
+    "direction": "마산",
+    "node_id": "TSB390000471",
+    "node_nm": "관음사입구",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.364354,
+    "longitude": 128.54359,
+    "id": 165,
+    "direction": "마산",
+    "node_id": "TSB390000469",
+    "node_nm": "외봉촌",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.364803,
+    "longitude": 128.541385,
+    "id": 166,
+    "direction": "마산",
+    "node_id": "TSB390000467",
+    "node_nm": "령동",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.366397,
+    "longitude": 128.536722,
+    "id": 167,
+    "direction": "마산",
+    "node_id": "TSB390000464",
+    "node_nm": "령동-중앙",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.366846,
+    "longitude": 128.532205,
+    "id": 168,
+    "direction": "마산",
+    "node_id": "TSB390000461",
+    "node_nm": "이령삼거리",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.360903,
+    "longitude": 128.53209,
+    "id": 169,
+    "direction": "마산",
+    "node_id": "TSB390000271",
+    "node_nm": "령서",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.346879,
+    "longitude": 128.521447,
+    "id": 170,
+    "direction": "마산",
+    "node_id": "TSB390000433",
+    "node_nm": "유계",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.341869,
+    "longitude": 128.51308,
+    "id": 171,
+    "direction": "마산",
+    "node_id": "TSB390000431",
+    "node_nm": "어연마을",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.340475,
+    "longitude": 128.508316,
+    "id": 172,
+    "direction": "마산",
+    "node_id": "TSB390000303",
+    "node_nm": "구포리",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.323543,
+    "longitude": 128.512012,
+    "id": 173,
+    "direction": "마산",
+    "node_id": "TSB390000302",
+    "node_nm": "무릉마을",
+    "route_id": "TSB390000079"
+  },
+  {
+    "latitude": 35.356605,
+    "longitude": 128.424253,
+    "id": 174,
+    "direction": "마산",
+    "node_id": "TSB390000502",
+    "node_nm": "구혜",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.348332,
+    "longitude": 128.413689,
+    "id": 175,
+    "direction": "마산",
+    "node_id": "TSB390000068",
+    "node_nm": "신대마을",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.345793,
+    "longitude": 128.41286,
+    "id": 176,
+    "direction": "마산",
+    "node_id": "TSB390000536",
+    "node_nm": "서촌",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.341636,
+    "longitude": 128.411486,
+    "id": 177,
+    "direction": "마산",
+    "node_id": "TSB390000244",
+    "node_nm": "동촌마을",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.339786,
+    "longitude": 128.408381,
+    "id": 178,
+    "direction": "마산",
+    "node_id": "TSB390000245",
+    "node_nm": "기동",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.335834,
+    "longitude": 128.407353,
+    "id": 179,
+    "direction": "마산",
+    "node_id": "TSB390000539",
+    "node_nm": "서촌삼거리",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.330871,
+    "longitude": 128.414372,
+    "id": 180,
+    "direction": "마산",
+    "node_id": "TSB390000540",
+    "node_nm": "동촌못골",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.330971,
+    "longitude": 128.414492,
+    "id": 181,
+    "direction": "마산",
+    "node_id": "TSB390000811",
+    "node_nm": "동촌못골",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.335823,
+    "longitude": 128.407618,
+    "id": 182,
+    "direction": "마산",
+    "node_id": "TSB390000538",
+    "node_nm": "서촌삼거리",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.339698,
+    "longitude": 128.408517,
+    "id": 183,
+    "direction": "마산",
+    "node_id": "TSB390000537",
+    "node_nm": "기동",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.341533,
+    "longitude": 128.41164,
+    "id": 184,
+    "direction": "마산",
+    "node_id": "TSB390000243",
+    "node_nm": "동촌마을",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.345768,
+    "longitude": 128.412988,
+    "id": 185,
+    "direction": "마산",
+    "node_id": "TSB390000535",
+    "node_nm": "서촌",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.348283,
+    "longitude": 128.413807,
+    "id": 186,
+    "direction": "마산",
+    "node_id": "TSB390000067",
+    "node_nm": "신대마을",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.350972,
+    "longitude": 128.407793,
+    "id": 187,
+    "direction": "마산",
+    "node_id": "TSB390000528",
+    "node_nm": "신대",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.352471,
+    "longitude": 128.406472,
+    "id": 188,
+    "direction": "마산",
+    "node_id": "TSB390000534",
+    "node_nm": "신대마을",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.349773,
+    "longitude": 128.396556,
+    "id": 189,
+    "direction": "마산",
+    "node_id": "TSB390000533",
+    "node_nm": "평기삼거리",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.347745,
+    "longitude": 128.398043,
+    "id": 190,
+    "direction": "마산",
+    "node_id": "TSB390000812",
+    "node_nm": "내촌",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.348599,
+    "longitude": 128.399004,
+    "id": 191,
+    "direction": "마산",
+    "node_id": "TSB390000531",
+    "node_nm": "새터",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.351342,
+    "longitude": 128.404729,
+    "id": 192,
+    "direction": "마산",
+    "node_id": "TSB390000530",
+    "node_nm": "신대",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.350846,
+    "longitude": 128.407722,
+    "id": 193,
+    "direction": "마산",
+    "node_id": "TSB390000529",
+    "node_nm": "신대",
+    "route_id": "TSB390000087"
+  },
+  {
+    "latitude": 35.382791,
+    "longitude": 128.435126,
+    "id": 194,
+    "direction": "마산",
+    "node_id": "TSB390000254",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.382834,
+    "longitude": 128.433124,
+    "id": 195,
+    "direction": "마산",
+    "node_id": "TSB390000500",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.383248,
+    "longitude": 128.431302,
+    "id": 196,
+    "direction": "마산",
+    "node_id": "TSB390000070",
+    "node_nm": "장암",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.377084,
+    "longitude": 128.428183,
+    "id": 197,
+    "direction": "마산",
+    "node_id": "TSB390000498",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.366027,
+    "longitude": 128.432792,
+    "id": 198,
+    "direction": "마산",
+    "node_id": "TSB390000497",
+    "node_nm": "연산",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.365863,
+    "longitude": 128.433165,
+    "id": 199,
+    "direction": "마산",
+    "node_id": "TSB390000815",
+    "node_nm": "연산",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.370136,
+    "longitude": 128.437925,
+    "id": 200,
+    "direction": "마산",
+    "node_id": "TSB390000495",
+    "node_nm": "연산",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.368727,
+    "longitude": 128.446957,
+    "id": 201,
+    "direction": "마산",
+    "node_id": "TSB390000493",
+    "node_nm": "대암마을",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.365047,
+    "longitude": 128.45101,
+    "id": 202,
+    "direction": "마산",
+    "node_id": "TSB390000252",
+    "node_nm": "입사",
+    "route_id": "TSB390000102"
+  },
+  {
+    "latitude": 35.351552,
+    "longitude": 128.439761,
+    "id": 203,
+    "direction": "마산",
+    "node_id": "TSB390000505",
+    "node_nm": "월포",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.356751,
+    "longitude": 128.449579,
+    "id": 204,
+    "direction": "마산",
+    "node_id": "TSB390000249",
+    "node_nm": "마산마을",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.357678,
+    "longitude": 128.452602,
+    "id": 205,
+    "direction": "마산",
+    "node_id": "TSB390000251",
+    "node_nm": "마산",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.363185,
+    "longitude": 128.453596,
+    "id": 206,
+    "direction": "마산",
+    "node_id": "TSB390000491",
+    "node_nm": "부목삼거리",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.362042,
+    "longitude": 128.462302,
+    "id": 207,
+    "direction": "마산",
+    "node_id": "TSB390000488",
+    "node_nm": "부촌-신촌",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.363567,
+    "longitude": 128.465306,
+    "id": 208,
+    "direction": "마산",
+    "node_id": "TSB390000256",
+    "node_nm": "부촌",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.363101,
+    "longitude": 128.471015,
+    "id": 209,
+    "direction": "마산",
+    "node_id": "TSB390000486",
+    "node_nm": "지원유압앞",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.36081,
+    "longitude": 128.477952,
+    "id": 210,
+    "direction": "마산",
+    "node_id": "TSB390000484",
+    "node_nm": "대치",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.361327,
+    "longitude": 128.480914,
+    "id": 211,
+    "direction": "마산",
+    "node_id": "TSB390000482",
+    "node_nm": "칠서산업단지",
+    "route_id": "TSB390000103"
+  },
+  {
+    "latitude": 35.385989,
+    "longitude": 128.491772,
+    "id": 212,
+    "direction": "마산",
+    "node_id": "TSB390000478",
+    "node_nm": "본용성",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.386773,
+    "longitude": 128.492657,
+    "id": 213,
+    "direction": "마산",
+    "node_id": "TSB390000819",
+    "node_nm": "우리병원",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.387878,
+    "longitude": 128.500594,
+    "id": 214,
+    "direction": "마산",
+    "node_id": "TSB390000476",
+    "node_nm": "이룡농협",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.387386,
+    "longitude": 128.503468,
+    "id": 215,
+    "direction": "마산",
+    "node_id": "TSB390000261",
+    "node_nm": "신기",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.386652,
+    "longitude": 128.507531,
+    "id": 216,
+    "direction": "마산",
+    "node_id": "TSB390000263",
+    "node_nm": "평지",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.381451,
+    "longitude": 128.526201,
+    "id": 217,
+    "direction": "마산",
+    "node_id": "TSB390000473",
+    "node_nm": "덕촌",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.380175,
+    "longitude": 128.530399,
+    "id": 218,
+    "direction": "마산",
+    "node_id": "TSB390000265",
+    "node_nm": "덕촌",
+    "route_id": "TSB390000104"
+  },
+  {
+    "latitude": 35.241291,
+    "longitude": 128.58501,
+    "id": 219,
+    "direction": "마산",
+    "node_id": "TSB417000035",
+    "node_nm": "합성동",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.244177,
+    "longitude": 128.587308,
+    "id": 220,
+    "direction": "마산",
+    "node_id": "TSB417000037",
+    "node_nm": "덕재-롯데캐슬",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.245525,
+    "longitude": 128.589438,
+    "id": 221,
+    "direction": "마산",
+    "node_id": "TSB417000039",
+    "node_nm": "복음요양병원",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.246816,
+    "longitude": 128.591811,
+    "id": 222,
+    "direction": "마산",
+    "node_id": "TSB417000040",
+    "node_nm": "구암동",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.25007,
+    "longitude": 128.597837,
+    "id": 223,
+    "direction": "마산",
+    "node_id": "TSB417000042",
+    "node_nm": "KT동마산지점",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.250914,
+    "longitude": 128.59933,
+    "id": 224,
+    "direction": "마산",
+    "node_id": "TSB417000044",
+    "node_nm": "한국전력",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.253226,
+    "longitude": 128.607801,
+    "id": 225,
+    "direction": "마산",
+    "node_id": "TSB414000001",
+    "node_nm": "경남테크노파크-팔용사거리방면",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.251619,
+    "longitude": 128.61065,
+    "id": 226,
+    "direction": "마산",
+    "node_id": "TSB414000002",
+    "node_nm": "팔용동입구-차룡사거리방면",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.24987,
+    "longitude": 128.61372,
+    "id": 227,
+    "direction": "마산",
+    "node_id": "TSB414000003",
+    "node_nm": "동서식품",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.247676,
+    "longitude": 128.617525,
+    "id": 228,
+    "direction": "마산",
+    "node_id": "TSB414000004",
+    "node_nm": "동우기계",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.244011,
+    "longitude": 128.623966,
+    "id": 229,
+    "direction": "마산",
+    "node_id": "TSB414000005",
+    "node_nm": "차룡119안전센터-입구",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.242795,
+    "longitude": 128.626088,
+    "id": 230,
+    "direction": "마산",
+    "node_id": "TSB414000006",
+    "node_nm": "차룡사거리",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.237928,
+    "longitude": 128.634625,
+    "id": 231,
+    "direction": "마산",
+    "node_id": "TSB414000007",
+    "node_nm": "유남주유소",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.237328,
+    "longitude": 128.639357,
+    "id": 232,
+    "direction": "마산",
+    "node_id": "TSB414000016",
+    "node_nm": "창원종합버스터미널",
+    "route_id": "TSB390000105"
+  },
+  {
+    "latitude": 35.380211,
+    "longitude": 128.366193,
+    "id": 233,
+    "direction": "마산",
+    "node_id": "TSB389000383",
+    "node_nm": "득소마을",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.366852,
+    "longitude": 128.370338,
+    "id": 234,
+    "direction": "마산",
+    "node_id": "TSB389000381",
+    "node_nm": "백야",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.364069,
+    "longitude": 128.377862,
+    "id": 235,
+    "direction": "마산",
+    "node_id": "TSB389000423",
+    "node_nm": "독대마을",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.361663,
+    "longitude": 128.381267,
+    "id": 236,
+    "direction": "마산",
+    "node_id": "TSB389000297",
+    "node_nm": "독대",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.362514,
+    "longitude": 128.388988,
+    "id": 237,
+    "direction": "마산",
+    "node_id": "TSB389000421",
+    "node_nm": "성당마을",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.365783,
+    "longitude": 128.406582,
+    "id": 238,
+    "direction": "마산",
+    "node_id": "TSB389000075",
+    "node_nm": "구야동",
+    "route_id": "TSB390000108"
+  },
+  {
+    "latitude": 35.387985,
+    "longitude": 128.500615,
+    "id": 239,
+    "direction": "마산",
+    "node_id": "TSB390000475",
+    "node_nm": "이룡농협",
+    "route_id": "TSB390000112"
+  },
+  {
+    "latitude": 35.386862,
+    "longitude": 128.492582,
+    "id": 240,
+    "direction": "마산",
+    "node_id": "TSB390000477",
+    "node_nm": "우리병원",
+    "route_id": "TSB390000112"
+  },
+  {
+    "latitude": 35.386087,
+    "longitude": 128.4917,
+    "id": 241,
+    "direction": "마산",
+    "node_id": "TSB390000818",
+    "node_nm": "본용성",
+    "route_id": "TSB390000112"
+  },
+  {
+    "latitude": 35.284053,
+    "longitude": 128.570766,
+    "id": 242,
+    "direction": "마산",
+    "node_id": "TSB390000851",
+    "node_nm": "산정마을",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.287696,
+    "longitude": 128.568351,
+    "id": 243,
+    "direction": "마산",
+    "node_id": "TSB390000428",
+    "node_nm": "산정",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.293257,
+    "longitude": 128.549303,
+    "id": 244,
+    "direction": "마산",
+    "node_id": "TSB390000426",
+    "node_nm": "돈담",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.29784,
+    "longitude": 128.538335,
+    "id": 245,
+    "direction": "마산",
+    "node_id": "TSB390000307",
+    "node_nm": "무기",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.303174,
+    "longitude": 128.521349,
+    "id": 246,
+    "direction": "마산",
+    "node_id": "TSB390000372",
+    "node_nm": "금안아파트입구",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.303784,
+    "longitude": 128.51967,
+    "id": 247,
+    "direction": "마산",
+    "node_id": "TSB390000371",
+    "node_nm": "남구마을",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.305225,
+    "longitude": 128.518422,
+    "id": 248,
+    "direction": "마산",
+    "node_id": "TSB390000781",
+    "node_nm": "이현",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.300582,
+    "longitude": 128.503945,
+    "id": 249,
+    "direction": "마산",
+    "node_id": "TSB390000334",
+    "node_nm": "양정새동네",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.299955,
+    "longitude": 128.498951,
+    "id": 250,
+    "direction": "마산",
+    "node_id": "TSB390000332",
+    "node_nm": "유원",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.287709,
+    "longitude": 128.504376,
+    "id": 251,
+    "direction": "마산",
+    "node_id": "TSB390000339",
+    "node_nm": "오곡",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.282734,
+    "longitude": 128.51059,
+    "id": 252,
+    "direction": "마산",
+    "node_id": "TSB390000340",
+    "node_nm": "부곡",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.278171,
+    "longitude": 128.51504,
+    "id": 253,
+    "direction": "마산",
+    "node_id": "TSB390000342",
+    "node_nm": "호곡",
+    "route_id": "TSB390000120"
+  },
+  {
+    "latitude": 35.367054,
+    "longitude": 128.532378,
+    "id": 254,
+    "direction": "마산",
+    "node_id": "TSB390000462",
+    "node_nm": "이령삼거리",
+    "route_id": "TSB390000126"
+  },
+  {
+    "latitude": 35.380253,
+    "longitude": 128.530493,
+    "id": 255,
+    "direction": "마산",
+    "node_id": "TSB390000266",
+    "node_nm": "덕촌",
+    "route_id": "TSB390000126"
+  },
+  {
+    "latitude": 35.381559,
+    "longitude": 128.526192,
+    "id": 256,
+    "direction": "마산",
+    "node_id": "TSB390000472",
+    "node_nm": "덕촌",
+    "route_id": "TSB390000126"
+  },
+  {
+    "latitude": 35.386799,
+    "longitude": 128.507347,
+    "id": 257,
+    "direction": "마산",
+    "node_id": "TSB390000264",
+    "node_nm": "평지",
+    "route_id": "TSB390000126"
+  },
+  {
+    "latitude": 35.387492,
+    "longitude": 128.503494,
+    "id": 258,
+    "direction": "마산",
+    "node_id": "TSB390000262",
+    "node_nm": "신기",
+    "route_id": "TSB390000126"
+  },
+  {
+    "latitude": 35.317428,
+    "longitude": 128.505051,
+    "id": 259,
+    "direction": "마산",
+    "node_id": "TSB390000823",
+    "node_nm": "에이스아파트",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.232224,
+    "longitude": 128.564484,
+    "id": 260,
+    "direction": "마산",
+    "node_id": "TSB417000020",
+    "node_nm": "회성동주민센터",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.230814,
+    "longitude": 128.566038,
+    "id": 261,
+    "direction": "마산",
+    "node_id": "TSB417000018",
+    "node_nm": "서마산교회",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.228635,
+    "longitude": 128.568358,
+    "id": 262,
+    "direction": "마산",
+    "node_id": "TSB417000017",
+    "node_nm": "서마산시장-맞은편",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.224593,
+    "longitude": 128.570977,
+    "id": 263,
+    "direction": "마산",
+    "node_id": "TSB417000015",
+    "node_nm": "석전사거리-신우빌리지맞은편",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.220845,
+    "longitude": 128.570778,
+    "id": 264,
+    "direction": "마산",
+    "node_id": "TSB417000012",
+    "node_nm": "국제주유소",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.218564,
+    "longitude": 128.570546,
+    "id": 265,
+    "direction": "마산",
+    "node_id": "TSB417000010",
+    "node_nm": "동중입구-LG전자회원점앞",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.216549,
+    "longitude": 128.570358,
+    "id": 266,
+    "direction": "마산",
+    "node_id": "TSB417000009",
+    "node_nm": "회산교-재건약국앞",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.212355,
+    "longitude": 128.571591,
+    "id": 267,
+    "direction": "마산",
+    "node_id": "TSB416000079",
+    "node_nm": "합포주유소",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.211358,
+    "longitude": 128.574109,
+    "id": 268,
+    "direction": "마산",
+    "node_id": "TSB416000078",
+    "node_nm": "원불교교구청-삼성생명방면",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.208896,
+    "longitude": 128.576192,
+    "id": 269,
+    "direction": "마산",
+    "node_id": "TSB416000076",
+    "node_nm": "삼성생명-맞은편",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.206462,
+    "longitude": 128.576552,
+    "id": 270,
+    "direction": "마산",
+    "node_id": "TSB416000074",
+    "node_nm": "순안산부인과",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.203437,
+    "longitude": 128.575369,
+    "id": 271,
+    "direction": "마산",
+    "node_id": "TSB416000072",
+    "node_nm": "어시장-송월타월앞",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.203014,
+    "longitude": 128.570877,
+    "id": 272,
+    "direction": "마산",
+    "node_id": "TSB416000070",
+    "node_nm": "kt서마산지점",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.201171,
+    "longitude": 128.567327,
+    "id": 273,
+    "direction": "마산",
+    "node_id": "TSB416000068",
+    "node_nm": "경남데파트",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.197868,
+    "longitude": 128.567091,
+    "id": 274,
+    "direction": "마산",
+    "node_id": "TSB416000066",
+    "node_nm": "마산합포구청-의료원-KT&G앞",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.19467,
+    "longitude": 128.566539,
+    "id": 275,
+    "direction": "마산",
+    "node_id": "TSB416000064",
+    "node_nm": "경동메르빌-맞은편",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.192898,
+    "longitude": 128.565072,
+    "id": 276,
+    "direction": "마산",
+    "node_id": "TSB416000063",
+    "node_nm": "중부경찰서",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.190333,
+    "longitude": 128.562737,
+    "id": 277,
+    "direction": "마산",
+    "node_id": "TSB416000060",
+    "node_nm": "반월동-주민센터앞",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.187173,
+    "longitude": 128.561651,
+    "id": 278,
+    "direction": "마산",
+    "node_id": "TSB416000059",
+    "node_nm": "연세병원-건너편",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.184584,
+    "longitude": 128.560257,
+    "id": 279,
+    "direction": "마산",
+    "node_id": "TSB416000057",
+    "node_nm": "문화동-경남대방면",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.181268,
+    "longitude": 128.558506,
+    "id": 280,
+    "direction": "마산",
+    "node_id": "TSB416000055",
+    "node_nm": "대내주공아파트",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.179316,
+    "longitude": 128.558271,
+    "id": 281,
+    "direction": "마산",
+    "node_id": "TSB416000042",
+    "node_nm": "경남대남부터미널종점-월영아파트방면",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.175696,
+    "longitude": 128.558473,
+    "id": 282,
+    "direction": "마산",
+    "node_id": "TSB416000044",
+    "node_nm": "해운초등학교",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.173687,
+    "longitude": 128.55934,
+    "id": 283,
+    "direction": "마산",
+    "node_id": "TSB416000047",
+    "node_nm": "월영아파트종점-월영동공원",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.175332,
+    "longitude": 128.562593,
+    "id": 284,
+    "direction": "마산",
+    "node_id": "TSB416000049",
+    "node_nm": "한국철강-해운중방면",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.17791,
+    "longitude": 128.563105,
+    "id": 285,
+    "direction": "마산",
+    "node_id": "TSB416000050",
+    "node_nm": "해운중학교종점-해운노인정",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.178984,
+    "longitude": 128.560525,
+    "id": 286,
+    "direction": "마산",
+    "node_id": "TSB416000083",
+    "node_nm": "마산남부시외버스터미널",
+    "route_id": "TSB390000035"
+  },
+  {
+    "latitude": 35.317498,
+    "longitude": 128.504948,
+    "id": 287,
+    "direction": "마산",
+    "node_id": "TSB390000423",
+    "node_nm": "에이스아파트",
+    "route_id": "TSB390000044"
+  },
+  {
+    "latitude": 35.372316,
+    "longitude": 128.499232,
+    "id": 288,
+    "direction": "마산",
+    "node_id": "TSB390000105",
+    "node_nm": "용호",
+    "route_id": "TSB390000170"
+  },
+  {
+    "latitude": 35.235571,
+    "longitude": 128.582114,
+    "id": 289,
+    "direction": "칠원",
+    "node_id": "TSB417000094",
+    "node_nm": "도원예시장",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.233586,
+    "longitude": 128.581404,
+    "id": 290,
+    "direction": "칠원",
+    "node_id": "TSB417000003",
+    "node_nm": "역전치안센터",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.233496,
+    "longitude": 128.578528,
+    "id": 291,
+    "direction": "칠원",
+    "node_id": "TSB417000029",
+    "node_nm": "마산역-동마산병원앞",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.230573,
+    "longitude": 128.57629,
+    "id": 292,
+    "direction": "칠원",
+    "node_id": "TSB417000028",
+    "node_nm": "마산우체국",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.229173,
+    "longitude": 128.573978,
+    "id": 293,
+    "direction": "칠원",
+    "node_id": "TSB417000026",
+    "node_nm": "석전동육교-서마산교회방면",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.231543,
+    "longitude": 128.568114,
+    "id": 294,
+    "direction": "칠원",
+    "node_id": "TSB417000024",
+    "node_nm": "북성초등학교-앞",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.232395,
+    "longitude": 128.56552,
+    "id": 295,
+    "direction": "칠원",
+    "node_id": "TSB417000022",
+    "node_nm": "보문주유소-맞은편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.233644,
+    "longitude": 128.561157,
+    "id": 296,
+    "direction": "칠원",
+    "node_id": "TSB417000046",
+    "node_nm": "교도소입구",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.234273,
+    "longitude": 128.556845,
+    "id": 297,
+    "direction": "칠원",
+    "node_id": "TSB417000049",
+    "node_nm": "한효국화맨션-건너편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.23572,
+    "longitude": 128.551722,
+    "id": 298,
+    "direction": "칠원",
+    "node_id": "TSB417000051",
+    "node_nm": "약수터가든-맞은편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.237096,
+    "longitude": 128.546885,
+    "id": 299,
+    "direction": "칠원",
+    "node_id": "TSB417000053",
+    "node_nm": "내서초등학교",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.237935,
+    "longitude": 128.543625,
+    "id": 300,
+    "direction": "칠원",
+    "node_id": "TSB417000054",
+    "node_nm": "두척-한국거성화물앞",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.241906,
+    "longitude": 128.536971,
+    "id": 301,
+    "direction": "칠원",
+    "node_id": "TSB417000056",
+    "node_nm": "마재고개-중리삼거리방면",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.245239,
+    "longitude": 128.528198,
+    "id": 302,
+    "direction": "칠원",
+    "node_id": "TSB417000059",
+    "node_nm": "구슬골-중리삼거리방면",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.248484,
+    "longitude": 128.524208,
+    "id": 303,
+    "direction": "칠원",
+    "node_id": "TSB417000060",
+    "node_nm": "중리삼거리-중리치안센터",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.250608,
+    "longitude": 128.521701,
+    "id": 304,
+    "direction": "칠원",
+    "node_id": "TSB417000075",
+    "node_nm": "현대아파트-입구",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.25309,
+    "longitude": 128.520962,
+    "id": 305,
+    "direction": "칠원",
+    "node_id": "TSB417000073",
+    "node_nm": "구미동-롯데리아앞",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.257998,
+    "longitude": 128.522237,
+    "id": 306,
+    "direction": "칠원",
+    "node_id": "TSB417000070",
+    "node_nm": "동서병원-건너편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.260613,
+    "longitude": 128.523105,
+    "id": 307,
+    "direction": "칠원",
+    "node_id": "TSB417000068",
+    "node_nm": "호계농협-건너편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.26492,
+    "longitude": 128.525303,
+    "id": 308,
+    "direction": "칠원",
+    "node_id": "TSB417000092",
+    "node_nm": "코오롱아파트",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.266527,
+    "longitude": 128.5279,
+    "id": 309,
+    "direction": "칠원",
+    "node_id": "TSB417000091",
+    "node_nm": "신우타워-건너편",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.268924,
+    "longitude": 128.531845,
+    "id": 310,
+    "direction": "칠원",
+    "node_id": "TSB390000063",
+    "node_nm": "예곡",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.27443,
+    "longitude": 128.531579,
+    "id": 311,
+    "direction": "칠원",
+    "node_id": "TSB390000770",
+    "node_nm": "수정그린아파트",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.278165,
+    "longitude": 128.530594,
+    "id": 312,
+    "direction": "칠원",
+    "node_id": "TSB390000374",
+    "node_nm": "곡촌",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.286561,
+    "longitude": 128.529971,
+    "id": 313,
+    "direction": "칠원",
+    "node_id": "TSB390000313",
+    "node_nm": "석전동",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.294651,
+    "longitude": 128.533755,
+    "id": 314,
+    "direction": "칠원",
+    "node_id": "TSB390000311",
+    "node_nm": "무기",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.307547,
+    "longitude": 128.517528,
+    "id": 315,
+    "direction": "칠원",
+    "node_id": "TSB390000367",
+    "node_nm": "용산사거리",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.310525,
+    "longitude": 128.515298,
+    "id": 316,
+    "direction": "칠원",
+    "node_id": "TSB390000365",
+    "node_nm": "장미아파트",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.316181,
+    "longitude": 128.509964,
+    "id": 317,
+    "direction": "칠원",
+    "node_id": "TSB390000424",
+    "node_nm": "기공아파트앞",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.317366,
+    "longitude": 128.509379,
+    "id": 318,
+    "direction": "칠원",
+    "node_id": "TSB390000300",
+    "node_nm": "산성",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.320552,
+    "longitude": 128.50952,
+    "id": 319,
+    "direction": "칠원",
+    "node_id": "TSB390000297",
+    "node_nm": "에이스아파트",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.353298,
+    "longitude": 128.487786,
+    "id": 320,
+    "direction": "칠원",
+    "node_id": "TSB390000826",
+    "node_nm": "태곡",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.358064,
+    "longitude": 128.486198,
+    "id": 321,
+    "direction": "칠원",
+    "node_id": "TSB390000415",
+    "node_nm": "대치",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.36163,
+    "longitude": 128.485329,
+    "id": 322,
+    "direction": "칠원",
+    "node_id": "TSB390000413",
+    "node_nm": "칠서단지",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.367224,
+    "longitude": 128.482114,
+    "id": 323,
+    "direction": "칠원",
+    "node_id": "TSB390000258",
+    "node_nm": "공단사거리2",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.37288,
+    "longitude": 128.479437,
+    "id": 324,
+    "direction": "칠원",
+    "node_id": "TSB390000480",
+    "node_nm": "계내",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.378014,
+    "longitude": 128.479376,
+    "id": 325,
+    "direction": "칠원",
+    "node_id": "TSB390000260",
+    "node_nm": "내내",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.381466,
+    "longitude": 128.487021,
+    "id": 326,
+    "direction": "칠원",
+    "node_id": "TSB390000404",
+    "node_nm": "진동",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.383096,
+    "longitude": 128.488754,
+    "id": 327,
+    "direction": "칠원",
+    "node_id": "TSB390000511",
+    "node_nm": "아랫담",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.366817,
+    "longitude": 128.532443,
+    "id": 328,
+    "direction": "칠원",
+    "node_id": "TSB390000463",
+    "node_nm": "이령삼거리",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.366295,
+    "longitude": 128.536678,
+    "id": 329,
+    "direction": "칠원",
+    "node_id": "TSB390000465",
+    "node_nm": "령동-중앙",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.364694,
+    "longitude": 128.541382,
+    "id": 330,
+    "direction": "칠원",
+    "node_id": "TSB390000466",
+    "node_nm": "령동",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.364245,
+    "longitude": 128.54365,
+    "id": 331,
+    "direction": "칠원",
+    "node_id": "TSB390000468",
+    "node_nm": "외봉촌",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.368679,
+    "longitude": 128.563184,
+    "id": 332,
+    "direction": "칠원",
+    "node_id": "TSB390000470",
+    "node_nm": "관음사입구",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.368188,
+    "longitude": 128.565525,
+    "id": 333,
+    "direction": "칠원",
+    "node_id": "TSB390000267",
+    "node_nm": "내봉촌",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.364573,
+    "longitude": 128.564857,
+    "id": 334,
+    "direction": "칠원",
+    "node_id": "TSB390000269",
+    "node_nm": "음달마을",
+    "route_id": "TSB390000061"
+  },
+  {
+    "latitude": 35.323506,
+    "longitude": 128.512117,
+    "id": 335,
+    "direction": "칠원",
+    "node_id": "TSB390000301",
+    "node_nm": "무릉마을",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.340374,
+    "longitude": 128.508362,
+    "id": 336,
+    "direction": "칠원",
+    "node_id": "TSB390000304",
+    "node_nm": "구포리",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.341904,
+    "longitude": 128.513227,
+    "id": 337,
+    "direction": "칠원",
+    "node_id": "TSB390000432",
+    "node_nm": "어연마을",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.346848,
+    "longitude": 128.521574,
+    "id": 338,
+    "direction": "칠원",
+    "node_id": "TSB390000434",
+    "node_nm": "유계",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.352075,
+    "longitude": 128.518989,
+    "id": 339,
+    "direction": "칠원",
+    "node_id": "TSB390000460",
+    "node_nm": "남양",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.360829,
+    "longitude": 128.532237,
+    "id": 340,
+    "direction": "칠원",
+    "node_id": "TSB390000270",
+    "node_nm": "령서",
+    "route_id": "TSB390000062"
+  },
+  {
+    "latitude": 35.306995,
+    "longitude": 128.502304,
+    "id": 341,
+    "direction": "칠원",
+    "node_id": "TSB390000066",
+    "node_nm": "회문",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.313006,
+    "longitude": 128.498043,
+    "id": 342,
+    "direction": "칠원",
+    "node_id": "TSB390000360",
+    "node_nm": "신산-안기",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.312892,
+    "longitude": 128.477348,
+    "id": 343,
+    "direction": "칠원",
+    "node_id": "TSB390000356",
+    "node_nm": "어령터",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.342721,
+    "longitude": 128.44642,
+    "id": 344,
+    "direction": "칠원",
+    "node_id": "TSB390000513",
+    "node_nm": "고원",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.344633,
+    "longitude": 128.442772,
+    "id": 345,
+    "direction": "칠원",
+    "node_id": "TSB390000241",
+    "node_nm": "중앙동",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.346966,
+    "longitude": 128.438278,
+    "id": 346,
+    "direction": "칠원",
+    "node_id": "TSB390000515",
+    "node_nm": "경남로봇고등학교",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.3634,
+    "longitude": 128.45334,
+    "id": 347,
+    "direction": "칠원",
+    "node_id": "TSB390000489",
+    "node_nm": "부목삼거리",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.365027,
+    "longitude": 128.451287,
+    "id": 348,
+    "direction": "칠원",
+    "node_id": "TSB390000253",
+    "node_nm": "입사",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.368815,
+    "longitude": 128.447026,
+    "id": 349,
+    "direction": "칠원",
+    "node_id": "TSB390000492",
+    "node_nm": "대암마을",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.370224,
+    "longitude": 128.438059,
+    "id": 350,
+    "direction": "칠원",
+    "node_id": "TSB390000494",
+    "node_nm": "연산",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.36604,
+    "longitude": 128.432904,
+    "id": 351,
+    "direction": "칠원",
+    "node_id": "TSB390000496",
+    "node_nm": "연산",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.377045,
+    "longitude": 128.428286,
+    "id": 352,
+    "direction": "칠원",
+    "node_id": "TSB390000499",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.383169,
+    "longitude": 128.431422,
+    "id": 353,
+    "direction": "칠원",
+    "node_id": "TSB390000069",
+    "node_nm": "장암",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.382777,
+    "longitude": 128.433011,
+    "id": 354,
+    "direction": "칠원",
+    "node_id": "TSB390000501",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.382777,
+    "longitude": 128.4353,
+    "id": 355,
+    "direction": "칠원",
+    "node_id": "TSB390000816",
+    "node_nm": "장포마을",
+    "route_id": "TSB390000065"
+  },
+  {
+    "latitude": 35.335195,
+    "longitude": 128.450976,
+    "id": 356,
+    "direction": "칠원",
+    "node_id": "TSB390000239",
+    "node_nm": "평림리",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.364125,
+    "longitude": 128.412619,
+    "id": 357,
+    "direction": "칠원",
+    "node_id": "TSB389000686",
+    "node_nm": "마산",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.36636,
+    "longitude": 128.410473,
+    "id": 358,
+    "direction": "칠원",
+    "node_id": "TSB389000300",
+    "node_nm": "마산",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.36912,
+    "longitude": 128.407809,
+    "id": 359,
+    "direction": "칠원",
+    "node_id": "TSB389000689",
+    "node_nm": "포외",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.375795,
+    "longitude": 128.398783,
+    "id": 360,
+    "direction": "칠원",
+    "node_id": "TSB389000298",
+    "node_nm": "당성곡",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.382238,
+    "longitude": 128.387687,
+    "id": 361,
+    "direction": "칠원",
+    "node_id": "TSB389000307",
+    "node_nm": "지정",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.378452,
+    "longitude": 128.393117,
+    "id": 362,
+    "direction": "칠원",
+    "node_id": "TSB389000385",
+    "node_nm": "나림",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.383021,
+    "longitude": 128.403235,
+    "id": 363,
+    "direction": "칠원",
+    "node_id": "TSB389000301",
+    "node_nm": "오천",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.38493,
+    "longitude": 128.405543,
+    "id": 364,
+    "direction": "칠원",
+    "node_id": "TSB389000302",
+    "node_nm": "웅곡",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.387767,
+    "longitude": 128.413187,
+    "id": 365,
+    "direction": "칠원",
+    "node_id": "TSB389000073",
+    "node_nm": "다솜농장",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.39073,
+    "longitude": 128.42056,
+    "id": 366,
+    "direction": "칠원",
+    "node_id": "TSB389000389",
+    "node_nm": "수월",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.401924,
+    "longitude": 128.425637,
+    "id": 367,
+    "direction": "칠원",
+    "node_id": "TSB389000390",
+    "node_nm": "성산마을",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.401205,
+    "longitude": 128.423863,
+    "id": 368,
+    "direction": "칠원",
+    "node_id": "TSB389000645",
+    "node_nm": "성산",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.39926,
+    "longitude": 128.407099,
+    "id": 369,
+    "direction": "칠원",
+    "node_id": "TSB389000418",
+    "node_nm": "두곡마을-하두곡",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.399445,
+    "longitude": 128.404939,
+    "id": 370,
+    "direction": "칠원",
+    "node_id": "TSB389000391",
+    "node_nm": "두곡",
+    "route_id": "TSB390000069"
+  },
+  {
+    "latitude": 35.268829,
+    "longitude": 128.530023,
+    "id": 371,
+    "direction": "칠원",
+    "node_id": "TSB390000315",
+    "node_nm": "하은교회-맞은편",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.270123,
+    "longitude": 128.526533,
+    "id": 372,
+    "direction": "칠원",
+    "node_id": "TSB390000833",
+    "node_nm": "칠원-내장교",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.271121,
+    "longitude": 128.525976,
+    "id": 373,
+    "direction": "칠원",
+    "node_id": "TSB390000832",
+    "node_nm": "자이아파트입구",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.273651,
+    "longitude": 128.52631,
+    "id": 374,
+    "direction": "칠원",
+    "node_id": "TSB390000318",
+    "node_nm": "자이아파트정문",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.276298,
+    "longitude": 128.522804,
+    "id": 375,
+    "direction": "칠원",
+    "node_id": "TSB390000377",
+    "node_nm": "자이아파트",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.277422,
+    "longitude": 128.52437,
+    "id": 376,
+    "direction": "칠원",
+    "node_id": "TSB390000320",
+    "node_nm": "야촌",
+    "route_id": "TSB390000081"
+  },
+  {
+    "latitude": 35.315169,
+    "longitude": 128.507411,
+    "id": 377,
+    "direction": "칠원",
+    "node_id": "TSB390000363",
+    "node_nm": "쇠만이",
+    "route_id": "TSB390000083"
+  },
+  {
+    "latitude": 35.313414,
+    "longitude": 128.5027,
+    "id": 378,
+    "direction": "칠원",
+    "node_id": "TSB390000362",
+    "node_nm": "칠평",
+    "route_id": "TSB390000083"
+  },
+  {
+    "latitude": 35.352927,
+    "longitude": 128.426925,
+    "id": 379,
+    "direction": "칠원",
+    "node_id": "TSB390000242",
+    "node_nm": "대산버스터미널",
+    "route_id": "TSB390000083"
+  },
+  {
+    "latitude": 35.300947,
+    "longitude": 128.494889,
+    "id": 380,
+    "direction": "칠원",
+    "node_id": "TSB390000774",
+    "node_nm": "유상",
+    "route_id": "TSB390000085"
+  },
+  {
+    "latitude": 35.301816,
+    "longitude": 128.490956,
+    "id": 381,
+    "direction": "칠원",
+    "node_id": "TSB390000777",
+    "node_nm": "유상",
+    "route_id": "TSB390000085"
+  },
+  {
+    "latitude": 35.301812,
+    "longitude": 128.480225,
+    "id": 382,
+    "direction": "칠원",
+    "node_id": "TSB390000779",
+    "node_nm": "예은테크앞",
+    "route_id": "TSB390000085"
+  },
+  {
+    "latitude": 35.294439,
+    "longitude": 128.477642,
+    "id": 383,
+    "direction": "칠원",
+    "node_id": "TSB390000335",
+    "node_nm": "장암",
+    "route_id": "TSB390000085"
+  },
+  {
+    "latitude": 35.289452,
+    "longitude": 128.475174,
+    "id": 384,
+    "direction": "칠원",
+    "node_id": "TSB390000337",
+    "node_nm": "장암마을",
+    "route_id": "TSB390000085"
+  },
+  {
+    "latitude": 35.368523,
+    "longitude": 128.483429,
+    "id": 385,
+    "direction": "칠원",
+    "node_id": "TSB390000410",
+    "node_nm": "삼현사거리",
+    "route_id": "TSB390000088"
+  },
+  {
+    "latitude": 35.374489,
+    "longitude": 128.490676,
+    "id": 386,
+    "direction": "칠원",
+    "node_id": "TSB390000409",
+    "node_nm": "신계",
+    "route_id": "TSB390000088"
+  },
+  {
+    "latitude": 35.376665,
+    "longitude": 128.492089,
+    "id": 387,
+    "direction": "칠원",
+    "node_id": "TSB390000406",
+    "node_nm": "본용성",
+    "route_id": "TSB390000088"
+  },
+  {
+    "latitude": 35.307508,
+    "longitude": 128.518002,
+    "id": 388,
+    "direction": "칠원",
+    "node_id": "TSB390000329",
+    "node_nm": "용산",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.309508,
+    "longitude": 128.519497,
+    "id": 389,
+    "direction": "칠원",
+    "node_id": "TSB390000287",
+    "node_nm": "덕산",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.316433,
+    "longitude": 128.533205,
+    "id": 390,
+    "direction": "칠원",
+    "node_id": "TSB390000285",
+    "node_nm": "운서",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.316754,
+    "longitude": 128.537143,
+    "id": 391,
+    "direction": "칠원",
+    "node_id": "TSB390000283",
+    "node_nm": "학동마을",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.3174,
+    "longitude": 128.540444,
+    "id": 392,
+    "direction": "칠원",
+    "node_id": "TSB390000443",
+    "node_nm": "운동",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.317919,
+    "longitude": 128.542558,
+    "id": 393,
+    "direction": "칠원",
+    "node_id": "TSB390000440",
+    "node_nm": "운곡삼거리",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.319851,
+    "longitude": 128.542645,
+    "id": 394,
+    "direction": "칠원",
+    "node_id": "TSB390000438",
+    "node_nm": "양촌",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.321882,
+    "longitude": 128.542697,
+    "id": 395,
+    "direction": "칠원",
+    "node_id": "TSB390000281",
+    "node_nm": "양촌",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.327711,
+    "longitude": 128.5432,
+    "id": 396,
+    "direction": "칠원",
+    "node_id": "TSB390000444",
+    "node_nm": "동태공단입구",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.330031,
+    "longitude": 128.539009,
+    "id": 397,
+    "direction": "칠원",
+    "node_id": "TSB390000278",
+    "node_nm": "동태",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.331022,
+    "longitude": 128.536313,
+    "id": 398,
+    "direction": "칠원",
+    "node_id": "TSB390000828",
+    "node_nm": "천석가든",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.33208,
+    "longitude": 128.533503,
+    "id": 399,
+    "direction": "칠원",
+    "node_id": "TSB390000277",
+    "node_nm": "영동",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.334325,
+    "longitude": 128.530058,
+    "id": 400,
+    "direction": "칠원",
+    "node_id": "TSB390000447",
+    "node_nm": "가연",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.337757,
+    "longitude": 128.527982,
+    "id": 401,
+    "direction": "칠원",
+    "node_id": "TSB390000274",
+    "node_nm": "어연",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.342773,
+    "longitude": 128.526563,
+    "id": 402,
+    "direction": "칠원",
+    "node_id": "TSB390000450",
+    "node_nm": "못골",
+    "route_id": "TSB390000089"
+  },
+  {
+    "latitude": 35.328412,
+    "longitude": 128.464232,
+    "id": 403,
+    "direction": "칠원",
+    "node_id": "TSB390000545",
+    "node_nm": "대사",
+    "route_id": "TSB390000090"
+  },
+  {
+    "latitude": 35.333603,
+    "longitude": 128.467842,
+    "id": 404,
+    "direction": "칠원",
+    "node_id": "TSB390000289",
+    "node_nm": "사촌마을",
+    "route_id": "TSB390000090"
+  },
+  {
+    "latitude": 35.337515,
+    "longitude": 128.462859,
+    "id": 405,
+    "direction": "칠원",
+    "node_id": "TSB390000543",
+    "node_nm": "사촌",
+    "route_id": "TSB390000090"
+  },
+  {
+    "latitude": 35.343511,
+    "longitude": 128.457686,
+    "id": 406,
+    "direction": "칠원",
+    "node_id": "TSB390000290",
+    "node_nm": "뎃질",
+    "route_id": "TSB390000090"
+  },
+  {
+    "latitude": 35.344602,
+    "longitude": 128.453247,
+    "id": 407,
+    "direction": "칠원",
+    "node_id": "TSB390000541",
+    "node_nm": "고원-구평림",
+    "route_id": "TSB390000090"
+  },
+  {
+    "latitude": 35.365848,
+    "longitude": 128.406529,
+    "id": 408,
+    "direction": "칠원",
+    "node_id": "TSB389000076",
+    "node_nm": "구야동",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.362576,
+    "longitude": 128.389097,
+    "id": 409,
+    "direction": "칠원",
+    "node_id": "TSB389000422",
+    "node_nm": "성당마을",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.361746,
+    "longitude": 128.381352,
+    "id": 410,
+    "direction": "칠원",
+    "node_id": "TSB389000296",
+    "node_nm": "독대",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.364148,
+    "longitude": 128.377953,
+    "id": 411,
+    "direction": "칠원",
+    "node_id": "TSB389000424",
+    "node_nm": "독대마을",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.36689,
+    "longitude": 128.370464,
+    "id": 412,
+    "direction": "칠원",
+    "node_id": "TSB389000382",
+    "node_nm": "백야",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.380283,
+    "longitude": 128.366368,
+    "id": 413,
+    "direction": "칠원",
+    "node_id": "TSB389000654",
+    "node_nm": "득소마을",
+    "route_id": "TSB390000092"
+  },
+  {
+    "latitude": 35.35221,
+    "longitude": 128.518768,
+    "id": 414,
+    "direction": "칠원",
+    "node_id": "TSB390000459",
+    "node_nm": "남양",
+    "route_id": "TSB390000097"
+  },
+  {
+    "latitude": 35.356991,
+    "longitude": 128.517362,
+    "id": 415,
+    "direction": "칠원",
+    "node_id": "TSB390000457",
+    "node_nm": "남양입구삼거리",
+    "route_id": "TSB390000097"
+  },
+  {
+    "latitude": 35.363142,
+    "longitude": 128.519974,
+    "id": 416,
+    "direction": "칠원",
+    "node_id": "TSB390000060",
+    "node_nm": "남양",
+    "route_id": "TSB390000097"
+  },
+  {
+    "latitude": 35.365371,
+    "longitude": 128.521217,
+    "id": 417,
+    "direction": "칠원",
+    "node_id": "TSB390000101",
+    "node_nm": "남양마을",
+    "route_id": "TSB390000097"
+  },
+  {
+    "latitude": 35.235773,
+    "longitude": 128.639232,
+    "id": 418,
+    "direction": "칠원",
+    "node_id": "TSB414000008",
+    "node_nm": "창원종합터미널",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.2394,
+    "longitude": 128.632853,
+    "id": 419,
+    "direction": "칠원",
+    "node_id": "TSB414000009",
+    "node_nm": "창원스마트업파크",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.243146,
+    "longitude": 128.626305,
+    "id": 420,
+    "direction": "칠원",
+    "node_id": "TSB414000010",
+    "node_nm": "차룡사거리-유전철강앞",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.244823,
+    "longitude": 128.623356,
+    "id": 421,
+    "direction": "칠원",
+    "node_id": "TSB414000011",
+    "node_nm": "차룡119안전센터-입구맞은편",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.248453,
+    "longitude": 128.617011,
+    "id": 422,
+    "direction": "칠원",
+    "node_id": "TSB414000012",
+    "node_nm": "동우기계-맞은편",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.25076,
+    "longitude": 128.612968,
+    "id": 423,
+    "direction": "칠원",
+    "node_id": "TSB414000013",
+    "node_nm": "동서식품-맞은편",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.252463,
+    "longitude": 128.609986,
+    "id": 424,
+    "direction": "칠원",
+    "node_id": "TSB414000014",
+    "node_nm": "팔용동입구",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.254449,
+    "longitude": 128.6069,
+    "id": 425,
+    "direction": "칠원",
+    "node_id": "TSB414000015",
+    "node_nm": "경남테크노파크-창원주유소앞",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.251731,
+    "longitude": 128.600024,
+    "id": 426,
+    "direction": "칠원",
+    "node_id": "TSB417000045",
+    "node_nm": "한국전력-맞은편",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.250513,
+    "longitude": 128.597976,
+    "id": 427,
+    "direction": "칠원",
+    "node_id": "TSB417000043",
+    "node_nm": "KT동마산지점-맞은편",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.248704,
+    "longitude": 128.594656,
+    "id": 428,
+    "direction": "칠원",
+    "node_id": "TSB417000002",
+    "node_nm": "구암동육교",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.24734,
+    "longitude": 128.592071,
+    "id": 429,
+    "direction": "칠원",
+    "node_id": "TSB417000041",
+    "node_nm": "구암동",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.244809,
+    "longitude": 128.587478,
+    "id": 430,
+    "direction": "칠원",
+    "node_id": "TSB417000038",
+    "node_nm": "덕재-롯데캐슬",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.241454,
+    "longitude": 128.584701,
+    "id": 431,
+    "direction": "칠원",
+    "node_id": "TSB417000036",
+    "node_nm": "합성동",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.238809,
+    "longitude": 128.582634,
+    "id": 432,
+    "direction": "칠원",
+    "node_id": "TSB417000034",
+    "node_nm": "마산시외버스터미널",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.236318,
+    "longitude": 128.580695,
+    "id": 433,
+    "direction": "칠원",
+    "node_id": "TSB417000032",
+    "node_nm": "마산역",
+    "route_id": "TSB390000115"
+  },
+  {
+    "latitude": 35.299778,
+    "longitude": 128.532895,
+    "id": 434,
+    "direction": "칠원",
+    "node_id": "TSB390000305",
+    "node_nm": "무기",
+    "route_id": "TSB390000116"
+  },
+  {
+    "latitude": 35.297729,
+    "longitude": 128.538327,
+    "id": 435,
+    "direction": "칠원",
+    "node_id": "TSB390000308",
+    "node_nm": "무기",
+    "route_id": "TSB390000116"
+  },
+  {
+    "latitude": 35.293174,
+    "longitude": 128.549422,
+    "id": 436,
+    "direction": "칠원",
+    "node_id": "TSB390000427",
+    "node_nm": "돈담",
+    "route_id": "TSB390000116"
+  },
+  {
+    "latitude": 35.287606,
+    "longitude": 128.568277,
+    "id": 437,
+    "direction": "칠원",
+    "node_id": "TSB390000429",
+    "node_nm": "산정",
+    "route_id": "TSB390000116"
+  },
+  {
+    "latitude": 35.284041,
+    "longitude": 128.570634,
+    "id": 438,
+    "direction": "칠원",
+    "node_id": "TSB390000309",
+    "node_nm": "산정마을",
+    "route_id": "TSB390000116"
+  },
+  {
+    "latitude": 35.177847,
+    "longitude": 128.560643,
+    "id": 439,
+    "direction": "칠원",
+    "node_id": "TSB416000052",
+    "node_nm": "해운동",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.177779,
+    "longitude": 128.562392,
+    "id": 440,
+    "direction": "칠원",
+    "node_id": "TSB416000051",
+    "node_nm": "해운중학교종점-신마산교회",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.175386,
+    "longitude": 128.562244,
+    "id": 441,
+    "direction": "칠원",
+    "node_id": "TSB416000048",
+    "node_nm": "한국철강-가포방면",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.174327,
+    "longitude": 128.55917,
+    "id": 442,
+    "direction": "칠원",
+    "node_id": "TSB416000046",
+    "node_nm": "월영아파트종점-월영1차APT",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.175751,
+    "longitude": 128.55865,
+    "id": 443,
+    "direction": "칠원",
+    "node_id": "TSB416000045",
+    "node_nm": "해운초등학교-건너편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.179191,
+    "longitude": 128.558472,
+    "id": 444,
+    "direction": "칠원",
+    "node_id": "TSB416000043",
+    "node_nm": "경남대남부터미널종점-경남대방면",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.181848,
+    "longitude": 128.559032,
+    "id": 445,
+    "direction": "칠원",
+    "node_id": "TSB416000054",
+    "node_nm": "경남대학교-농협앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.184239,
+    "longitude": 128.560234,
+    "id": 446,
+    "direction": "칠원",
+    "node_id": "TSB416000056",
+    "node_nm": "문화동-어시장방면",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.186495,
+    "longitude": 128.561413,
+    "id": 447,
+    "direction": "칠원",
+    "node_id": "TSB416000058",
+    "node_nm": "연세병원-앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.190436,
+    "longitude": 128.563104,
+    "id": 448,
+    "direction": "칠원",
+    "node_id": "TSB416000061",
+    "node_nm": "반월동-합포내과앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.192578,
+    "longitude": 128.565049,
+    "id": 449,
+    "direction": "칠원",
+    "node_id": "TSB416000062",
+    "node_nm": "중부경찰서-맞은편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.194724,
+    "longitude": 128.566792,
+    "id": 450,
+    "direction": "칠원",
+    "node_id": "TSB416000065",
+    "node_nm": "경동메르빌",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.198044,
+    "longitude": 128.567301,
+    "id": 451,
+    "direction": "칠원",
+    "node_id": "TSB416000067",
+    "node_nm": "마산합포구청-의료원",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.201034,
+    "longitude": 128.567536,
+    "id": 452,
+    "direction": "칠원",
+    "node_id": "TSB416000082",
+    "node_nm": "경남데파트-맞은편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.202834,
+    "longitude": 128.570325,
+    "id": 453,
+    "direction": "칠원",
+    "node_id": "TSB416000069",
+    "node_nm": "kt서마산지점-건너편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.203351,
+    "longitude": 128.575546,
+    "id": 454,
+    "direction": "칠원",
+    "node_id": "TSB416000071",
+    "node_nm": "어시장-성모안과앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.20597,
+    "longitude": 128.576749,
+    "id": 455,
+    "direction": "칠원",
+    "node_id": "TSB416000073",
+    "node_nm": "불종로이인창치과",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.208518,
+    "longitude": 128.576372,
+    "id": 456,
+    "direction": "칠원",
+    "node_id": "TSB416000075",
+    "node_nm": "삼성생명",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.211506,
+    "longitude": 128.5742,
+    "id": 457,
+    "direction": "칠원",
+    "node_id": "TSB416000077",
+    "node_nm": "원불교교구청-노비산입구방면",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.213418,
+    "longitude": 128.571327,
+    "id": 458,
+    "direction": "칠원",
+    "node_id": "TSB416000080",
+    "node_nm": "노비산입구",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.216012,
+    "longitude": 128.570525,
+    "id": 459,
+    "direction": "칠원",
+    "node_id": "TSB416000081",
+    "node_nm": "회산교",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.21968,
+    "longitude": 128.570897,
+    "id": 460,
+    "direction": "칠원",
+    "node_id": "TSB417000011",
+    "node_nm": "동중입구-천지리치빌앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.222277,
+    "longitude": 128.57109,
+    "id": 461,
+    "direction": "칠원",
+    "node_id": "TSB417000013",
+    "node_nm": "국제주유소-건너편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.224339,
+    "longitude": 128.571204,
+    "id": 462,
+    "direction": "칠원",
+    "node_id": "TSB417000014",
+    "node_nm": "석전사거리-신우빌리지앞",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.228834,
+    "longitude": 128.568389,
+    "id": 463,
+    "direction": "칠원",
+    "node_id": "TSB417000016",
+    "node_nm": "서마산시장",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.231661,
+    "longitude": 128.565317,
+    "id": 464,
+    "direction": "칠원",
+    "node_id": "TSB417000019",
+    "node_nm": "서마산교회-건너편",
+    "route_id": "TSB390000034"
+  },
+  {
+    "latitude": 35.372474,
+    "longitude": 128.499252,
+    "id": 465,
+    "direction": "칠원",
+    "node_id": "TSB390000080",
+    "node_nm": "용호",
+    "route_id": "TSB390000168"
+  }
+]

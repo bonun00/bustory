@@ -1,0 +1,70 @@
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:1.25-alpine
+
+# 기본 conf 제거
+RUN rm -f /etc/nginx/conf.d/default.conf
+
+# Nginx 설정 작성
+RUN cat <<'EOF' > /etc/nginx/conf.d/default.conf
+server {
+  listen 80;
+  server_name _;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  # MIME: .webmanifest가 제대로 타입 잡히도록
+  types {
+    application/manifest+json webmanifest;
+  }
+
+  # SPA 라우팅: 모든 경로는 index.html로 폴백
+  location / {
+    try_files $uri $uri/ /index.html;
+    # HTML은 항상 최신
+    add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+  }
+
+  # index.html 직진 접근도 동일 정책
+  location = /index.html {
+    try_files $uri =404;
+    add_header Cache-Control "no-store, no-cache, must-revalidate, max-age=0" always;
+  }
+
+  # 정적 에셋: Vite가 파일명에 해시를 붙이므로 강력 캐시 OK
+  location ~* \.(?:js|css|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$ {
+    expires 1y;
+    add_header Cache-Control "public, max-age=31536000, immutable" always;
+  }
+
+  # PWA 파일들은 업데이트를 위해 캐시 길게 잡지 않음
+  location = /sw.js {
+    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+  }
+  location ~ ^/workbox-.*\.js$ {
+    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+  }
+  location = /manifest.webmanifest {
+    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+    default_type application/manifest+json;
+  }
+
+  # 압축
+  gzip on;
+  gzip_comp_level 6;
+  gzip_min_length 256;
+  gzip_types text/plain text/css application/javascript application/json image/svg+xml;
+  gzip_vary on;
+}
+EOF
+
+# 정적 파일 복사
+COPY --from=build /app/dist/ /usr/share/nginx/html/
+
+EXPOSE 80
